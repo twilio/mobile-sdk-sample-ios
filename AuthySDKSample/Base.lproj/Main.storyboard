@@ -7,6 +7,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -204,12 +205,19 @@
                         <barButtonItem title="Item" id="jVX-8T-Eku"/>
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="Approval Requests" id="JDm-3x-QA9">
-                        <barButtonItem key="leftBarButtonItem" title="ID" id="6tQ-BG-tgp">
-                            <color key="tintColor" red="0.1058823529" green="0.53725490200000003" blue="0.81176470590000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <connections>
-                                <action selector="getDeviceId:" destination="eyL-ju-x9N" id="LZe-b4-gT2"/>
-                            </connections>
-                        </barButtonItem>
+                        <leftBarButtonItems>
+                            <barButtonItem title="ID" id="6tQ-BG-tgp">
+                                <color key="tintColor" red="0.1058823529" green="0.53725490200000003" blue="0.81176470590000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <action selector="getDeviceId:" destination="eyL-ju-x9N" id="LZe-b4-gT2"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="TOTP" id="J22-RG-zJQ">
+                                <connections>
+                                    <segue destination="b1i-4a-IKs" kind="show" id="uNi-KD-W2G"/>
+                                </connections>
+                            </barButtonItem>
+                        </leftBarButtonItems>
                         <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="Uh9-KU-qdc">
                             <color key="tintColor" red="0.10588235294117647" green="0.53725490196078429" blue="0.81176470588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
@@ -227,6 +235,41 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gsp-hP-yhL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2015" y="496"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="7ug-y3-cCT">
+            <objects>
+                <viewController id="b1i-4a-IKs" customClass="TOTPViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ouF-t4-oPd"/>
+                        <viewControllerLayoutGuide type="bottom" id="cSU-5K-6Ad"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="C3e-cn-opp">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading ..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bd0-yf-WGd">
+                                <rect key="frame" x="16" y="306.5" width="343" height="54"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="45"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="bd0-yf-WGd" firstAttribute="centerX" secondItem="C3e-cn-opp" secondAttribute="centerX" id="1RI-CP-IdS"/>
+                            <constraint firstItem="bd0-yf-WGd" firstAttribute="centerY" secondItem="C3e-cn-opp" secondAttribute="centerY" id="EIU-cE-qP2"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="bd0-yf-WGd" secondAttribute="trailing" id="M6u-un-aq9"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="bd0-yf-WGd" secondAttribute="leading" id="tST-bb-OXl"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="totpLabel" destination="bd0-yf-WGd" id="hkZ-n4-wRa"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="I59-sj-gmx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2014" y="1223"/>
         </scene>
         <!--Approval Request-->
         <scene sceneID="pnz-j8-e31">
