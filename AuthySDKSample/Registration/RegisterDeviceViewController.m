@@ -14,6 +14,9 @@
 
 #import "UITextField+Extensions.h"
 
+#define TextfieldOffSetWhenKeyBoardIsShown 5
+#define ViewAnimationDurationWhenKeyBoardIsShown 0.25
+
 @interface RegisterDeviceViewController ()
 
 @property (weak, nonatomic) IBOutlet UITextField *authyIDTextField;
@@ -42,6 +45,10 @@
 
     [self.authyIDTextField configureBottomBorder];
     [self.backendURLTextField configureBottomBorder];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardWillHideNotification object:nil];
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -51,6 +58,47 @@
 - (void)dismissKeyboard {
     [self.authyIDTextField resignFirstResponder];
     [self.backendURLTextField resignFirstResponder];
+}
+#pragma mark - Move view up when keyboard is shown
+- (void)keyboardDidShow:(NSNotification *)notification {
+
+    CGFloat offset = TextfieldOffSetWhenKeyBoardIsShown;
+    CGFloat position = self.view.frame.origin.y;
+
+    if ([self.authyIDTextField isEditing]) {
+
+        CGFloat authyIDTextFieldYPosition = self.authyIDTextField.layer.frame.origin.y;
+        CGFloat authyIDTextFieldHeight = self.authyIDTextField.layer.frame.size.height;
+        position = authyIDTextFieldYPosition - authyIDTextFieldHeight*offset;
+
+    } else if ([self.backendURLTextField isEditing]) {
+
+        CGFloat backendURLTextFieldYPosition = self.backendURLTextField.layer.frame.origin.y;
+        CGFloat backendURLTextFieldHeight = self.backendURLTextField.layer.frame.size.height;
+        position = backendURLTextFieldYPosition - backendURLTextFieldHeight*offset;
+    }
+
+    [UIView animateWithDuration:ViewAnimationDurationWhenKeyBoardIsShown animations:^{
+
+        CGRect newFrame = [self.view frame];
+        newFrame.origin.y = -position;
+        [self.view setFrame:newFrame];
+
+    }];
+
+}
+
+-(void)keyboardDidHide:(NSNotification *)notification {
+
+    [UIView animateWithDuration:ViewAnimationDurationWhenKeyBoardIsShown animations:^{
+
+        CGRect newFrame = [self.view frame];
+        newFrame.origin.x = 0;
+        newFrame.origin.y = 0;
+        [self.view setFrame:newFrame];
+
+    }];
+
 }
 
 #pragma mark - Register Device
