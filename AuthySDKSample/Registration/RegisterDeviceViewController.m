@@ -46,8 +46,8 @@
     [self.authyIDTextField configureBottomBorder];
     [self.backendURLTextField configureBottomBorder];
 
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardWillShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardWillHideNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 
 }
 
@@ -59,8 +59,9 @@
     [self.authyIDTextField resignFirstResponder];
     [self.backendURLTextField resignFirstResponder];
 }
+
 #pragma mark - Move view up when keyboard is shown
-- (void)keyboardDidShow:(NSNotification *)notification {
+- (void)keyboardWillShow:(NSNotification *)notification {
 
     CGFloat offset = TextfieldOffSetWhenKeyBoardIsShown;
     CGFloat position = self.view.frame.origin.y;
@@ -88,7 +89,7 @@
 
 }
 
--(void)keyboardDidHide:(NSNotification *)notification {
+-(void)keyboardWillHide:(NSNotification *)notification {
 
     [UIView animateWithDuration:ViewAnimationDurationWhenKeyBoardIsShown animations:^{
 
