@@ -93,10 +93,14 @@
 
     [UIView animateWithDuration:ViewAnimationDurationWhenKeyBoardIsShown animations:^{
 
-        CGRect newFrame = [self.view frame];
-        newFrame.origin.x = 0;
-        newFrame.origin.y = 0;
-        [self.view setFrame:newFrame];
+        __weak RegisterDeviceViewController *weakSelf = self;
+
+        dispatch_async(dispatch_get_main_queue(), ^{
+            CGRect newFrame = [weakSelf.view frame];
+            newFrame.origin.x = 0;
+            newFrame.origin.y = 0;
+            [weakSelf.view setFrame:newFrame];
+        });
 
     }];
 
@@ -107,6 +111,8 @@
     [self.registerDeviceButton setEnabled:NO];
     [self.registerDeviceLoadingIndicator setHidden:NO];
     [self.registerDeviceLoadingIndicator startAnimating];
+    [self.authyIDTextField resignFirstResponder];
+    [self.backendURLTextField resignFirstResponder];
 }
 
 - (void)configureUIElementsWhileNotRegistering {
