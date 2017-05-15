@@ -35,6 +35,7 @@ NSInteger const archiveTabIndex = 1;
     [self configureTableView];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadRequests) name:UIApplicationWillEnterForegroundNotification object:nil];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated {

@@ -181,6 +181,7 @@
     [self configureUIElementsWhileRegistering];
 
     // Validate fields
+
     NSString *authyId = self.authyIDTextField.text;
     if ([authyId isEqualToString:@""]) {
         [self showErrorAlertWithTitle:@"Authy ID invalid" andMessage:@"Make sure the value you entered is correct"];
