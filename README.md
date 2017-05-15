@@ -1,4 +1,4 @@
-# Twilio Authy - iOS SDK Sample
+# TwilioAuth SDK - iOS Sample app
 
 Welcome to the Twilio Authy iOS SDK Sample application. This application demonstrates how to use the mobile SDK inside an iOS app.
 
