@@ -204,7 +204,7 @@
                         <barButtonItem title="Item" id="jVX-8T-Eku"/>
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="Approval Requests" id="JDm-3x-QA9">
-                        <barButtonItem key="leftBarButtonItem" title="ID2" id="6tQ-BG-tgp">
+                        <barButtonItem key="leftBarButtonItem" title="ID" id="6tQ-BG-tgp">
                             <color key="tintColor" red="0.1058823529" green="0.53725490200000003" blue="0.81176470590000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="getDeviceId:" destination="eyL-ju-x9N" id="LZe-b4-gT2"/>
