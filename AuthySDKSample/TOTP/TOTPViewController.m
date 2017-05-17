@@ -30,7 +30,15 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    [self.navigationController setNavigationBarHidden:YES];
+    [self configureNavigationBar];
+}
+
+- (void)configureNavigationBar {
+
+    [self.navigationController setNavigationBarHidden:NO];
+    self.navigationController.navigationBar.topItem.title = @"Tokens";
+    self.navigationController.navigationBar.topItem.rightBarButtonItem = nil;
+
 }
 
 - (void)didReceiveMemoryWarning {
