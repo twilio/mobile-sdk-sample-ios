@@ -9,6 +9,7 @@
 #import "TOTPViewController.h"
 #import <TwilioAuth/TwilioAuth.h>
 
+#import "Constants.h"
 #import "UIColor+Extensions.h"
 #import <CoreGraphics/CoreGraphics.h>
 
@@ -21,9 +22,11 @@
 - (void)viewDidLoad {
 
     [super viewDidLoad];
-    [self.navigationController setNavigationBarHidden:YES];
-
     [self configureTOTP];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [self.navigationController setNavigationBarHidden:YES];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -71,7 +74,7 @@
 - (void)showTimerAnimation {
 
     CAShapeLayer *circle = [CAShapeLayer layer];
-    int radius = 40;
+    int radius = 30;
     CGFloat xPosition = self.timerImage.bounds.size.width/2;
     CGFloat yPosition = self.timerImage.bounds.origin.y;
     CGFloat startAngle = -M_PI_2;
@@ -84,8 +87,8 @@
                                               clockwise:YES].CGPath;
 
     circle.fillColor = [UIColor clearColor].CGColor;
-    circle.strokeColor = [UIColor colorWithHexString:@"#1b89cf"].CGColor;
-    circle.lineWidth = 8;
+    circle.strokeColor = [UIColor colorWithHexString:defaultColor].CGColor;
+    circle.lineWidth = 6;
 
     CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
     animation.duration = 20;

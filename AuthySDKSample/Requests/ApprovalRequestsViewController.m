@@ -13,6 +13,8 @@
 #import "DeviceResetManager.h"
 
 #import "AUTApprovalRequest+Extensions.h"
+#import "UIColor+Extensions.h"
+#import "Constants.h"
 
 NSInteger const pendingTabIndex = 0;
 NSInteger const archiveTabIndex = 1;
@@ -30,8 +32,6 @@ NSInteger const archiveTabIndex = 1;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-
 
     [self configureTableView];
 
@@ -40,7 +40,15 @@ NSInteger const archiveTabIndex = 1;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+
     [super viewWillAppear:animated];
+
+    [self configureNavigationBarTopItems];
+
+    [self loadRequests];
+}
+
+- (void)configureNavigationBarTopItems {
 
     [self.navigationController setNavigationBarHidden:NO];
 
@@ -48,16 +56,13 @@ NSInteger const archiveTabIndex = 1;
 
     // Left bar button item
     UIBarButtonItem *deviceIdBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"ID" style:UIBarButtonItemStylePlain target:self action:@selector(getDeviceId:)];
+    [deviceIdBarButtonItem setTintColor:[UIColor colorWithHexString:defaultColor]];
     self.navigationController.navigationBar.topItem.leftBarButtonItem = deviceIdBarButtonItem;
 
     // Right bar button item
     UIBarButtonItem *refreshBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refresh:)];
+    [refreshBarButtonItem setTintColor:[UIColor colorWithHexString:defaultColor]];
     self.navigationController.navigationBar.topItem.rightBarButtonItem = refreshBarButtonItem;
-
-
-
-
-    [self loadRequests];
 }
 
 - (void)didReceiveMemoryWarning {

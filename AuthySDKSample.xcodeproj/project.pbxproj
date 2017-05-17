@@ -99,6 +99,14 @@
 			path = Detail;
 			sourceTree = "<group>";
 		};
+		012D3CA51ECCC20A0038D774 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				012D3CA61ECCC32D0038D774 /* Constants.h */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
 		013B978F1CB304D600951E6B /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -139,6 +147,7 @@
 				01A32A621DED1DBA008529A1 /* AppDelegate.m */,
 				01B99CA91C936A1600462FA3 /* Main.storyboard */,
 				01B99CAE1C936A1600462FA3 /* LaunchScreen.storyboard */,
+				012D3CA51ECCC20A0038D774 /* Constants */,
 				01D48C2D1DE79A0100D675BB /* Registration */,
 				01D48C2E1DE79A0C00D675BB /* Requests */,
 				01EE5E1B1EBB843E00B2E333 /* TOTP */,
