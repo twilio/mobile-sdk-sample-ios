@@ -13,6 +13,9 @@
 #import "UIColor+Extensions.h"
 #import <CoreGraphics/CoreGraphics.h>
 
+#define circleRadius 25
+#define circleLineWidth 6
+
 @interface TOTPViewController ()
 
 @end
@@ -22,6 +25,7 @@
 - (void)viewDidLoad {
 
     [super viewDidLoad];
+    [self drawBackgroundCircle];
     [self configureTOTP];
 }
 
@@ -61,7 +65,7 @@
 - (void)configureTOTPWithText:(NSString *)totpText {
 
     NSMutableAttributedString *totpAttributedString = [[NSMutableAttributedString alloc] initWithString:totpText];
-    [totpAttributedString addAttribute:NSKernAttributeName value:@5 range:NSMakeRange(0, totpAttributedString.length)];
+    [totpAttributedString addAttribute:NSKernAttributeName value:@3.5 range:NSMakeRange(0, totpAttributedString.length)];
     [self.totpLabel setAttributedText:totpAttributedString];
 }
 
@@ -74,21 +78,20 @@
 - (void)showTimerAnimation {
 
     CAShapeLayer *circle = [CAShapeLayer layer];
-    int radius = 30;
-    CGFloat xPosition = self.timerImage.bounds.size.width/2;
-    CGFloat yPosition = self.timerImage.bounds.origin.y;
+    CGFloat xPosition = self.timerImage.layer.bounds.size.width/2;
+    CGFloat yPosition = self.timerImage.layer.bounds.size.height/2;
     CGFloat startAngle = -M_PI_2;
     CGFloat endAngle = 2*M_PI - M_PI_2;
 
     circle.path = [UIBezierPath bezierPathWithArcCenter:CGPointMake(xPosition, yPosition)
-                                                 radius:radius
+                                                 radius:circleRadius
                                              startAngle:startAngle
                                                endAngle:endAngle
                                               clockwise:YES].CGPath;
 
     circle.fillColor = [UIColor clearColor].CGColor;
     circle.strokeColor = [UIColor colorWithHexString:defaultColor].CGColor;
-    circle.lineWidth = 6;
+    circle.lineWidth = circleLineWidth;
 
     CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
     animation.duration = 20;
@@ -100,6 +103,45 @@
 
     [self.timerImage.layer.sublayers makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
     [self.timerImage.layer addSublayer:circle];
+
+}
+
+- (void)drawBackgroundCircle {
+
+    UIImage *circle = nil;
+
+    CGSize size = self.timerImage.layer.bounds.size;
+
+    UIGraphicsBeginImageContextWithOptions(size, NO, 0.0f);
+    CGContextRef ctx = UIGraphicsGetCurrentContext();
+    CGContextSaveGState(ctx);
+
+    CGRect rect = CGRectMake(0, 0, size.width, size.height);
+    CGContextSetFillColorWithColor(ctx, [UIColor whiteColor].CGColor);
+    CGContextFillEllipseInRect(ctx, rect);
+
+    [[UIColor colorWithHexString:@"#D9D9D9"] setStroke];
+
+    CGFloat xPosition = size.width/2;
+    CGFloat yPosition = size.height/2;
+    CGFloat startAngle = -M_PI_2;
+    CGFloat endAngle = 2*M_PI - M_PI_2;
+
+    UIBezierPath *path = [UIBezierPath bezierPathWithArcCenter:CGPointMake(xPosition, yPosition)
+                                                 radius:circleRadius
+                                             startAngle:startAngle
+                                               endAngle:endAngle
+                                              clockwise:YES];
+
+
+    path.lineWidth = circleLineWidth;
+    [path stroke];
+
+    CGContextRestoreGState(ctx);
+    circle = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+
+    [self.timerImage setImage:circle];
 
 
 }

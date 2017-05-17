@@ -194,7 +194,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Requests" image="requests_list" selectedImage="requests_list" id="nKQ-pA-RMw"/>
+                    <tabBarItem key="tabBarItem" title="Requests" image="requests_not_selected" selectedImage="requests_selected" id="nKQ-pA-RMw"/>
                     <toolbarItems/>
                     <connections>
                         <outlet property="noRequestsLabel" destination="KSF-Up-yqX" id="G3s-OT-kqD"/>
@@ -219,16 +219,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bd0-yf-WGd">
-                                <rect key="frame" x="16" y="200" width="343" height="54"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="45"/>
+                                <rect key="frame" x="16" y="200" width="343" height="67"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="56"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GXG-Al-ks1">
-                                <rect key="frame" x="112" y="305" width="150" height="80"/>
+                                <rect key="frame" x="157" y="330" width="60" height="60"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="150" id="0Km-Vu-SqX"/>
-                                    <constraint firstAttribute="height" constant="80" id="N1f-w6-Vvx"/>
+                                    <constraint firstAttribute="width" constant="60" id="0Km-Vu-SqX"/>
+                                    <constraint firstAttribute="height" constant="60" id="N1f-w6-Vvx"/>
                                 </constraints>
                             </imageView>
                         </subviews>
@@ -238,11 +238,11 @@
                             <constraint firstItem="GXG-Al-ks1" firstAttribute="centerX" secondItem="C3e-cn-opp" secondAttribute="centerX" id="5op-4G-S7E"/>
                             <constraint firstAttribute="trailingMargin" secondItem="bd0-yf-WGd" secondAttribute="trailing" id="M6u-un-aq9"/>
                             <constraint firstItem="bd0-yf-WGd" firstAttribute="top" secondItem="ouF-t4-oPd" secondAttribute="bottom" constant="180" id="awv-xD-Y9g"/>
-                            <constraint firstItem="GXG-Al-ks1" firstAttribute="top" secondItem="bd0-yf-WGd" secondAttribute="bottom" constant="51" id="hHk-OF-VD8"/>
+                            <constraint firstItem="GXG-Al-ks1" firstAttribute="top" secondItem="bd0-yf-WGd" secondAttribute="bottom" constant="63" id="hHk-OF-VD8"/>
                             <constraint firstAttribute="leadingMargin" secondItem="bd0-yf-WGd" secondAttribute="leading" id="tST-bb-OXl"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Token" image="requests_list" selectedImage="requests_list" id="vE0-Pm-C5O"/>
+                    <tabBarItem key="tabBarItem" title="Token" image="tokens_selected" selectedImage="tokens_not_selected" id="vE0-Pm-C5O"/>
                     <connections>
                         <outlet property="timerImage" destination="GXG-Al-ks1" id="Yhp-GV-YHM"/>
                         <outlet property="totpLabel" destination="bd0-yf-WGd" id="hkZ-n4-wRa"/>
@@ -252,7 +252,7 @@
             </objects>
             <point key="canvasLocation" x="2926" y="922"/>
         </scene>
-        <!--Approval Request-->
+        <!--Request-->
         <scene sceneID="pnz-j8-e31">
             <objects>
                 <viewController storyboardIdentifier="approvalRequestDetail" id="g1R-6Z-mXI" customClass="RequestDetailViewController" sceneMemberID="viewController">
@@ -364,7 +364,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" title="Approval Request" id="u2F-1R-8KT">
+                    <navigationItem key="navigationItem" title="Request" id="u2F-1R-8KT">
                         <barButtonItem key="backBarButtonItem" title="Back" id="Llg-Nf-AFG"/>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
@@ -388,9 +388,12 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="d0k-gg-5LQ" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="tYv-Cq-lMw">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="tYv-Cq-lMw">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -425,6 +428,9 @@
     </scenes>
     <resources>
         <image name="request_detail" width="60" height="60"/>
-        <image name="requests_list" width="27" height="27"/>
+        <image name="requests_not_selected" width="20" height="18"/>
+        <image name="requests_selected" width="20" height="18"/>
+        <image name="tokens_not_selected" width="15" height="21"/>
+        <image name="tokens_selected" width="15" height="21"/>
     </resources>
 </document>
