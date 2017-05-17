@@ -7,7 +7,6 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
-        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -113,14 +112,14 @@
                         <outlet property="backendURLTextField" destination="bwp-qT-U6r" id="tjI-WD-gVV"/>
                         <outlet property="registerDeviceButton" destination="aaa-qv-6o5" id="ZZA-R2-8U1"/>
                         <outlet property="registerDeviceLoadingIndicator" destination="3JH-uE-jnC" id="oO9-hx-kza"/>
-                        <segue destination="eyL-ju-x9N" kind="show" identifier="showRequests" id="Umn-bl-c1N"/>
+                        <segue destination="omW-Ru-Gvt" kind="showDetail" identifier="showRequests" action="showViewController:sender:" id="Umn-bl-c1N"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1296.8" y="495.20239880059972"/>
         </scene>
-        <!--Approval Requests-->
+        <!--Requests-->
         <scene sceneID="0Ul-yn-A3G">
             <objects>
                 <viewController storyboardIdentifier="requestsController" id="eyL-ju-x9N" customClass="ApprovalRequestsViewController" sceneMemberID="viewController">
@@ -133,7 +132,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="4ti-v5-YpR">
-                                <rect key="frame" x="12" y="83" width="351" height="29"/>
+                                <rect key="frame" x="12" y="39" width="351" height="29"/>
                                 <segments>
                                     <segment title="Pending"/>
                                     <segment title="Archive"/>
@@ -144,7 +143,7 @@
                                 </connections>
                             </segmentedControl>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="1JB-f2-p2r">
-                                <rect key="frame" x="-4" y="116" width="383" height="481"/>
+                                <rect key="frame" x="-4" y="72" width="383" height="520"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
@@ -164,13 +163,13 @@
                                 <sections/>
                             </tableView>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You have no pending requests" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KSF-Up-yqX">
-                                <rect key="frame" x="86" y="151" width="203" height="18"/>
+                                <rect key="frame" x="86" y="107" width="203" height="18"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                 <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.55686274509803924" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="8rw-LZ-AG6">
-                                <rect key="frame" x="169" y="142" width="37" height="37"/>
+                                <rect key="frame" x="169" y="98" width="37" height="37"/>
                                 <color key="color" red="0.5568627451" green="0.5568627451" blue="0.5568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </activityIndicatorView>
                         </subviews>
@@ -201,31 +200,8 @@
                             </mask>
                         </variation>
                     </view>
-                    <toolbarItems>
-                        <barButtonItem title="Item" id="jVX-8T-Eku"/>
-                    </toolbarItems>
-                    <navigationItem key="navigationItem" title="Approval Requests" id="JDm-3x-QA9">
-                        <leftBarButtonItems>
-                            <barButtonItem title="ID" id="6tQ-BG-tgp">
-                                <color key="tintColor" red="0.1058823529" green="0.53725490200000003" blue="0.81176470590000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <connections>
-                                    <action selector="getDeviceId:" destination="eyL-ju-x9N" id="LZe-b4-gT2"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem title="TOTP" id="J22-RG-zJQ">
-                                <connections>
-                                    <segue destination="b1i-4a-IKs" kind="show" id="uNi-KD-W2G"/>
-                                </connections>
-                            </barButtonItem>
-                        </leftBarButtonItems>
-                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="Uh9-KU-qdc">
-                            <color key="tintColor" red="0.10588235294117647" green="0.53725490196078429" blue="0.81176470588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <connections>
-                                <action selector="refresh:" destination="eyL-ju-x9N" id="Ywg-ai-rQb"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <tabBarItem key="tabBarItem" title="Requests" id="nKQ-pA-RMw"/>
+                    <toolbarItems/>
                     <connections>
                         <outlet property="noRequestsLabel" destination="KSF-Up-yqX" id="G3s-OT-kqD"/>
                         <outlet property="requestTypeSegmentedControl" destination="4ti-v5-YpR" id="UWB-b8-wFY"/>
@@ -234,9 +210,9 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gsp-hP-yhL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2015" y="496"/>
+            <point key="canvasLocation" x="2952.8000000000002" y="495.20239880059972"/>
         </scene>
-        <!--View Controller-->
+        <!--Tokens-->
         <scene sceneID="7ug-y3-cCT">
             <objects>
                 <viewController id="b1i-4a-IKs" customClass="TOTPViewController" sceneMemberID="viewController">
@@ -280,6 +256,7 @@
                             <constraint firstAttribute="leadingMargin" secondItem="bd0-yf-WGd" secondAttribute="leading" id="tST-bb-OXl"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Tokens" id="vE0-Pm-C5O"/>
                     <connections>
                         <outlet property="timerImage" destination="GXG-Al-ks1" id="Yhp-GV-YHM"/>
                         <outlet property="tokenName" destination="AqP-7y-66k" id="JA2-xZ-RwI"/>
@@ -288,7 +265,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="I59-sj-gmx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2013.5999999999999" y="1222.9385307346329"/>
+            <point key="canvasLocation" x="2953" y="1231"/>
         </scene>
         <!--Approval Request-->
         <scene sceneID="pnz-j8-e31">
@@ -419,7 +396,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="beN-KL-leQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2746" y="496"/>
+            <point key="canvasLocation" x="3684" y="495.20239880059972"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="pge-pU-jKP">
@@ -438,6 +415,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Kp-19-Neu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="574" y="-335"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="zvb-HB-SsE">
+            <objects>
+                <tabBarController storyboardIdentifier="tabBarController" automaticallyAdjustsScrollViewInsets="NO" id="omW-Ru-Gvt" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="3xd-Am-2tk">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="eyL-ju-x9N" kind="relationship" relationship="viewControllers" id="dhY-2m-FzV"/>
+                        <segue destination="b1i-4a-IKs" kind="relationship" relationship="viewControllers" id="zGF-qH-NbL"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dBI-49-98l" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2105" y="495"/>
         </scene>
     </scenes>
     <resources>

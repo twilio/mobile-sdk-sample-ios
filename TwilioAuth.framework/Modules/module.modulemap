@@ -1,0 +1,6 @@
+framework module TwilioAuth {
+    umbrella header "TwilioAuthHeaders.h"
+
+    export *
+    module * { export * }
+}

@@ -32,6 +32,7 @@ NSInteger const archiveTabIndex = 1;
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 
+
     [self configureTableView];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadRequests) name:UIApplicationWillEnterForegroundNotification object:nil];
@@ -40,6 +41,21 @@ NSInteger const archiveTabIndex = 1;
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+
+    [self.navigationController setNavigationBarHidden:NO];
+
+    self.navigationController.navigationBar.topItem.title = @"Requests";
+
+    // Left bar button item
+    UIBarButtonItem *deviceIdBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"ID" style:UIBarButtonItemStylePlain target:self action:@selector(getDeviceId:)];
+    self.navigationController.navigationBar.topItem.leftBarButtonItem = deviceIdBarButtonItem;
+
+    // Right bar button item
+    UIBarButtonItem *refreshBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refresh:)];
+    self.navigationController.navigationBar.topItem.rightBarButtonItem = refreshBarButtonItem;
+
+
+
 
     [self loadRequests];
 }
