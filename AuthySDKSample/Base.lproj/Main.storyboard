@@ -163,15 +163,11 @@
                                 <sections/>
                             </tableView>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You have no pending requests" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KSF-Up-yqX">
-                                <rect key="frame" x="86" y="107" width="203" height="18"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                <rect key="frame" x="73" y="323.5" width="230" height="20"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                 <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.55686274509803924" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="8rw-LZ-AG6">
-                                <rect key="frame" x="169" y="98" width="37" height="37"/>
-                                <color key="color" red="0.5568627451" green="0.5568627451" blue="0.5568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -180,12 +176,10 @@
                             <constraint firstAttribute="trailingMargin" secondItem="4ti-v5-YpR" secondAttribute="trailing" constant="-4" id="CJA-dn-WBR"/>
                             <constraint firstItem="4ti-v5-YpR" firstAttribute="top" secondItem="zHD-Ef-KQ8" secondAttribute="bottom" constant="19" id="Err-yc-1Fe"/>
                             <constraint firstItem="Llu-tG-Ih6" firstAttribute="top" secondItem="1JB-f2-p2r" secondAttribute="bottom" constant="26" id="LyU-KR-Nlc"/>
-                            <constraint firstItem="8rw-LZ-AG6" firstAttribute="top" secondItem="4ti-v5-YpR" secondAttribute="bottom" constant="31" id="N5z-SW-NVi"/>
                             <constraint firstAttribute="trailingMargin" secondItem="1JB-f2-p2r" secondAttribute="trailing" constant="-20" id="Qra-Ft-dNI"/>
+                            <constraint firstItem="KSF-Up-yqX" firstAttribute="centerY" secondItem="I63-gK-HdZ" secondAttribute="centerY" id="dPj-DC-Sfz"/>
                             <constraint firstItem="1JB-f2-p2r" firstAttribute="trailing" secondItem="4ti-v5-YpR" secondAttribute="trailing" id="fXD-P3-aUz"/>
-                            <constraint firstItem="KSF-Up-yqX" firstAttribute="top" secondItem="4ti-v5-YpR" secondAttribute="bottom" constant="40" id="h82-cJ-JCW"/>
                             <constraint firstItem="1JB-f2-p2r" firstAttribute="leading" secondItem="4ti-v5-YpR" secondAttribute="leading" id="hw2-ek-rrU"/>
-                            <constraint firstItem="8rw-LZ-AG6" firstAttribute="centerX" secondItem="I63-gK-HdZ" secondAttribute="centerX" id="j2t-JC-eh3"/>
                             <constraint firstAttribute="trailingMargin" secondItem="1JB-f2-p2r" secondAttribute="trailing" constant="8" id="l1B-iS-Bsc"/>
                             <constraint firstItem="1JB-f2-p2r" firstAttribute="leading" secondItem="I63-gK-HdZ" secondAttribute="leadingMargin" constant="-20" id="pCj-Gv-bE5"/>
                             <constraint firstItem="1JB-f2-p2r" firstAttribute="top" secondItem="4ti-v5-YpR" secondAttribute="bottom" constant="5" id="qWY-uM-HWQ"/>
@@ -200,7 +194,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Requests" image="requests_list" id="nKQ-pA-RMw"/>
+                    <tabBarItem key="tabBarItem" title="Requests" image="requests_list" selectedImage="requests_list" id="nKQ-pA-RMw"/>
                     <toolbarItems/>
                     <connections>
                         <outlet property="noRequestsLabel" destination="KSF-Up-yqX" id="G3s-OT-kqD"/>
@@ -210,7 +204,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gsp-hP-yhL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2952.8000000000002" y="495.20239880059972"/>
+            <point key="canvasLocation" x="2927" y="109"/>
         </scene>
         <!--Token-->
         <scene sceneID="7ug-y3-cCT">
@@ -224,7 +218,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading ..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bd0-yf-WGd">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bd0-yf-WGd">
                                 <rect key="frame" x="16" y="200" width="343" height="54"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="45"/>
                                 <nil key="textColor"/>
@@ -248,7 +242,7 @@
                             <constraint firstAttribute="leadingMargin" secondItem="bd0-yf-WGd" secondAttribute="leading" id="tST-bb-OXl"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Token" image="requests_list" id="vE0-Pm-C5O"/>
+                    <tabBarItem key="tabBarItem" title="Token" image="requests_list" selectedImage="requests_list" id="vE0-Pm-C5O"/>
                     <connections>
                         <outlet property="timerImage" destination="GXG-Al-ks1" id="Yhp-GV-YHM"/>
                         <outlet property="totpLabel" destination="bd0-yf-WGd" id="hkZ-n4-wRa"/>
@@ -256,7 +250,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="I59-sj-gmx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2953" y="1231"/>
+            <point key="canvasLocation" x="2926" y="922"/>
         </scene>
         <!--Approval Request-->
         <scene sceneID="pnz-j8-e31">
@@ -387,7 +381,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="beN-KL-leQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3684" y="495.20239880059972"/>
+            <point key="canvasLocation" x="3774" y="108"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="pge-pU-jKP">
@@ -405,7 +399,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Kp-19-Neu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="574" y="-335"/>
+            <point key="canvasLocation" x="415" y="494"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="zvb-HB-SsE">
@@ -417,6 +411,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <color key="tintColor" red="0.1058823529" green="0.53725490200000003" blue="0.81176470590000005" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="selectedImageTintColor" red="0.1058823529" green="0.53725490200000003" blue="0.81176470590000005" alpha="1" colorSpace="calibratedRGB"/>
                     </tabBar>
                     <connections>
                         <segue destination="eyL-ju-x9N" kind="relationship" relationship="viewControllers" id="dhY-2m-FzV"/>

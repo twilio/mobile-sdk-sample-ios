@@ -191,6 +191,7 @@ NSInteger const archiveTabIndex = 1;
 
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Device ID" message:deviceId preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *action = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+    [action setValue:[UIColor colorWithHexString:defaultColor] forKey:@"titleTextColor"];
     [alert addAction:action];
     [self presentViewController:alert animated:YES completion:nil];
 }

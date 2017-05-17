@@ -10,6 +10,7 @@
 #import "UIColor+Extensions.h"
 #import "AUTApprovalRequest+Extensions.h"
 #import "DeviceResetManager.h"
+#import "Constants.h"
 
 @interface RequestDetailViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *requestLogo;
@@ -27,10 +28,10 @@
 @implementation RequestDetailViewController
 
 - (void)viewDidLoad {
+
     [super viewDidLoad];
 
     [self setupUI];
-
 }
 
 - (void)didReceiveMemoryWarning {
@@ -39,6 +40,7 @@
 
 - (void)setupUI {
 
+    [self setupNavigationBar];
     [self setupRequestMessage];
     [self setupRequestDetails];
 
@@ -55,6 +57,11 @@
         self.notPendingMessage.hidden = NO;
     }
 
+}
+
+- (void)setupNavigationBar {
+
+    self.navigationController.navigationBar.tintColor = [UIColor colorWithHexString:defaultColor];
 }
 
 - (void)setupRequestMessage {
