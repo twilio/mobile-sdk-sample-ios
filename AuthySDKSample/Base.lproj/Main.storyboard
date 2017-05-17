@@ -194,7 +194,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Requests" image="requests_not_selected" selectedImage="requests_selected" id="nKQ-pA-RMw"/>
+                    <tabBarItem key="tabBarItem" title="Requests" image="requests" selectedImage="requests" id="nKQ-pA-RMw"/>
                     <toolbarItems/>
                     <connections>
                         <outlet property="noRequestsLabel" destination="KSF-Up-yqX" id="G3s-OT-kqD"/>
@@ -206,7 +206,7 @@
             </objects>
             <point key="canvasLocation" x="2927" y="109"/>
         </scene>
-        <!--Token-->
+        <!--Tokens-->
         <scene sceneID="7ug-y3-cCT">
             <objects>
                 <viewController id="b1i-4a-IKs" customClass="TOTPViewController" sceneMemberID="viewController">
@@ -242,7 +242,7 @@
                             <constraint firstAttribute="leadingMargin" secondItem="bd0-yf-WGd" secondAttribute="leading" id="tST-bb-OXl"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Token" image="tokens_selected" selectedImage="tokens_not_selected" id="vE0-Pm-C5O"/>
+                    <tabBarItem key="tabBarItem" title="Tokens" image="tokens" selectedImage="tokens" id="vE0-Pm-C5O"/>
                     <connections>
                         <outlet property="timerImage" destination="GXG-Al-ks1" id="Yhp-GV-YHM"/>
                         <outlet property="totpLabel" destination="bd0-yf-WGd" id="hkZ-n4-wRa"/>
@@ -388,7 +388,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="d0k-gg-5LQ" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="tYv-Cq-lMw">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="tYv-Cq-lMw">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textAttributes key="titleTextAttributes">
@@ -415,6 +415,11 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <color key="tintColor" red="0.1058823529" green="0.53725490200000003" blue="0.81176470590000005" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="selectedImageTintColor" red="0.1058823529" green="0.53725490200000003" blue="0.81176470590000005" alpha="1" colorSpace="calibratedRGB"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
+                                <color key="value" red="0.10588235294117647" green="0.53725490196078429" blue="0.81176470588235294" alpha="1" colorSpace="calibratedRGB"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </tabBar>
                     <connections>
                         <segue destination="eyL-ju-x9N" kind="relationship" relationship="viewControllers" id="dhY-2m-FzV"/>
@@ -428,9 +433,7 @@
     </scenes>
     <resources>
         <image name="request_detail" width="60" height="60"/>
-        <image name="requests_not_selected" width="20" height="18"/>
-        <image name="requests_selected" width="20" height="18"/>
-        <image name="tokens_not_selected" width="15" height="21"/>
-        <image name="tokens_selected" width="15" height="21"/>
+        <image name="requests" width="20" height="18"/>
+        <image name="tokens" width="15" height="21"/>
     </resources>
 </document>
