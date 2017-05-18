@@ -39,7 +39,7 @@
 
     self.message.numberOfLines = 0;
     [self.message setLineBreakMode:NSLineBreakByWordWrapping];
-    [self.message setFont:[UIFont fontWithName:@"Helvetice-Neue" size:15]];
+    [self.message setFont:[UIFont systemFontOfSize:15]];
     [self.message setTextColor:[UIColor colorWithHexString:@"#000000"]];
     [self.message sizeToFit];
 }
@@ -49,7 +49,7 @@
     [self.expireTime setUserInteractionEnabled:NO];
     [self.expireTime setTextAlignment:NSTextAlignmentLeft];
     self.expireTime.numberOfLines = 1;
-    [self.expireTime setFont:[UIFont fontWithName:@"Helvetice-Neue" size:12]];
+    [self.expireTime setFont:[UIFont systemFontOfSize:14]];
     [self.expireTime setTextColor:[UIColor colorWithHexString:@"#a2a2a2"]];
     [self.expireTime sizeToFit];
 
@@ -62,7 +62,7 @@
 
     [self.timeAgoLabel setTextAlignment:NSTextAlignmentRight];
     self.timeAgoLabel.numberOfLines = 0;
-    [self.timeAgoLabel setFont:[UIFont fontWithName:@"Helvetice-Neue" size:15]];
+    [self.timeAgoLabel setFont:[UIFont systemFontOfSize:14]];
     [self.timeAgoLabel setTextColor:[UIColor colorWithHexString:@"#a2a2a2"]];
 
 }

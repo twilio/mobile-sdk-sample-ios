@@ -23,6 +23,7 @@
 		01D48C3E1DEA4AB200D675BB /* RequestDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D48C3D1DEA4AB200D675BB /* RequestDetailViewController.m */; };
 		01D48C411DEA55CE00D675BB /* RequestTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D48C401DEA55CE00D675BB /* RequestTableViewCell.m */; };
 		01D48C441DEA605200D675BB /* UIColor+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D48C431DEA605200D675BB /* UIColor+Extensions.m */; };
+		01EE5E1E1EBB84C900B2E333 /* TOTPViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01EE5E1D1EBB84C900B2E333 /* TOTPViewController.m */; };
 		01F318FB1C9C6CFF003BA657 /* RequestTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01F318F91C9C6CFF003BA657 /* RequestTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
@@ -44,6 +45,7 @@
 		010C68921E5B8AE900CC7358 /* RegisterDeviceUseCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterDeviceUseCase.m; sourceTree = "<group>"; };
 		010C68941E5B9BB000CC7358 /* UITextField+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UITextField+Extensions.h"; path = "Extensions/UITextField+Extensions.h"; sourceTree = "<group>"; };
 		010C68951E5B9BB000CC7358 /* UITextField+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UITextField+Extensions.m"; path = "Extensions/UITextField+Extensions.m"; sourceTree = "<group>"; };
+		012D3CA61ECCC32D0038D774 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		01A32A5B1DED14C9008529A1 /* NSDate+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDate+Extensions.h"; path = "Extensions/NSDate+Extensions.h"; sourceTree = "<group>"; };
 		01A32A5C1DED14C9008529A1 /* NSDate+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDate+Extensions.m"; path = "Extensions/NSDate+Extensions.m"; sourceTree = "<group>"; };
 		01A32A5E1DED193A008529A1 /* AUTApprovalRequest+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AUTApprovalRequest+Extensions.h"; sourceTree = "<group>"; };
@@ -71,6 +73,8 @@
 		01D48C401DEA55CE00D675BB /* RequestTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestTableViewCell.m; sourceTree = "<group>"; };
 		01D48C421DEA605200D675BB /* UIColor+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+Extensions.h"; path = "Extensions/UIColor+Extensions.h"; sourceTree = "<group>"; };
 		01D48C431DEA605200D675BB /* UIColor+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+Extensions.m"; path = "Extensions/UIColor+Extensions.m"; sourceTree = "<group>"; };
+		01EE5E1C1EBB84C900B2E333 /* TOTPViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TOTPViewController.h; sourceTree = "<group>"; };
+		01EE5E1D1EBB84C900B2E333 /* TOTPViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TOTPViewController.m; sourceTree = "<group>"; };
 		01F318F91C9C6CFF003BA657 /* RequestTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RequestTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -94,6 +98,14 @@
 				01A32A5F1DED193A008529A1 /* AUTApprovalRequest+Extensions.m */,
 			);
 			path = Detail;
+			sourceTree = "<group>";
+		};
+		012D3CA51ECCC20A0038D774 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				012D3CA61ECCC32D0038D774 /* Constants.h */,
+			);
+			path = Constants;
 			sourceTree = "<group>";
 		};
 		013B978F1CB304D600951E6B /* Extensions */ = {
@@ -136,8 +148,10 @@
 				01A32A621DED1DBA008529A1 /* AppDelegate.m */,
 				01B99CA91C936A1600462FA3 /* Main.storyboard */,
 				01B99CAE1C936A1600462FA3 /* LaunchScreen.storyboard */,
+				012D3CA51ECCC20A0038D774 /* Constants */,
 				01D48C2D1DE79A0100D675BB /* Registration */,
 				01D48C2E1DE79A0C00D675BB /* Requests */,
+				01EE5E1B1EBB843E00B2E333 /* TOTP */,
 				013B978F1CB304D600951E6B /* Extensions */,
 			);
 			path = AuthySDKSample;
@@ -169,6 +183,15 @@
 				01F318F91C9C6CFF003BA657 /* RequestTableViewCell.xib */,
 			);
 			path = Requests;
+			sourceTree = "<group>";
+		};
+		01EE5E1B1EBB843E00B2E333 /* TOTP */ = {
+			isa = PBXGroup;
+			children = (
+				01EE5E1C1EBB84C900B2E333 /* TOTPViewController.h */,
+				01EE5E1D1EBB84C900B2E333 /* TOTPViewController.m */,
+			);
+			path = TOTP;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -255,6 +278,7 @@
 				01A32A631DED1DBA008529A1 /* AppDelegate.m in Sources */,
 				01D48C441DEA605200D675BB /* UIColor+Extensions.m in Sources */,
 				01D48C411DEA55CE00D675BB /* RequestTableViewCell.m in Sources */,
+				01EE5E1E1EBB84C900B2E333 /* TOTPViewController.m in Sources */,
 				01A32A601DED193A008529A1 /* AUTApprovalRequest+Extensions.m in Sources */,
 				01D48C3B1DE7AC2A00D675BB /* ApprovalRequestsViewController.m in Sources */,
 				01D48C3E1DEA4AB200D675BB /* RequestDetailViewController.m in Sources */,

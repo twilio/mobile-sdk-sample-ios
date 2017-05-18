@@ -25,10 +25,11 @@
     TwilioAuth *sharedTwilioAuth = [TwilioAuth sharedInstance];
 
     if ([sharedTwilioAuth isDeviceRegistered]) {
-        [self configureApprovalRequestsViewAsRootController];
+        [self configureRootController];
     }
 
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+
     return YES;
 }
 
@@ -116,10 +117,10 @@
     [application registerUserNotificationSettings:settings];
 }
 
-- (void)configureApprovalRequestsViewAsRootController {
+- (void)configureRootController {
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
 
-    ApprovalRequestsViewController *viewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"requestsController"];
+    UITabBarController *viewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"tabBarController"];
 
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
     [self.window setRootViewController:navigationController];
