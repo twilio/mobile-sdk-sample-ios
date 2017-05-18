@@ -196,7 +196,6 @@ NSInteger const archiveTabIndex = 1;
     [self presentViewController:alert animated:YES completion:nil];
 }
 
-
 #pragma mark - Table
 - (void)configureTableView {
     [self.tableView registerNib:[UINib nibWithNibName:@"RequestTableViewCell" bundle:nil] forCellReuseIdentifier:@"request"];
