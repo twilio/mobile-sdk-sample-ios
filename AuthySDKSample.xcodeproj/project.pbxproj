@@ -45,6 +45,7 @@
 		010C68921E5B8AE900CC7358 /* RegisterDeviceUseCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterDeviceUseCase.m; sourceTree = "<group>"; };
 		010C68941E5B9BB000CC7358 /* UITextField+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UITextField+Extensions.h"; path = "Extensions/UITextField+Extensions.h"; sourceTree = "<group>"; };
 		010C68951E5B9BB000CC7358 /* UITextField+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UITextField+Extensions.m"; path = "Extensions/UITextField+Extensions.m"; sourceTree = "<group>"; };
+		012D3CA61ECCC32D0038D774 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		01A32A5B1DED14C9008529A1 /* NSDate+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDate+Extensions.h"; path = "Extensions/NSDate+Extensions.h"; sourceTree = "<group>"; };
 		01A32A5C1DED14C9008529A1 /* NSDate+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDate+Extensions.m"; path = "Extensions/NSDate+Extensions.m"; sourceTree = "<group>"; };
 		01A32A5E1DED193A008529A1 /* AUTApprovalRequest+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AUTApprovalRequest+Extensions.h"; sourceTree = "<group>"; };
@@ -99,6 +100,14 @@
 			path = Detail;
 			sourceTree = "<group>";
 		};
+		012D3CA51ECCC20A0038D774 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				012D3CA61ECCC32D0038D774 /* Constants.h */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
 		013B978F1CB304D600951E6B /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -139,6 +148,7 @@
 				01A32A621DED1DBA008529A1 /* AppDelegate.m */,
 				01B99CA91C936A1600462FA3 /* Main.storyboard */,
 				01B99CAE1C936A1600462FA3 /* LaunchScreen.storyboard */,
+				012D3CA51ECCC20A0038D774 /* Constants */,
 				01D48C2D1DE79A0100D675BB /* Registration */,
 				01D48C2E1DE79A0C00D675BB /* Requests */,
 				01EE5E1B1EBB843E00B2E333 /* TOTP */,

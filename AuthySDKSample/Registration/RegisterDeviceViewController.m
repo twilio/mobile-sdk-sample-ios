@@ -207,13 +207,14 @@
 #pragma mark - Navigation
 - (void)goToApprovalRequestsView {
 
-    ApprovalRequestsViewController *approvalRequestsViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"requestsController"];
+    UITabBarController *tabBarViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"tabBarController"];
 
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:approvalRequestsViewController];
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:tabBarViewController];
 
     dispatch_async(dispatch_get_main_queue(), ^{
         [self presentViewController:navigationController animated:YES completion:nil];
     });
+
 }
 
 #pragma mark - Alert
