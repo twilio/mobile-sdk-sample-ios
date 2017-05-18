@@ -14,6 +14,9 @@
 
 #import "UITextField+Extensions.h"
 
+#define TextfieldOffSetWhenKeyBoardIsShown 5
+#define ViewAnimationDurationWhenKeyBoardIsShown 0.25
+
 @interface RegisterDeviceViewController ()
 
 @property (weak, nonatomic) IBOutlet UITextField *authyIDTextField;
@@ -42,6 +45,10 @@
 
     [self.authyIDTextField configureBottomBorder];
     [self.backendURLTextField configureBottomBorder];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -53,11 +60,59 @@
     [self.backendURLTextField resignFirstResponder];
 }
 
+#pragma mark - Move view up when keyboard is shown
+- (void)keyboardWillShow:(NSNotification *)notification {
+
+    CGFloat offset = TextfieldOffSetWhenKeyBoardIsShown;
+    CGFloat position = self.view.frame.origin.y;
+
+    if ([self.authyIDTextField isEditing]) {
+
+        CGFloat authyIDTextFieldYPosition = self.authyIDTextField.layer.frame.origin.y;
+        CGFloat authyIDTextFieldHeight = self.authyIDTextField.layer.frame.size.height;
+        position = authyIDTextFieldYPosition - authyIDTextFieldHeight*offset;
+
+    } else if ([self.backendURLTextField isEditing]) {
+
+        CGFloat backendURLTextFieldYPosition = self.backendURLTextField.layer.frame.origin.y;
+        CGFloat backendURLTextFieldHeight = self.backendURLTextField.layer.frame.size.height;
+        position = backendURLTextFieldYPosition - backendURLTextFieldHeight*offset;
+    }
+
+    [UIView animateWithDuration:ViewAnimationDurationWhenKeyBoardIsShown animations:^{
+
+        CGRect newFrame = [self.view frame];
+        newFrame.origin.y = -position;
+        [self.view setFrame:newFrame];
+
+    }];
+
+}
+
+-(void)keyboardWillHide:(NSNotification *)notification {
+
+    [UIView animateWithDuration:ViewAnimationDurationWhenKeyBoardIsShown animations:^{
+
+        __weak RegisterDeviceViewController *weakSelf = self;
+
+        dispatch_async(dispatch_get_main_queue(), ^{
+            CGRect newFrame = [weakSelf.view frame];
+            newFrame.origin.x = 0;
+            newFrame.origin.y = 0;
+            [weakSelf.view setFrame:newFrame];
+        });
+
+    }];
+
+}
+
 #pragma mark - Register Device
 - (void)configureUIElementsWhileRegistering {
     [self.registerDeviceButton setEnabled:NO];
     [self.registerDeviceLoadingIndicator setHidden:NO];
     [self.registerDeviceLoadingIndicator startAnimating];
+    [self.authyIDTextField resignFirstResponder];
+    [self.backendURLTextField resignFirstResponder];
 }
 
 - (void)configureUIElementsWhileNotRegistering {
@@ -126,6 +181,7 @@
     [self configureUIElementsWhileRegistering];
 
     // Validate fields
+
     NSString *authyId = self.authyIDTextField.text;
     if ([authyId isEqualToString:@""]) {
         [self showErrorAlertWithTitle:@"Authy ID invalid" andMessage:@"Make sure the value you entered is correct"];
@@ -151,13 +207,14 @@
 #pragma mark - Navigation
 - (void)goToApprovalRequestsView {
 
-    ApprovalRequestsViewController *approvalRequestsViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"requestsController"];
+    UITabBarController *tabBarViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"tabBarController"];
 
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:approvalRequestsViewController];
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:tabBarViewController];
 
     dispatch_async(dispatch_get_main_queue(), ^{
         [self presentViewController:navigationController animated:YES completion:nil];
     });
+
 }
 
 #pragma mark - Alert
