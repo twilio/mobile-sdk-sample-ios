@@ -32,7 +32,7 @@
     int seconds = abs((int)differenceInSeconds);
     int minutes = abs(seconds/60);
     int hours = abs(minutes/60);
-    int days = abs(hours/60);
+    int days = abs(hours/24);
     int weeks = abs(days/7);
 
     if (seconds < 60) {
