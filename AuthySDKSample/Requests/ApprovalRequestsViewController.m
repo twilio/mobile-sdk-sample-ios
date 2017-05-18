@@ -13,6 +13,8 @@
 #import "DeviceResetManager.h"
 
 #import "AUTApprovalRequest+Extensions.h"
+#import "UIColor+Extensions.h"
+#import "Constants.h"
 
 NSInteger const pendingTabIndex = 0;
 NSInteger const archiveTabIndex = 1;
@@ -30,17 +32,37 @@ NSInteger const archiveTabIndex = 1;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
 
     [self configureTableView];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadRequests) name:UIApplicationWillEnterForegroundNotification object:nil];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+
     [super viewWillAppear:animated];
 
+    [self configureNavigationBarTopItems];
+
     [self loadRequests];
+}
+
+- (void)configureNavigationBarTopItems {
+
+    [self.navigationController setNavigationBarHidden:NO];
+
+    self.navigationController.navigationBar.topItem.title = @"Requests";
+
+    // Left bar button item
+    UIBarButtonItem *deviceIdBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"ID" style:UIBarButtonItemStylePlain target:self action:@selector(getDeviceId:)];
+    [deviceIdBarButtonItem setTintColor:[UIColor colorWithHexString:defaultColor]];
+    self.navigationController.navigationBar.topItem.leftBarButtonItem = deviceIdBarButtonItem;
+
+    // Right bar button item
+    UIBarButtonItem *refreshBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refresh:)];
+    [refreshBarButtonItem setTintColor:[UIColor colorWithHexString:defaultColor]];
+    self.navigationController.navigationBar.topItem.rightBarButtonItem = refreshBarButtonItem;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -169,6 +191,7 @@ NSInteger const archiveTabIndex = 1;
 
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Device ID" message:deviceId preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *action = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+    [action setValue:[UIColor colorWithHexString:defaultColor] forKey:@"titleTextColor"];
     [alert addAction:action];
     [self presentViewController:alert animated:YES completion:nil];
 }
