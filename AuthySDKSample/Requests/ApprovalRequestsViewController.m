@@ -161,19 +161,6 @@ NSInteger const archiveTabIndex = 1;
 
 }
 
-#pragma mark - Device ID
-- (IBAction)getDeviceId:(id)sender {
-
-    TwilioAuth *sharedTwilioAuth = [TwilioAuth sharedInstance];
-    NSString *deviceId = [sharedTwilioAuth getDeviceId];
-
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Device ID" message:deviceId preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *action = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
-    [alert addAction:action];
-    [self presentViewController:alert animated:YES completion:nil];
-}
-
-
 #pragma mark - Table
 - (void)configureTableView {
     [self.tableView registerNib:[UINib nibWithNibName:@"RequestTableViewCell" bundle:nil] forCellReuseIdentifier:@"request"];
