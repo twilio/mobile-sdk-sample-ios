@@ -32,8 +32,20 @@
 
 @implementation RegisterDeviceViewController
 
+- (void)setStatusBarBackgroundColor:(UIColor *)color {
+
+    UIView *statusBar = [[[UIApplication sharedApplication] valueForKey:@"statusBarWindow"] valueForKey:@"statusBar"];
+
+    if ([statusBar respondsToSelector:@selector(setBackgroundColor:)]) {
+        statusBar.backgroundColor = color;
+    }
+}
+
 - (void)viewDidLoad {
+
     [super viewDidLoad];
+
+    [self setStatusBarBackgroundColor:[UIColor whiteColor]];
 
     self.registerDeviceUseCase = [[RegisterDeviceUseCase alloc] init];
     self.sharedTwilioAuth = [TwilioAuth sharedInstance];
