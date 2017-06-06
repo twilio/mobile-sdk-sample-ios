@@ -7,7 +7,6 @@
 //
 
 #import "TOTPViewController.h"
-#import <TwilioAuth/TwilioAuth.h>
 
 #import "Constants.h"
 #import "UIColor+Extensions.h"
@@ -48,19 +47,9 @@
 
 - (void)configureTOTP {
 
-    TwilioAuth *sharedTwiliAuth = [TwilioAuth sharedInstance];
+    TwilioAuth *sharedTwilioAuth = [TwilioAuth sharedInstance];
+    [sharedTwilioAuth getTOTPWithDelegate:self];
 
-    [sharedTwiliAuth getSyncedTOTP:^(NSString *totp, NSError *error) {
-
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if (totp == nil) {
-                return;
-            }
-            [self configureTOTPWithText:totp];
-            [self configureTimer];
-        });
-
-    }];
 }
 
 - (void)configureTimer {
@@ -152,6 +141,28 @@
     [self.timerImage setImage:circle];
 
 
+}
+
+#pragma mark - TOTP Delegate
+- (void)didReceiveTOTP:(NSString *)totp withError:(NSError *)error {
+
+    NSLog(@"*******");
+
+    dispatch_async(dispatch_get_main_queue(), ^{
+
+        if (error != nil) {
+            NSLog(@"Error %@", error.localizedDescription);
+            return;
+        }
+
+        if (totp == nil) {
+            return;
+        }
+
+        [self configureTOTPWithText:totp];
+        [self configureTimer];
+
+    });
 }
 
 @end
