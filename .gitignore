@@ -33,7 +33,7 @@ xcuserdata/
 timeline.xctimeline
 playground.xcworkspace
 
-## TwilioAuth
+## TwilioAuth Framework
 *.framework
 
 # Swift Package Manager
