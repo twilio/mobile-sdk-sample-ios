@@ -61,8 +61,8 @@
 
 - (void)setupNavigationBar {
 
-    self.navigationController.navigationBar.topItem.title = @"Back";
     self.navigationController.navigationBar.tintColor = [UIColor colorWithHexString:defaultColor];
+
 }
 
 - (void)setupRequestMessage {
@@ -227,6 +227,7 @@
         }
 
     }];
+    [action setValue:[UIColor colorWithHexString:defaultColor] forKey:@"titleTextColor"];
 
     [alertController addAction:action];
 

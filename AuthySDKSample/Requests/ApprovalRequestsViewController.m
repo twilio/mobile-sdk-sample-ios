@@ -54,12 +54,12 @@ NSInteger const archiveTabIndex = 1;
 
     self.navigationController.navigationBar.topItem.title = @"Requests";
 
-    // Left bar button item
+    // Left bar button item - Device ID
     UIBarButtonItem *deviceIdBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"ID" style:UIBarButtonItemStylePlain target:self action:@selector(getDeviceId:)];
     [deviceIdBarButtonItem setTintColor:[UIColor colorWithHexString:defaultColor]];
     self.navigationController.navigationBar.topItem.leftBarButtonItem = deviceIdBarButtonItem;
 
-    // Right bar button item
+    // Right bar button item - Refresh
     UIBarButtonItem *refreshBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refresh:)];
     [refreshBarButtonItem setTintColor:[UIColor colorWithHexString:defaultColor]];
     self.navigationController.navigationBar.topItem.rightBarButtonItem = refreshBarButtonItem;
@@ -92,11 +92,13 @@ NSInteger const archiveTabIndex = 1;
 
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:error.localizedDescription preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:nil];
+    [cancelAction setValue:[UIColor colorWithHexString:defaultColor] forKey:@"titleTextColor"];
     [alertController addAction:cancelAction];
 
     UIAlertAction *retryAction = [UIAlertAction actionWithTitle:@"Refresh" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         retryBlock();
     }];
+    [retryAction setValue:[UIColor colorWithHexString:defaultColor] forKey:@"titleTextColor"];
 
     [alertController addAction:retryAction];
 
