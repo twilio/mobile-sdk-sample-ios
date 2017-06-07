@@ -146,8 +146,6 @@
 #pragma mark - TOTP Delegate
 - (void)didReceiveTOTP:(NSString *)totp withError:(NSError *)error {
 
-    NSLog(@"*******");
-
     dispatch_async(dispatch_get_main_queue(), ^{
 
         if (error != nil) {
