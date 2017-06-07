@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <TwilioAuth/TwilioAuth.h>
 
-@interface TOTPViewController : UIViewController
+@interface TOTPViewController : UIViewController <TOTPDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *totpLabel;
 @property (weak, nonatomic) IBOutlet UILabel *tokenName;
