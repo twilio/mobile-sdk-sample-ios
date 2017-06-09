@@ -124,7 +124,6 @@
 		01B99C991C936A1600462FA3 = {
 			isa = PBXGroup;
 			children = (
-				018E8B6E1ED87FEF00D12592 /* TwilioAuth.framework */,
 				01B99CA41C936A1600462FA3 /* TwilioAuthSample */,
 				01B99CA31C936A1600462FA3 /* Products */,
 			);
