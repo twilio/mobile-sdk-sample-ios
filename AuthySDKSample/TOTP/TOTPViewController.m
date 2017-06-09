@@ -17,6 +17,8 @@
 
 @interface TOTPViewController ()
 
+@property (nonatomic, strong) NSTimer *totpTimer;
+
 @end
 
 @implementation TOTPViewController
@@ -25,11 +27,21 @@
 
     [super viewDidLoad];
     [self drawBackgroundCircle];
-    [self configureTOTP];
+
+    [self configureTimer];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [self configureNavigationBar];
+    [self configureTOTP];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+
+    if (self.totpTimer) {
+        [self.totpTimer invalidate];
+        self.totpTimer = nil;
+    }
 }
 
 - (void)configureNavigationBar {
@@ -53,10 +65,7 @@
 }
 
 - (void)configureTimer {
-
-    [self showTimerAnimation];
-    [NSTimer scheduledTimerWithTimeInterval:20 target:self selector:@selector(refreshTimer:) userInfo:nil repeats:NO];
-
+    self.totpTimer = [NSTimer scheduledTimerWithTimeInterval:20 target:self selector:@selector(refreshTimer:) userInfo:nil repeats:YES];
 }
 
 - (void)configureTOTPWithText:(NSString *)totpText {
@@ -158,7 +167,7 @@
         }
 
         [self configureTOTPWithText:totp];
-        [self configureTimer];
+        [self showTimerAnimation];
 
     });
 }
