@@ -12,7 +12,7 @@ Welcome to the Twilio Authy iOS SDK Sample application. This application demonst
 
 * **Step 2 (option 3 - manual):** Open the Xcode project (`AuthySDKSample.xcodeproj`) from the cloned repository's working directory. [Download](https://media.twiliocdn.com/sdk/ios/auth/releases/1.0.0/twilio-auth-ios-1.0.0.tar.bz2) the Authy iOS framework. Navigate to your Xcode project's General settings page. Drag and drop the framework onto the Embedded Binaries section. Ensure that "Copy items if needed" is checked and press Finish. This will add the framework to both the Embedded Binaries and Linked Frameworks and Libraries sections.
 
-* **Step 3:** [A backend application to handle the device registration](https://www.twilio.com/docs/api/authy/authy-mobile-sdk-back-end-and-apps)
+* **Step 3:** [A backend application to handle the device registration](https://www.twilio.com/docs/quickstart/twilioauth-sdk-quickstart-tutorials/running-sample-app)
 
 ### Learn more
 - Check out the full documentation at https://www.twilio.com/docs/quickstart/twilioauth-sdk-quickstart-tutorials
