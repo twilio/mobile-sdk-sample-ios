@@ -10,6 +10,7 @@
 #import <TwilioAuth/TwilioAuth.h>
 
 #import "ApprovalRequestsViewController.h"
+#import "RequestDetailViewController.h"
 
 @implementation AppDelegate
 
@@ -30,8 +31,25 @@
 
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
 
+    NSDictionary *notificationInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+
+    if (notificationInfo) {
+        [self handlePushNotificationWithInfo:notificationInfo];
+    }
+
     return YES;
 }
+
+- (void)configureRootController {
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+
+    UITabBarController *viewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"tabBarController"];
+
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
+    [self.window setRootViewController:navigationController];
+    [self.window makeKeyAndVisible];
+}
+
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     NSLog(@"application will resign active");
@@ -60,6 +78,7 @@
     }
 }
 
+#pragma mark - Push Notifications
 -(void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
 
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
@@ -108,6 +127,9 @@
 }
 
 - (void)application:(UIApplication*)application didReceiveRemoteNotification:(NSDictionary*)userInfo {
+
+    [self handlePushNotificationWithInfo:userInfo];
+
 }
 
 - (void)registerForPushNotifications:(UIApplication *)application {
@@ -117,13 +139,58 @@
     [application registerUserNotificationSettings:settings];
 }
 
-- (void)configureRootController {
-    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+- (void)handlePushNotificationWithInfo:(NSDictionary*)userInfo {
 
-    UITabBarController *viewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"tabBarController"];
+    NSString *notificationType = [userInfo objectForKey:@"type"];
+    if (![notificationType isEqualToString:@"onetouch_approval_request"]) {
+        return;
+    }
 
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
-    [self.window setRootViewController:navigationController];
-    [self.window makeKeyAndVisible];
+    NSString *approvalRequestUUID = [userInfo objectForKey:@"approval_request_uuid"];
+    TwilioAuth *twilioAuth = [TwilioAuth sharedInstance];
+    [twilioAuth getApprovalRequestsWithStatuses:AUTApprovalRequestStatusPending timeInterval:nil completion:^(AUTApprovalRequests * _Nullable approvalRequests, NSError * _Nullable error) {
+
+        if (error != nil) {
+            return;
+        }
+
+        for (AUTApprovalRequest *pendingRequest in approvalRequests.pending) {
+
+            if ([pendingRequest.uuid isEqualToString:approvalRequestUUID]) {
+
+
+                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
+                RequestDetailViewController *requestDetailViewController = [storyboard instantiateViewControllerWithIdentifier:@"approvalRequestDetail"];
+                requestDetailViewController.approvalRequest = pendingRequest;
+
+                UIViewController *currentViewController = self.window.rootViewController;
+                UIViewController *presentedViewController = currentViewController.presentedViewController;
+
+                UINavigationController *currentNavigationController;
+
+                if (presentedViewController != nil && [presentedViewController isKindOfClass:[UINavigationController class]]) {
+
+                    currentNavigationController = (UINavigationController *)presentedViewController;
+
+                } else if ([currentViewController isKindOfClass:[UINavigationController class]]) {
+
+                    currentNavigationController = (UINavigationController *)currentViewController;
+
+                }
+
+                dispatch_async(dispatch_get_main_queue(), ^{
+
+                    if (currentNavigationController != nil) {
+                        [currentNavigationController pushViewController:requestDetailViewController animated:YES];
+                    }
+
+                });
+
+                return;
+            }
+        }
+    }];
+
 }
+
 @end
