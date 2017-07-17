@@ -126,7 +126,7 @@ NSInteger const archiveTabIndex = 1;
         dispatch_async(dispatch_get_main_queue(), ^{
 
             if (error.code == AUTDeviceDeletedError) {
-                [DeviceResetManager resetDeviceAndGetRegistrationViewForCurrentView:weakSelf];
+                [DeviceResetManager resetDeviceAndGetRegistrationViewForCurrentView:weakSelf withCustomTitle:nil];
                 return;
             }
 
@@ -203,7 +203,7 @@ NSInteger const archiveTabIndex = 1;
     UIAlertAction *logoutAction = [UIAlertAction actionWithTitle:@"Logout" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
 
         [sharedTwilioAuth clearLocalData];
-        [DeviceResetManager resetDeviceAndGetRegistrationViewForCurrentView:weakSelf];
+        [DeviceResetManager resetDeviceAndGetRegistrationViewForCurrentView:weakSelf withCustomTitle:@"Local Data Deleted"];
 
     }];
     [alert addAction:logoutAction];

@@ -11,6 +11,6 @@
 
 @interface DeviceResetManager : NSObject
 
-+ (void)resetDeviceAndGetRegistrationViewForCurrentView:(UIViewController *)viewController;
++ (void)resetDeviceAndGetRegistrationViewForCurrentView:(UIViewController *)viewController withCustomTitle:(NSString *)title;
 
 @end
