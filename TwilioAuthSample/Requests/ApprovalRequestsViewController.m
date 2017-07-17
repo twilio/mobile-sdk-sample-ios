@@ -192,9 +192,23 @@ NSInteger const archiveTabIndex = 1;
     NSString *deviceId = [sharedTwilioAuth getDeviceId];
 
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Device ID" message:deviceId preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *action = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
-    [action setValue:[UIColor colorWithHexString:defaultColor] forKey:@"titleTextColor"];
-    [alert addAction:action];
+
+    // OK Action
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+    [okAction setValue:[UIColor colorWithHexString:defaultColor] forKey:@"titleTextColor"];
+    [alert addAction:okAction];
+
+    // Logout Action
+    __weak ApprovalRequestsViewController *weakSelf = self;
+    UIAlertAction *logoutAction = [UIAlertAction actionWithTitle:@"Logout" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+
+        [sharedTwilioAuth clearLocalData];
+        [DeviceResetManager resetDeviceAndGetRegistrationViewForCurrentView:weakSelf];
+
+    }];
+    [alert addAction:logoutAction];
+
+    // Present Alert
     [self presentViewController:alert animated:YES completion:nil];
 }
 
