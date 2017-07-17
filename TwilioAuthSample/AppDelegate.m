@@ -40,17 +40,6 @@
     return YES;
 }
 
-- (void)configureRootController {
-    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-
-    UITabBarController *viewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"tabBarController"];
-
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
-    [self.window setRootViewController:navigationController];
-    [self.window makeKeyAndVisible];
-}
-
-
 - (void)applicationWillResignActive:(UIApplication *)application {
     NSLog(@"application will resign active");
 }
