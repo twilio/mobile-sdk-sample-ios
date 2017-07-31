@@ -78,7 +78,17 @@
     }
 }
 
-#pragma mark - Push Notifications
+- (void)configureRootController {
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+
+    UITabBarController *viewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"tabBarController"];
+
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
+    [self.window setRootViewController:navigationController];
+    [self.window makeKeyAndVisible];
+}
+
+#pragma mark - Register for Push Notifications
 -(void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
 
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
@@ -126,17 +136,56 @@
     NSLog(@"Failed to register notification: %@", [error localizedDescription]);
 }
 
-- (void)application:(UIApplication*)application didReceiveRemoteNotification:(NSDictionary*)userInfo {
-
-    [self handlePushNotificationWithInfo:userInfo];
-
-}
-
 - (void)registerForPushNotifications:(UIApplication *)application {
 
     UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert) categories:nil];
 
     [application registerUserNotificationSettings:settings];
+}
+
+#pragma mark - Handle Push Notification
+- (UINavigationController *)getCurrentNavigationController {
+
+    UIViewController *currentViewController = self.window.rootViewController;
+    UIViewController *presentedViewController = currentViewController.presentedViewController;
+
+    UINavigationController *currentNavigationController;
+
+    if (presentedViewController != nil && [presentedViewController isKindOfClass:[UINavigationController class]]) {
+
+        currentNavigationController = (UINavigationController *)presentedViewController;
+
+    } else if ([currentViewController isKindOfClass:[UINavigationController class]]) {
+
+        currentNavigationController = (UINavigationController *)currentViewController;
+
+    }
+
+    return currentNavigationController;
+}
+
+- (RequestDetailViewController *)getRequestDetailForApprovalRequest:(AUTApprovalRequest *)request {
+
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
+    RequestDetailViewController *requestDetailViewController = [storyboard instantiateViewControllerWithIdentifier:@"approvalRequestDetail"];
+    requestDetailViewController.approvalRequest = request;
+
+    return requestDetailViewController;
+}
+
+- (void)presentRequestDetailForApprovalRequest:(AUTApprovalRequest *)request {
+
+    UINavigationController *currentNavigationController = [self getCurrentNavigationController];
+    RequestDetailViewController *requestDetailViewController = [self getRequestDetailForApprovalRequest:request];
+
+    dispatch_async(dispatch_get_main_queue(), ^{
+
+        if (currentNavigationController != nil) {
+            [currentNavigationController pushViewController:requestDetailViewController animated:YES];
+        }
+
+    });
+
 }
 
 - (void)handlePushNotificationWithInfo:(NSDictionary*)userInfo {
@@ -149,44 +198,24 @@
     NSString *approvalRequestUUID = [userInfo objectForKey:@"approval_request_uuid"];
     TwilioAuth *twilioAuth = [TwilioAuth sharedInstance];
     [twilioAuth getRequestWithUUID:approvalRequestUUID completion:^(AUTApprovalRequest *request, NSError *error) {
-        if (error != nil || request == nil) {
+
+        if (error != nil) {
             return;
         }
 
-        if ([request.uuid isEqualToString:approvalRequestUUID]) {
-
-
-            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
-            RequestDetailViewController *requestDetailViewController = [storyboard instantiateViewControllerWithIdentifier:@"approvalRequestDetail"];
-            requestDetailViewController.approvalRequest = request;
-
-            UIViewController *currentViewController = self.window.rootViewController;
-            UIViewController *presentedViewController = currentViewController.presentedViewController;
-
-            UINavigationController *currentNavigationController;
-
-            if (presentedViewController != nil && [presentedViewController isKindOfClass:[UINavigationController class]]) {
-
-                currentNavigationController = (UINavigationController *)presentedViewController;
-
-            } else if ([currentViewController isKindOfClass:[UINavigationController class]]) {
-
-                currentNavigationController = (UINavigationController *)currentViewController;
-
-            }
-
-            dispatch_async(dispatch_get_main_queue(), ^{
-
-                if (currentNavigationController != nil) {
-                    [currentNavigationController pushViewController:requestDetailViewController animated:YES];
-                }
-
-            });
-
+        if (![request.uuid isEqualToString:approvalRequestUUID]) {
             return;
         }
+
+        [self presentRequestDetailForApprovalRequest:request];
+
     }];
 
+}
+
+- (void)application:(UIApplication*)application didReceiveRemoteNotification:(NSDictionary*)userInfo {
+
+    [self handlePushNotificationWithInfo:userInfo];
 }
 
 @end
