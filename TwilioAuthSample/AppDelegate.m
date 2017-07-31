@@ -186,11 +186,9 @@
             return;
         }
 
-        if (![request.uuid isEqualToString:approvalRequestUUID]) {
-            return;
+        if ([request.uuid isEqualToString:approvalRequestUUID]) {
+            [self presentRequestDetailForApprovalRequest:request];
         }
-
-        [self presentRequestDetailForApprovalRequest:request];
 
     }];
 
