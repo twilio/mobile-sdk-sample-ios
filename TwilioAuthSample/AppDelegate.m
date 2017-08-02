@@ -80,6 +80,7 @@
        stringByReplacingOccurrencesOfString: @"<" withString: @""]
       stringByReplacingOccurrencesOfString: @">" withString: @""]
      stringByReplacingOccurrencesOfString: @" " withString: @""];
+    NSLog(@"Push token: %@", deviceTokenAsString);
 
     NSString *currentPushToken = [userDefaults objectForKey:@"PUSH_TOKEN"];
 
