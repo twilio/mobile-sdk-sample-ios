@@ -408,7 +408,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: Adriana Pineda (7AQUE3U49X)";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 9EVH78F4V4;
-				ENABLE_BITCODE = NO;
+				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/TwilioAuthSample",
@@ -435,7 +435,7 @@
 				CODE_SIGN_ENTITLEMENTS = TwilioAuthSample/TwilioAuthSample.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Authy Inc. (9EVH78F4V4)";
 				DEVELOPMENT_TEAM = 9EVH78F4V4;
-				ENABLE_BITCODE = NO;
+				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/TwilioAuthSample",
