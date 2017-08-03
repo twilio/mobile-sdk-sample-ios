@@ -31,6 +31,11 @@
 
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
 
+    NSDictionary *notificationInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+    if (notificationInfo) {
+        [self handlePushNotificationWithInfo:notificationInfo];
+    }
+
     return YES;
 }
 
