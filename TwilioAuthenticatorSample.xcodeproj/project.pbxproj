@@ -451,8 +451,8 @@
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.twilio.authenticator.sample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "c7cda706-99c8-4af2-8953-fa7686db5c82";
-				PROVISIONING_PROFILE_SPECIFIER = "TwilioAuth SDK Sample Dev Provisioning Profile";
+				PROVISIONING_PROFILE = "c4191781-7654-4a59-81b0-7c5f5f567397";
+				PROVISIONING_PROFILE_SPECIFIER = "TwilioAuthenticator Sample Dev Profile";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -477,8 +477,8 @@
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.twilio.authenticator.sample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "56250f8e-51f8-4ef8-97ad-5980c836cf3d";
-				PROVISIONING_PROFILE_SPECIFIER = "TwilioAuth SDK Sample Prod Provisioning Profile";
+				PROVISIONING_PROFILE = "3f9e1946-6608-4e49-ba10-26de21c2721c";
+				PROVISIONING_PROFILE_SPECIFIER = "TwilioAuthenticator Sample Prod Profile";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 3.0;
 			};
