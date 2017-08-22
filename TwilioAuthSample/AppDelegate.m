@@ -148,46 +148,42 @@
 
     NSString *approvalRequestUUID = [userInfo objectForKey:@"approval_request_uuid"];
     TwilioAuth *twilioAuth = [TwilioAuth sharedInstance];
-    [twilioAuth getApprovalRequestsWithStatuses:AUTApprovalRequestStatusPending timeInterval:nil completion:^(AUTApprovalRequests * _Nullable approvalRequests, NSError * _Nullable error) {
-
-        if (error != nil) {
+    [twilioAuth getRequestWithUUID:approvalRequestUUID completion:^(AUTApprovalRequest *request, NSError *error) {
+        if (error != nil || request == nil) {
             return;
         }
 
-        for (AUTApprovalRequest *pendingRequest in approvalRequests.pending) {
-
-            if ([pendingRequest.uuid isEqualToString:approvalRequestUUID]) {
+        if ([request.uuid isEqualToString:approvalRequestUUID]) {
 
 
-                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
-                RequestDetailViewController *requestDetailViewController = [storyboard instantiateViewControllerWithIdentifier:@"approvalRequestDetail"];
-                requestDetailViewController.approvalRequest = pendingRequest;
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
+            RequestDetailViewController *requestDetailViewController = [storyboard instantiateViewControllerWithIdentifier:@"approvalRequestDetail"];
+            requestDetailViewController.approvalRequest = request;
 
-                UIViewController *currentViewController = self.window.rootViewController;
-                UIViewController *presentedViewController = currentViewController.presentedViewController;
+            UIViewController *currentViewController = self.window.rootViewController;
+            UIViewController *presentedViewController = currentViewController.presentedViewController;
 
-                UINavigationController *currentNavigationController;
+            UINavigationController *currentNavigationController;
 
-                if (presentedViewController != nil && [presentedViewController isKindOfClass:[UINavigationController class]]) {
+            if (presentedViewController != nil && [presentedViewController isKindOfClass:[UINavigationController class]]) {
 
-                    currentNavigationController = (UINavigationController *)presentedViewController;
+                currentNavigationController = (UINavigationController *)presentedViewController;
 
-                } else if ([currentViewController isKindOfClass:[UINavigationController class]]) {
+            } else if ([currentViewController isKindOfClass:[UINavigationController class]]) {
 
-                    currentNavigationController = (UINavigationController *)currentViewController;
+                currentNavigationController = (UINavigationController *)currentViewController;
 
+            }
+
+            dispatch_async(dispatch_get_main_queue(), ^{
+
+                if (currentNavigationController != nil) {
+                    [currentNavigationController pushViewController:requestDetailViewController animated:YES];
                 }
 
-                dispatch_async(dispatch_get_main_queue(), ^{
+            });
 
-                    if (currentNavigationController != nil) {
-                        [currentNavigationController pushViewController:requestDetailViewController animated:YES];
-                    }
-
-                });
-
-                return;
-            }
+            return;
         }
     }];
 
