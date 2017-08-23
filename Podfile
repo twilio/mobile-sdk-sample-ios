@@ -1,5 +1,5 @@
 source 'https://github.com/CocoaPods/Specs'
 
 target 'TwilioAuthenticatorSample' do
-    pod 'TwilioAuthenticator', '~>1.1.0'
+    pod 'TwilioAuthenticator', '~>2.0.0'
 end
