@@ -146,9 +146,9 @@
     return YES;
 }
 
-- (void)registerDeviceWithAuthyWithRegistrationToken:(NSString *)registrationToken andPushToken:(NSString *)pushToken {
+- (void)registerDeviceWithAuthyWithRegistrationToken:(NSString *)registrationToken integrationApiKey:(NSString *)integrationApiKey andPushToken:(NSString *)pushToken {
 
-    [self.sharedTwilioAuth registerDeviceWithRegistrationToken:registrationToken pushToken:pushToken completion:^(NSError *error) {
+    [self.sharedTwilioAuth registerDeviceWithRegistrationToken:registrationToken integrationApiKey:integrationApiKey pushToken:pushToken completion:^(NSError *error) {
 
         if (error != nil) {
 
@@ -212,7 +212,7 @@
 
         // Register device with Authy
         NSString *pushToken = [self getCurrentPushToken];
-        [self registerDeviceWithAuthyWithRegistrationToken:registrationToken andPushToken:pushToken];
+        [self registerDeviceWithAuthyWithRegistrationToken:registrationToken integrationApiKey:integrationApiKey andPushToken:pushToken];
 
     }];
 }
