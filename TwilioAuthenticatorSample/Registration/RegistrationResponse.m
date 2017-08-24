@@ -14,10 +14,6 @@
 
     self = [super init];
 
-    if (self) {
-        _messageError = @"Make sure the data is correct";
-    }
-
     return self;
 }
 
