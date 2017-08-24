@@ -42,7 +42,7 @@
         NSError *error = nil;
         NSDictionary *currentResponseAsDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&error];
 
-        NSString *integrationApiKey = [currentResponseAsDict objectForKey:@"integration"];
+        NSString *integrationApiKey = [currentResponseAsDict objectForKey:@"integration_api_key"];
         if (integrationApiKey) {
             registrationResponse.integrationApiKey = integrationApiKey;
         }
