@@ -11,9 +11,16 @@
 
 @implementation DeviceResetManager
 
-+ (void)resetDeviceAndGetRegistrationViewForCurrentView:(UIViewController *)viewController {
++ (void)resetDeviceAndGetRegistrationViewForCurrentView:(UIViewController *)viewController withCustomTitle:(NSString *)title {
 
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Device deleted" message:@"Enter a new Authy ID and Backend URL" preferredStyle:UIAlertControllerStyleAlert];
+    NSString *alertTitle = @"";
+    if (title == nil) {
+        alertTitle = @"Device deleted";
+    } else {
+        alertTitle = title;
+    }
+
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:alertTitle message:@"Enter a new Authy ID and Backend URL" preferredStyle:UIAlertControllerStyleAlert];
 
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
 

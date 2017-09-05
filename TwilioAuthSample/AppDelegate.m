@@ -10,6 +10,7 @@
 #import <TwilioAuth/TwilioAuth.h>
 
 #import "ApprovalRequestsViewController.h"
+#import "RequestDetailViewController.h"
 
 @implementation AppDelegate
 
@@ -29,6 +30,12 @@
     }
 
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+
+    NSDictionary *notificationInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+
+    if (notificationInfo) {
+        [self handlePushNotificationWithInfo:notificationInfo];
+    }
 
     return YES;
 }
@@ -60,6 +67,17 @@
     }
 }
 
+- (void)configureRootController {
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+
+    UITabBarController *viewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"tabBarController"];
+
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
+    [self.window setRootViewController:navigationController];
+    [self.window makeKeyAndVisible];
+}
+
+#pragma mark - Register for Push Notifications
 -(void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
 
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
@@ -107,9 +125,6 @@
     NSLog(@"Failed to register notification: %@", [error localizedDescription]);
 }
 
-- (void)application:(UIApplication*)application didReceiveRemoteNotification:(NSDictionary*)userInfo {
-}
-
 - (void)registerForPushNotifications:(UIApplication *)application {
 
     UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert) categories:nil];
@@ -117,13 +132,77 @@
     [application registerUserNotificationSettings:settings];
 }
 
-- (void)configureRootController {
-    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+#pragma mark - Handle Push Notification
+- (UINavigationController *)getCurrentNavigationController {
 
-    UITabBarController *viewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"tabBarController"];
+    UIViewController *currentViewController = self.window.rootViewController;
+    UIViewController *presentedViewController = currentViewController.presentedViewController;
 
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
-    [self.window setRootViewController:navigationController];
-    [self.window makeKeyAndVisible];
+    UINavigationController *currentNavigationController;
+
+    if (presentedViewController != nil && [presentedViewController isKindOfClass:[UINavigationController class]]) {
+
+        currentNavigationController = (UINavigationController *)presentedViewController;
+
+    } else if ([currentViewController isKindOfClass:[UINavigationController class]]) {
+
+        currentNavigationController = (UINavigationController *)currentViewController;
+
+    }
+
+    return currentNavigationController;
 }
+
+- (RequestDetailViewController *)getRequestDetailForApprovalRequest:(AUTApprovalRequest *)request {
+
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
+    RequestDetailViewController *requestDetailViewController = [storyboard instantiateViewControllerWithIdentifier:@"approvalRequestDetail"];
+    requestDetailViewController.approvalRequest = request;
+
+    return requestDetailViewController;
+}
+
+- (void)presentRequestDetailForApprovalRequest:(AUTApprovalRequest *)request {
+
+    UINavigationController *currentNavigationController = [self getCurrentNavigationController];
+    RequestDetailViewController *requestDetailViewController = [self getRequestDetailForApprovalRequest:request];
+
+    dispatch_async(dispatch_get_main_queue(), ^{
+
+        if (currentNavigationController != nil) {
+            [currentNavigationController pushViewController:requestDetailViewController animated:YES];
+        }
+
+    });
+
+}
+
+- (void)handlePushNotificationWithInfo:(NSDictionary*)userInfo {
+
+    NSString *notificationType = [userInfo objectForKey:@"type"];
+    if (![notificationType isEqualToString:@"onetouch_approval_request"]) {
+        return;
+    }
+
+    NSString *approvalRequestUUID = [userInfo objectForKey:@"approval_request_uuid"];
+    TwilioAuth *twilioAuth = [TwilioAuth sharedInstance];
+    [twilioAuth getRequestWithUUID:approvalRequestUUID completion:^(AUTApprovalRequest *request, NSError *error) {
+
+        if (error != nil) {
+            return;
+        }
+
+        if ([request.uuid isEqualToString:approvalRequestUUID]) {
+            [self presentRequestDetailForApprovalRequest:request];
+        }
+
+    }];
+
+}
+
+- (void)application:(UIApplication*)application didReceiveRemoteNotification:(NSDictionary*)userInfo {
+
+    [self handlePushNotificationWithInfo:userInfo];
+}
+
 @end

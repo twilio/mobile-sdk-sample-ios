@@ -212,7 +212,7 @@
 
 - (void)configureRegistrationTokenViewAsRootController {
 
-    [DeviceResetManager resetDeviceAndGetRegistrationViewForCurrentView:self];
+    [DeviceResetManager resetDeviceAndGetRegistrationViewForCurrentView:self withCustomTitle:nil];
 
 }
 
