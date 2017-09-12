@@ -231,7 +231,9 @@
 
     [alertController addAction:action];
 
-    [self presentViewController:alertController animated:NO completion:nil];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self presentViewController:alertController animated:NO completion:nil];
+    });
 
 }
 
