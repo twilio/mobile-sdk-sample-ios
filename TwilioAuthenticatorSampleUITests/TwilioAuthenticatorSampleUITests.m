@@ -39,7 +39,50 @@
     [super tearDown];
 }
 
-- (void)testRegisterWithInvalidURL {
+- (void)testRegisterWithNoAuthyId_1 {
+
+    XCUIElement *registerButton = self.application.buttons[@"Register Device"];
+    [registerButton tap];
+
+    XCUIElement *deviceRegistrationFailedAlert = self.application.alerts[@"Authy ID invalid"];
+    XCTAssertTrue(deviceRegistrationFailedAlert.exists);
+    [deviceRegistrationFailedAlert.buttons[@"OK"] tap];
+
+}
+
+- (void)testRegisterWithNoAuthyId_2 {
+
+    // Enter Invalid URL
+    XCUIElement *backendUrlField = self.application.textFields[@"https required"];
+    [backendUrlField tap];
+    [backendUrlField typeText:@"https://invalid.com"];
+
+    XCUIElement *registerButton = self.application.buttons[@"Register Device"];
+    [registerButton tap];
+
+    XCUIElement *deviceRegistrationFailedAlert = self.application.alerts[@"Authy ID invalid"];
+    XCTAssertTrue(deviceRegistrationFailedAlert.exists);
+    [deviceRegistrationFailedAlert.buttons[@"OK"] tap];
+
+}
+
+- (void)testRegisterWithNoBackendURL {
+
+    // Enter Authy ID
+    XCUIElement *userAuthyIdField = self.application.textFields[@"12345678"];
+    [userAuthyIdField tap];
+    [userAuthyIdField typeText:@"74553"];
+
+    XCUIElement *registerButton = self.application.buttons[@"Register Device"];
+    [registerButton tap];
+
+    XCUIElement *deviceRegistrationFailedAlert = self.application.alerts[@"Backend URL invalid"];
+    XCTAssertTrue(deviceRegistrationFailedAlert.exists);
+    [deviceRegistrationFailedAlert.buttons[@"OK"] tap];
+
+}
+
+- (void)testRegisterWithInvalidURL_1 {
 
     // Enter Authy ID
     XCUIElement *userAuthyIdField = self.application.textFields[@"12345678"];
@@ -60,44 +103,23 @@
 
 }
 
-- (void)testRegisterWithInvalidAuthyId_1 {
-
-    XCUIElement *registerButton = self.application.buttons[@"Register Device"];
-    [registerButton tap];
-
-    XCUIElement *deviceRegistrationFailedAlert = self.application.alerts[@"Authy ID invalid"];
-    XCTAssertTrue(deviceRegistrationFailedAlert.exists);
-    [deviceRegistrationFailedAlert.buttons[@"OK"] tap];
-
-}
-
-- (void)testRegisterWithInvalidAuthyId_2 {
-
-    // Enter Invalid URL
-    XCUIElement *backendUrlField = self.application.textFields[@"https required"];
-    [backendUrlField tap];
-    [backendUrlField typeText:@"https://invalid.com"];
-
-    XCUIElement *registerButton = self.application.buttons[@"Register Device"];
-    [registerButton tap];
-
-    XCUIElement *deviceRegistrationFailedAlert = self.application.alerts[@"Authy ID invalid"];
-    XCTAssertTrue(deviceRegistrationFailedAlert.exists);
-    [deviceRegistrationFailedAlert.buttons[@"OK"] tap];
-
-}
-
-- (void)testRegisterWithInvalidBackendURL {
+- (void)testRegisterWithInvalidURL_2 {
 
     // Enter Authy ID
     XCUIElement *userAuthyIdField = self.application.textFields[@"12345678"];
     [userAuthyIdField tap];
     [userAuthyIdField typeText:@"74553"];
 
+    // Enter Invalid URL
+    XCUIElement *backendUrlField = self.application.textFields[@"https required"];
+    [backendUrlField tap];
+    // HTTP not allowed
+    [backendUrlField typeText:@"http://new-registration-sdk.herokuapp.com"];
+
     XCUIElement *registerButton = self.application.buttons[@"Register Device"];
     [registerButton tap];
 
-    XCUIElement *deviceRegistrationFailedAlert = self.application.alerts[@"Backend URL invalid"];
+    XCUIElement *deviceRegistrationFailedAlert = self.application.alerts[@"Device Registration Failed"];
     XCTAssertTrue(deviceRegistrationFailedAlert.exists);
     [deviceRegistrationFailedAlert.buttons[@"OK"] tap];
 
@@ -113,7 +135,7 @@
     // Enter Invalid URL
     XCUIElement *backendUrlField = self.application.textFields[@"https required"];
     [backendUrlField tap];
-    [backendUrlField typeText:@"https://a8c54ae8.ngrok.io"];
+    [backendUrlField typeText:@"https://new-registration-sdk.herokuapp.com"];
 
     XCUIElement *registerButton = self.application.buttons[@"Register Device"];
     [registerButton tap];
