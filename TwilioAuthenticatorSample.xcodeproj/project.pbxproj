@@ -19,6 +19,7 @@
 		01B99CAB1C936A1600462FA3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01B99CA91C936A1600462FA3 /* Main.storyboard */; };
 		01B99CAD1C936A1600462FA3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01B99CAC1C936A1600462FA3 /* Assets.xcassets */; };
 		01B99CB01C936A1600462FA3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01B99CAE1C936A1600462FA3 /* LaunchScreen.storyboard */; };
+		01BD37631F686A2600A76639 /* TwilioAuthenticatorSampleUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 01BD37621F686A2600A76639 /* TwilioAuthenticatorSampleUITests.m */; };
 		01CDAA8B1DF08CF700347404 /* DeviceResetManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 01CDAA8A1DF08CF700347404 /* DeviceResetManager.m */; };
 		01D48C381DE7A8EF00D675BB /* RegisterDeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D48C371DE7A8EF00D675BB /* RegisterDeviceViewController.m */; };
 		01D48C3B1DE7AC2A00D675BB /* ApprovalRequestsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D48C3A1DE7AC2A00D675BB /* ApprovalRequestsViewController.m */; };
@@ -28,6 +29,16 @@
 		01EE5E1E1EBB84C900B2E333 /* TOTPViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01EE5E1D1EBB84C900B2E333 /* TOTPViewController.m */; };
 		01F318FB1C9C6CFF003BA657 /* RequestTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01F318F91C9C6CFF003BA657 /* RequestTableViewCell.xib */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		01BD37651F686A2600A76639 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 01B99C9A1C936A1600462FA3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 01B99CA11C936A1600462FA3;
+			remoteInfo = TwilioAuthenticatorSample;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		0130721E1C9703B60048383E /* Embed Frameworks */ = {
@@ -65,6 +76,9 @@
 		01B99CAC1C936A1600462FA3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		01B99CAF1C936A1600462FA3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		01B99CB11C936A1600462FA3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		01BD37601F686A2600A76639 /* TwilioAuthenticatorSampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TwilioAuthenticatorSampleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		01BD37621F686A2600A76639 /* TwilioAuthenticatorSampleUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TwilioAuthenticatorSampleUITests.m; sourceTree = "<group>"; };
+		01BD37641F686A2600A76639 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		01CDAA891DF08CF700347404 /* DeviceResetManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceResetManager.h; sourceTree = "<group>"; };
 		01CDAA8A1DF08CF700347404 /* DeviceResetManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceResetManager.m; sourceTree = "<group>"; };
 		01D48C361DE7A8EF00D675BB /* RegisterDeviceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterDeviceViewController.h; sourceTree = "<group>"; };
@@ -88,6 +102,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				016D53B01F4CA40700D899D7 /* TwilioAuthenticator.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		01BD375D1F686A2600A76639 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -131,6 +152,7 @@
 			children = (
 				016D53AF1F4CA40700D899D7 /* TwilioAuthenticator.framework */,
 				01B99CA41C936A1600462FA3 /* TwilioAuthenticatorSample */,
+				01BD37611F686A2600A76639 /* TwilioAuthenticatorSampleUITests */,
 				01B99CA31C936A1600462FA3 /* Products */,
 				01E82FAB1F1D6302003E7278 /* Frameworks */,
 			);
@@ -140,6 +162,7 @@
 			isa = PBXGroup;
 			children = (
 				01B99CA21C936A1600462FA3 /* TwilioAuthenticatorSample.app */,
+				01BD37601F686A2600A76639 /* TwilioAuthenticatorSampleUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -162,6 +185,15 @@
 				013B978F1CB304D600951E6B /* Extensions */,
 			);
 			path = TwilioAuthenticatorSample;
+			sourceTree = "<group>";
+		};
+		01BD37611F686A2600A76639 /* TwilioAuthenticatorSampleUITests */ = {
+			isa = PBXGroup;
+			children = (
+				01BD37621F686A2600A76639 /* TwilioAuthenticatorSampleUITests.m */,
+				01BD37641F686A2600A76639 /* Info.plist */,
+			);
+			path = TwilioAuthenticatorSampleUITests;
 			sourceTree = "<group>";
 		};
 		01D48C2D1DE79A0100D675BB /* Registration */ = {
@@ -230,6 +262,24 @@
 			productReference = 01B99CA21C936A1600462FA3 /* TwilioAuthenticatorSample.app */;
 			productType = "com.apple.product-type.application";
 		};
+		01BD375F1F686A2600A76639 /* TwilioAuthenticatorSampleUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 01BD37691F686A2600A76639 /* Build configuration list for PBXNativeTarget "TwilioAuthenticatorSampleUITests" */;
+			buildPhases = (
+				01BD375C1F686A2600A76639 /* Sources */,
+				01BD375D1F686A2600A76639 /* Frameworks */,
+				01BD375E1F686A2600A76639 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				01BD37661F686A2600A76639 /* PBXTargetDependency */,
+			);
+			name = TwilioAuthenticatorSampleUITests;
+			productName = TwilioAuthenticatorSampleUITests;
+			productReference = 01BD37601F686A2600A76639 /* TwilioAuthenticatorSampleUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -251,6 +301,12 @@
 							};
 						};
 					};
+					01BD375F1F686A2600A76639 = {
+						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = 9EVH78F4V4;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 01B99CA11C936A1600462FA3;
+					};
 				};
 			};
 			buildConfigurationList = 01B99C9D1C936A1600462FA3 /* Build configuration list for PBXProject "TwilioAuthenticatorSample" */;
@@ -267,6 +323,7 @@
 			projectRoot = "";
 			targets = (
 				01B99CA11C936A1600462FA3 /* TwilioAuthenticatorSample */,
+				01BD375F1F686A2600A76639 /* TwilioAuthenticatorSampleUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -280,6 +337,13 @@
 				01B99CAD1C936A1600462FA3 /* Assets.xcassets in Resources */,
 				01F318FB1C9C6CFF003BA657 /* RequestTableViewCell.xib in Resources */,
 				01B99CAB1C936A1600462FA3 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		01BD375E1F686A2600A76639 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -323,7 +387,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		01BD375C1F686A2600A76639 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				01BD37631F686A2600A76639 /* TwilioAuthenticatorSampleUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		01BD37661F686A2600A76639 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 01B99CA11C936A1600462FA3 /* TwilioAuthenticatorSample */;
+			targetProxy = 01BD37651F686A2600A76639 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		01B99CA91C936A1600462FA3 /* Main.storyboard */ = {
@@ -486,6 +566,45 @@
 			};
 			name = Release;
 		};
+		01BD37671F686A2600A76639 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				DEVELOPMENT_TEAM = 9EVH78F4V4;
+				INFOPLIST_FILE = TwilioAuthenticatorSampleUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.pineda.adriana.TwilioAuthenticatorSampleUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "3f9e1946-6608-4e49-ba10-26de21c2721c";
+				TEST_TARGET_NAME = TwilioAuthenticatorSample;
+			};
+			name = Debug;
+		};
+		01BD37681F686A2600A76639 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 9EVH78F4V4;
+				INFOPLIST_FILE = TwilioAuthenticatorSampleUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.pineda.adriana.TwilioAuthenticatorSampleUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "3f9e1946-6608-4e49-ba10-26de21c2721c";
+				TEST_TARGET_NAME = TwilioAuthenticatorSample;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -506,6 +625,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		01BD37691F686A2600A76639 /* Build configuration list for PBXNativeTarget "TwilioAuthenticatorSampleUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				01BD37671F686A2600A76639 /* Debug */,
+				01BD37681F686A2600A76639 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};

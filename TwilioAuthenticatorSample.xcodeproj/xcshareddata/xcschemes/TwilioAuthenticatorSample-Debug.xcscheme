@@ -38,6 +38,16 @@
                ReferencedContainer = "container:TwilioAuthenticatorSample.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "01BD375F1F686A2600A76639"
+               BuildableName = "TwilioAuthenticatorSampleUITests.xctest"
+               BlueprintName = "TwilioAuthenticatorSampleUITests"
+               ReferencedContainer = "container:TwilioAuthenticatorSample.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
