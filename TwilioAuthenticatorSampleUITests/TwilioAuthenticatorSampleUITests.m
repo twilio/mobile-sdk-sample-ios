@@ -199,17 +199,195 @@
     [deviceIdButton tap];
 
     XCUIElement *logoutButton = deviceIdAlert.buttons[@"Logout"];
-    XCTAssertTrue(logoutButton);
+    XCTAssertTrue(logoutButton.exists);
     [logoutButton tap];
 
     XCUIElement *localDataClearedAlert = self.application.alerts[@"Local Data Deleted"];
-    XCTAssertTrue(localDataClearedAlert);
+    XCTAssertTrue(localDataClearedAlert.exists);
+
+    XCUIElement *alertMessage = self.application.alerts.element.staticTexts[@"Enter a new Authy ID and Backend URL"];
+    XCTAssertTrue(alertMessage.exists);
+
     [localDataClearedAlert.buttons[@"OK"] tap];
 
+    XCUIElement *userAuthyIdField = self.application.textFields[@"12345678"];
     XCTAssertTrue(userAuthyIdField.exists);
+
+    XCUIElement *backendUrlField = self.application.textFields[@"https required"];
     XCTAssertTrue(backendUrlField.exists);
+
+    XCUIElement *registerButton = self.application.buttons[@"Register Device"];
     XCTAssertTrue(registerButton.exists);
 
 }
+
+- (void)testApproveRequest {
+
+    [self registerUser];
+
+    NSString *urlAsString = [NSString stringWithFormat:@"%@?message=TESTING&api_key=%@&seconds_to_expire=10000&details[key1]=value&details[key2]=value", create_request_url, api_key];
+    NSURL *url = [[NSURL alloc] initWithString:urlAsString];
+    NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] initWithURL:url];
+    [urlRequest setHTTPMethod:@"POST"];
+
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionDataTask *task =[session dataTaskWithRequest:urlRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+
+        if (error != nil) {
+            XCTFail();
+        }
+
+    }];
+
+    [task resume];
+
+    sleep(2);
+
+    // Refresh requests list
+    XCUIElement *requestsBar = self.application.navigationBars[@"Requests"];
+    XCUIElement *refreshButton = requestsBar.buttons[@"Refresh"];
+    [refreshButton tap];
+
+    // Select first cell of list
+    [[self.application.cells elementBoundByIndex:0] tap];
+
+    // Approve request
+    [self.application.buttons[@"Approve"] tap];
+    sleep(2);
+    XCUIElement *alert = self.application.alerts[@"Approved"];
+    XCTAssertTrue(alert.exists);
+
+    XCUIElement *alertMessage = self.application.alerts.element.staticTexts[@"Request approved successfully"];
+    XCTAssertTrue(alertMessage.exists);
+
+    [alert.buttons[@"OK"] tap];
+
+}
+
+- (void)testApproveExpiredRequest {
+
+    [self registerUser];
+
+    NSString *urlAsString = [NSString stringWithFormat:@"%@?message=TESTING&api_key=%@&seconds_to_expire=10&details[key1]=value&details[key2]=value", create_request_url, api_key];
+    NSURL *url = [[NSURL alloc] initWithString:urlAsString];
+    NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] initWithURL:url];
+    [urlRequest setHTTPMethod:@"POST"];
+
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionDataTask *task =[session dataTaskWithRequest:urlRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+
+        if (error != nil) {
+            XCTFail();
+        }
+
+    }];
+
+    [task resume];
+
+    sleep(2);
+
+    // Refresh requests list
+    XCUIElement *requestsBar = self.application.navigationBars[@"Requests"];
+    XCUIElement *refreshButton = requestsBar.buttons[@"Refresh"];
+    [refreshButton tap];
+
+    // Select first cell of list
+    [[self.application.cells elementBoundByIndex:0] tap];
+
+    // Deny request
+    sleep(10);
+    [self.application.buttons[@"Approve"] tap];
+    sleep(2);
+    XCUIElement *alert = self.application.alerts[@"Request cannot be approved"];
+    XCTAssertTrue(alert.exists);
+    XCUIElement *alertMessage = self.application.alerts.element.staticTexts[@"Approval request has expired"];
+    XCTAssertTrue(alertMessage.exists);
+    [alert.buttons[@"OK"] tap];
+}
+
+- (void)testDenyRequest {
+
+    [self registerUser];
+
+    NSString *urlAsString = [NSString stringWithFormat:@"%@?message=TESTING&api_key=%@&seconds_to_expire=10000&details[key1]=value&details[key2]=value", create_request_url, api_key];
+    NSURL *url = [[NSURL alloc] initWithString:urlAsString];
+    NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] initWithURL:url];
+    [urlRequest setHTTPMethod:@"POST"];
+
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionDataTask *task =[session dataTaskWithRequest:urlRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+
+        if (error != nil) {
+            XCTFail();
+        }
+
+    }];
+
+    [task resume];
+
+    sleep(2);
+
+    // Refresh requests list
+    XCUIElement *requestsBar = self.application.navigationBars[@"Requests"];
+    XCUIElement *refreshButton = requestsBar.buttons[@"Refresh"];
+    [refreshButton tap];
+
+    // Select first cell of list
+    [[self.application.cells elementBoundByIndex:0] tap];
+
+    // Deny request
+    [self.application.buttons[@"Deny"] tap];
+    sleep(2);
+    XCUIElement *alert = self.application.alerts[@"Denied"];
+    XCTAssertTrue(alert.exists);
+
+    XCUIElement *alertMessage = self.application.alerts.element.staticTexts[@"Request denied successfully"];
+    XCTAssertTrue(alertMessage.exists);
+
+    [alert.buttons[@"OK"] tap];
+
+}
+
+- (void)testDenyExpiredRequest {
+
+    [self registerUser];
+
+    NSString *urlAsString = [NSString stringWithFormat:@"%@?message=TESTING&api_key=%@&seconds_to_expire=10&details[key1]=value&details[key2]=value", create_request_url, api_key];
+    NSURL *url = [[NSURL alloc] initWithString:urlAsString];
+    NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] initWithURL:url];
+    [urlRequest setHTTPMethod:@"POST"];
+
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionDataTask *task =[session dataTaskWithRequest:urlRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+
+        if (error != nil) {
+            XCTFail();
+        }
+
+    }];
+
+    [task resume];
+
+    sleep(2);
+
+    // Refresh requests list
+    XCUIElement *requestsBar = self.application.navigationBars[@"Requests"];
+    XCUIElement *refreshButton = requestsBar.buttons[@"Refresh"];
+    [refreshButton tap];
+
+    // Select first cell of list
+    [[self.application.cells elementBoundByIndex:0] tap];
+
+    // Deny request
+    sleep(10);
+    [self.application.buttons[@"Deny"] tap];
+    sleep(2);
+    XCUIElement *alert = self.application.alerts[@"Request cannot be denied"];
+    XCTAssertTrue(alert.exists);
+    XCUIElement *alertMessage = self.application.alerts.element.staticTexts[@"Approval request has expired"];
+    XCTAssertTrue(alertMessage.exists);
+    [alert.buttons[@"OK"] tap];
+}
+
 
 @end
