@@ -204,6 +204,9 @@
 
     [tokensTab tap];
 
+    XCUIElement *noTOTP = self.application.staticTexts[@"..."];
+    XCTAssertFalse(noTOTP.exists);
+
     deviceIdButton = self.application.navigationBars[@"Tokens"].buttons[@"ID"];
     [deviceIdButton tap];
 
@@ -485,8 +488,9 @@
     XCUIElement *tokensTab = self.application.tabBars.buttons[@"Tokens"];
     [tokensTab tap];
 
-    XCUIElement *totpLabel = self.application.textFields[@"totpLabel"];
-    NSString *totpValue = (NSString *)totpLabel.value;
+    // Get totp value
+    XCUIElement *totpLabel = self.application.staticTexts[@"totpLabel"];
+    NSString *totpValue = (NSString *)totpLabel.label;
 
     NSString *verifyTokenUrl = [NSString stringWithFormat:verify_token_url, totpValue];
     NSString *urlAsString = [NSString stringWithFormat:@"%@?api_key=%@", verifyTokenUrl, api_key];
@@ -500,8 +504,14 @@
 
     NSURLSessionDataTask *task =[session dataTaskWithRequest:urlRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
 
+        // Validate token
         XCTAssertTrue(error == nil);
 
+        NSError *serializationError = nil;
+        NSDictionary *currentResponseAsDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&serializationError];
+
+        XCTAssertTrue([[currentResponseAsDict objectForKey:@"message"] isEqualToString:@"Token is valid."]);
+        XCTAssertTrue([[currentResponseAsDict objectForKey:@"success"] isEqualToString:@"true"]);
         [expectation fulfill];
 
     }];
