@@ -54,18 +54,22 @@
     [super tearDown];
 }
 
-- (void)testRegisterWithNoAuthyId_1 {
+- (void)testRegisterWithNoAuthyIdAndNoBackendURL {
 
     XCUIElement *registerButton = self.application.buttons[@"Register Device"];
     [registerButton tap];
 
     XCUIElement *deviceRegistrationFailedAlert = self.application.alerts[@"Authy ID invalid"];
     XCTAssertTrue(deviceRegistrationFailedAlert.exists);
+
+    XCUIElement *alertMessage = self.application.alerts.element.staticTexts[@"Make sure the value you entered is correct"];
+    XCTAssertTrue(alertMessage.exists);
+
     [deviceRegistrationFailedAlert.buttons[@"OK"] tap];
 
 }
 
-- (void)testRegisterWithNoAuthyId_2 {
+- (void)testRegisterWithNoAuthyId {
 
     // Enter Invalid URL
     XCUIElement *backendUrlField = self.application.textFields[@"https required"];
@@ -77,6 +81,9 @@
 
     XCUIElement *deviceRegistrationFailedAlert = self.application.alerts[@"Authy ID invalid"];
     XCTAssertTrue(deviceRegistrationFailedAlert.exists);
+
+    XCUIElement *alertMessage = self.application.alerts.element.staticTexts[@"Make sure the value you entered is correct"];
+    XCTAssertTrue(alertMessage.exists);
     [deviceRegistrationFailedAlert.buttons[@"OK"] tap];
 
 }
@@ -93,11 +100,15 @@
 
     XCUIElement *deviceRegistrationFailedAlert = self.application.alerts[@"Backend URL invalid"];
     XCTAssertTrue(deviceRegistrationFailedAlert.exists);
+
+    XCUIElement *alertMessage = self.application.alerts.element.staticTexts[@"Make sure the value you entered is correct"];
+    XCTAssertTrue(alertMessage.exists);
+
     [deviceRegistrationFailedAlert.buttons[@"OK"] tap];
 
 }
 
-- (void)testRegisterWithInvalidURL_1 {
+- (void)testRegisterWithInvalidBackendURL_1 {
 
     // Enter Authy ID
     XCUIElement *userAuthyIdField = self.application.textFields[@"12345678"];
@@ -114,11 +125,15 @@
 
     XCUIElement *deviceRegistrationFailedAlert = self.application.alerts[@"Device Registration Failed"];
     XCTAssertTrue(deviceRegistrationFailedAlert.exists);
+
+    XCUIElement *alertMessage = self.application.alerts.element.staticTexts[@"Request could not be made: An SSL error has occurred and a secure connection to the server cannot be made."];
+    XCTAssertTrue(alertMessage.exists);
+
     [deviceRegistrationFailedAlert.buttons[@"OK"] tap];
 
 }
 
-- (void)testRegisterWithInvalidURL_2 {
+- (void)testRegisterWithInvalidBackendURL_2 {
 
     // Enter Authy ID
     XCUIElement *userAuthyIdField = self.application.textFields[@"12345678"];
@@ -129,18 +144,22 @@
     XCUIElement *backendUrlField = self.application.textFields[@"https required"];
     [backendUrlField tap];
     // HTTP not allowed
-    [backendUrlField typeText:@"http://new-registration-sdk.herokuapp.com"];
+    [backendUrlField typeText:custom_backend_url_http];
 
     XCUIElement *registerButton = self.application.buttons[@"Register Device"];
     [registerButton tap];
 
     XCUIElement *deviceRegistrationFailedAlert = self.application.alerts[@"Device Registration Failed"];
     XCTAssertTrue(deviceRegistrationFailedAlert.exists);
+
+    XCUIElement *alertMessage = self.application.alerts.element.staticTexts[@"Request could not be made: The resource could not be loaded because the App Transport Security policy requires the use of a secure connection."];
+    XCTAssertTrue(alertMessage.exists);
+
     [deviceRegistrationFailedAlert.buttons[@"OK"] tap];
 
 }
 
-- (void)testRegisterWithValidURLAndLogout {
+- (void)registerUser {
 
     // Enter Authy ID
     XCUIElement *userAuthyIdField = self.application.textFields[@"12345678"];
@@ -150,12 +169,18 @@
     // Enter Invalid URL
     XCUIElement *backendUrlField = self.application.textFields[@"https required"];
     [backendUrlField tap];
-    [backendUrlField typeText:@"https://new-registration-sdk.herokuapp.com"];
+    [backendUrlField typeText:custom_backend_url_https];
 
     XCUIElement *registerButton = self.application.buttons[@"Register Device"];
     [registerButton tap];
 
     sleep(2);
+}
+
+- (void)testRegisterWithValidBackendURLAndLogout {
+
+    [self registerUser];
+
     XCUIElement *deviceIdButton = self.application.navigationBars[@"Requests"].buttons[@"ID"];
     XCTAssertTrue(deviceIdButton.exists);
     [deviceIdButton tap];
