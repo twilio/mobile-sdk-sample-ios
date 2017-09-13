@@ -28,9 +28,24 @@
     
     // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
 
+    // Clear iOS Push Notifications alert
     XCUIElement *pushNotificationAlert = self.application.alerts[@"\"U201cTwilioAuthenticator Sample\"U201d Would Like to Send You Notifications"];
     if (pushNotificationAlert.exists) {
         [pushNotificationAlert.buttons[@"Allow"] tap];
+    }
+
+    // Logout if needed
+    XCUIElement *requestsTab = self.application.tabBars.buttons[@"Requests"];
+    if (requestsTab.exists) {
+        [requestsTab tap];
+
+        XCUIElement *deviceIdButton = self.application.navigationBars[@"Requests"].buttons[@"ID"];
+        [deviceIdButton tap];
+
+        XCUIElement *deviceIdAlert = self.application.alerts[@"Device ID"];
+        XCUIElement *logoutButton = deviceIdAlert.buttons[@"Logout"];
+        [logoutButton tap];
+
     }
 }
 
@@ -125,7 +140,7 @@
 
 }
 
-- (void)testRegisterWithValidURL {
+- (void)testRegisterWithValidURLAndLogout {
 
     // Enter Authy ID
     XCUIElement *userAuthyIdField = self.application.textFields[@"12345678"];
