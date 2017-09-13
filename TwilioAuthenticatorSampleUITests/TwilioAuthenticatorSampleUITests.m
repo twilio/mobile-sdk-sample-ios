@@ -267,6 +267,20 @@
 
     [alert.buttons[@"OK"] tap];
 
+    sleep(1);
+
+    // Review approved request
+    XCUIElement *archiveList = self.application.buttons[@"Archive"];
+    [archiveList tap];
+    // Select first cell of list
+    [[self.application.cells elementBoundByIndex:0] tap];
+
+    XCUIElement *approvedMessage = self.application.alerts.element.staticTexts[@"Request approved\nYou can no longer approve or deny"];
+    XCTAssertTrue(approvedMessage.exists);
+
+    XCUIElement *requestMessage = self.application.alerts.element.staticTexts[@"TESTING"];
+    XCTAssertTrue(requestMessage.exists);
+
 }
 
 - (void)testApproveExpiredRequest {
@@ -351,6 +365,18 @@
 
     [alert.buttons[@"OK"] tap];
 
+    // Review denied request
+    XCUIElement *archiveList = self.application.buttons[@"Archive"];
+    [archiveList tap];
+    // Select first cell of list
+    [[self.application.cells elementBoundByIndex:0] tap];
+
+    XCUIElement *deniedMessage = self.application.alerts.element.staticTexts[@"Request denied\nYou can no longer approve or deny"];
+    XCTAssertTrue(deniedMessage.exists);
+
+    XCUIElement *requestMessage = self.application.alerts.element.staticTexts[@"TESTING"];
+    XCTAssertTrue(requestMessage.exists);
+
 }
 
 - (void)testDenyExpiredRequest {
@@ -392,7 +418,59 @@
     XCUIElement *alertMessage = self.application.alerts.element.staticTexts[@"Approval request has expired"];
     XCTAssertTrue(alertMessage.exists);
     [alert.buttons[@"OK"] tap];
+
+    // Go back
+    XCUIElement *requestBar = self.application.navigationBars[@"Request"];
+    XCUIElement *backButton = requestBar.buttons[@"Back"];
+    [backButton tap];
+
+    // Review expired request
+    XCUIElement *archiveList = self.application.buttons[@"Archive"];
+    [archiveList tap];
+    // Select first cell of list
+    [[self.application.cells elementBoundByIndex:0] tap];
+
+    XCUIElement *expiredMessage = self.application.alerts.element.staticTexts[@"Request expired\nYou can no longer approve or deny"];
+    XCTAssertTrue(expiredMessage.exists);
+
+    XCUIElement *requestMessage = self.application.alerts.element.staticTexts[@"TESTING"];
+    XCTAssertTrue(requestMessage.exists);
 }
 
+- (void)testTOTP {
 
+    [self registerUser];
+
+    XCUIElement *tokensTab = self.application.tabBars.buttons[@"Tokens"];
+    [tokensTab tap];
+
+    XCUIElement *totpLabel = self.application.textFields[@"totpLabel"];
+    NSString *totpValue = (NSString *)totpLabel.value;
+
+    NSString *verifyTokenUrl = [NSString stringWithFormat:verify_token_url, totpValue];
+    NSString *urlAsString = [NSString stringWithFormat:@"%@?api_key=%@", verifyTokenUrl, api_key];
+    NSURL *url = [[NSURL alloc] initWithString:urlAsString];
+    NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] initWithURL:url];
+    [urlRequest setHTTPMethod:@"GET"];
+
+    NSURLSession *session = [NSURLSession sharedSession];
+
+    XCTestExpectation *expectation = [self expectationWithDescription:@"verify token"];
+
+    NSURLSessionDataTask *task =[session dataTaskWithRequest:urlRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+
+        XCTAssertTrue(error == nil);
+
+        [expectation fulfill];
+
+    }];
+
+    [task resume];
+
+    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError *error) {
+        if (error) {
+            NSLog(@"Timeout Error: %@", error);
+        }
+    }];
+}
 @end
