@@ -326,6 +326,23 @@
     XCUIElement *alertMessage = self.application.alerts.element.staticTexts[@"Approval request has expired"];
     XCTAssertTrue(alertMessage.exists);
     [alert.buttons[@"OK"] tap];
+
+    // Go back
+    XCUIElement *requestBar = self.application.navigationBars[@"Request"];
+    XCUIElement *backButton = requestBar.buttons[@"Back"];
+    [backButton tap];
+
+    // Review expired request
+    XCUIElement *archiveList = self.application.buttons[@"Archive"];
+    [archiveList tap];
+    // Select first cell of list
+    [[self.application.cells elementBoundByIndex:0] tap];
+
+    XCUIElement *expiredMessage = self.application.alerts.element.staticTexts[@"Request expired\nYou can no longer approve or deny"];
+    XCTAssertTrue(expiredMessage.exists);
+
+    XCUIElement *requestMessage = self.application.alerts.element.staticTexts[@"TESTING"];
+    XCTAssertTrue(requestMessage.exists);
 }
 
 - (void)testDenyRequest {
