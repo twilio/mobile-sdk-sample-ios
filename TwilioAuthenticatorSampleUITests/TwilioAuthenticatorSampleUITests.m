@@ -279,10 +279,15 @@
     // Select first cell of list
     [[self.application.cells elementBoundByIndex:0] tap];
 
-    XCUIElement *approvedMessage = self.application.alerts.element.staticTexts[@"Request approved\nYou can no longer approve or deny"];
-    XCTAssertTrue(approvedMessage.exists);
+    NSPredicate *beginsWithPredicate = [NSPredicate predicateWithFormat:@"label BEGINSWITH 'Request approved'"];
+    XCUIElementQuery *expiredMessageBeginsWithPredicate = [self.application.staticTexts containingPredicate:beginsWithPredicate];
+    XCTAssertTrue(expiredMessageBeginsWithPredicate.count == 1);
 
-    XCUIElement *requestMessage = self.application.alerts.element.staticTexts[@"TESTING"];
+    NSPredicate *containsWithPredicate = [NSPredicate predicateWithFormat:@"label CONTAINS 'You can no longer approve or deny'"];
+    XCUIElementQuery *expiredMessageContainsWithPredicate = [self.application.staticTexts containingPredicate:containsWithPredicate];
+    XCTAssertTrue(expiredMessageContainsWithPredicate.count == 1);
+
+    XCUIElement *requestMessage = self.application.staticTexts[@"TESTING"];
     XCTAssertTrue(requestMessage.exists);
 
 }
@@ -338,10 +343,15 @@
     // Select first cell of list
     [[self.application.cells elementBoundByIndex:0] tap];
 
-    XCUIElement *expiredMessage = self.application.alerts.element.staticTexts[@"Request expired\nYou can no longer approve or deny"];
-    XCTAssertTrue(expiredMessage.exists);
+    NSPredicate *beginsWithPredicate = [NSPredicate predicateWithFormat:@"label BEGINSWITH 'Expired on '"];
+    XCUIElementQuery *expiredMessageBeginsWithPredicate = [self.application.staticTexts containingPredicate:beginsWithPredicate];
+    XCTAssertTrue(expiredMessageBeginsWithPredicate.count == 1);
 
-    XCUIElement *requestMessage = self.application.alerts.element.staticTexts[@"TESTING"];
+    NSPredicate *containsWithPredicate = [NSPredicate predicateWithFormat:@"label CONTAINS 'You can no longer approve or deny'"];
+    XCUIElementQuery *expiredMessageContainsWithPredicate = [self.application.staticTexts containingPredicate:containsWithPredicate];
+    XCTAssertTrue(expiredMessageContainsWithPredicate.count == 1);
+
+    XCUIElement *requestMessage = self.application.staticTexts[@"TESTING"];
     XCTAssertTrue(requestMessage.exists);
 }
 
@@ -392,10 +402,15 @@
     // Select first cell of list
     [[self.application.cells elementBoundByIndex:0] tap];
 
-    XCUIElement *deniedMessage = self.application.alerts.element.staticTexts[@"Request denied\nYou can no longer approve or deny"];
-    XCTAssertTrue(deniedMessage.exists);
+    NSPredicate *beginsWithPredicate = [NSPredicate predicateWithFormat:@"label BEGINSWITH 'Request denied'"];
+    XCUIElementQuery *expiredMessageBeginsWithPredicate = [self.application.staticTexts containingPredicate:beginsWithPredicate];
+    XCTAssertTrue(expiredMessageBeginsWithPredicate.count == 1);
 
-    XCUIElement *requestMessage = self.application.alerts.element.staticTexts[@"TESTING"];
+    NSPredicate *containsWithPredicate = [NSPredicate predicateWithFormat:@"label CONTAINS 'You can no longer approve or deny'"];
+    XCUIElementQuery *expiredMessageContainsWithPredicate = [self.application.staticTexts containingPredicate:containsWithPredicate];
+    XCTAssertTrue(expiredMessageContainsWithPredicate.count == 1);
+
+    XCUIElement *requestMessage = self.application.staticTexts[@"TESTING"];
     XCTAssertTrue(requestMessage.exists);
 
 }
@@ -451,10 +466,15 @@
     // Select first cell of list
     [[self.application.cells elementBoundByIndex:0] tap];
 
-    XCUIElement *expiredMessage = self.application.alerts.element.staticTexts[@"Request expired\nYou can no longer approve or deny"];
-    XCTAssertTrue(expiredMessage.exists);
+    NSPredicate *beginsWithPredicate = [NSPredicate predicateWithFormat:@"label BEGINSWITH 'Expired on '"];
+    XCUIElementQuery *expiredMessageBeginsWithPredicate = [self.application.staticTexts containingPredicate:beginsWithPredicate];
+    XCTAssertTrue(expiredMessageBeginsWithPredicate.count == 1);
 
-    XCUIElement *requestMessage = self.application.alerts.element.staticTexts[@"TESTING"];
+    NSPredicate *containsWithPredicate = [NSPredicate predicateWithFormat:@"label CONTAINS 'You can no longer approve or deny'"];
+    XCUIElementQuery *expiredMessageContainsWithPredicate = [self.application.staticTexts containingPredicate:containsWithPredicate];
+    XCTAssertTrue(expiredMessageContainsWithPredicate.count == 1);
+
+    XCUIElement *requestMessage = self.application.staticTexts[@"TESTING"];
     XCTAssertTrue(requestMessage.exists);
 }
 
