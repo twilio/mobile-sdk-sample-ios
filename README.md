@@ -14,6 +14,14 @@ Welcome to the Twilio Authenticator iOS SDK Sample application. This application
 
 * **Step 3:** [A backend application to handle the device registration](https://www.twilio.com/docs/quickstart/twilioauth-sdk-quickstart-tutorials/running-sample-app)
 
+## How to Run UI tests
+- Make sure the simulator keyboard is has Authy-Correction turned off
+- Run the following command:
+```
+xcodebuild -scheme "TwilioAuthenticatorSample-Debug" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 7,OS=10.3.1' test
+```
+You can add `| xcpretty` at the end of the command above if you want to format xcodebuild's output
+
 ### Learn more
 - Check out the full documentation at https://www.twilio.com/docs/quickstart/twilioauth-sdk-quickstart-tutorials
 - Contact the Twilio support team at help@twilio.com

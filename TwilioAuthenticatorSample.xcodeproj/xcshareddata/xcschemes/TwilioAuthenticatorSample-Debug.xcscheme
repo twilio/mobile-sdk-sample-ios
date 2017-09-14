@@ -26,7 +26,8 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      codeCoverageEnabled = "YES">
       <Testables>
          <TestableReference
             skipped = "NO">
@@ -35,6 +36,16 @@
                BlueprintIdentifier = "013B97821CB2C1BF00951E6B"
                BuildableName = "TwilioAuthenticatorSampleTests.xctest"
                BlueprintName = "TwilioAuthenticatorSampleTests"
+               ReferencedContainer = "container:TwilioAuthenticatorSample.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "01BD375F1F686A2600A76639"
+               BuildableName = "TwilioAuthenticatorSampleUITests.xctest"
+               BlueprintName = "TwilioAuthenticatorSampleUITests"
                ReferencedContainer = "container:TwilioAuthenticatorSample.xcodeproj">
             </BuildableReference>
          </TestableReference>
