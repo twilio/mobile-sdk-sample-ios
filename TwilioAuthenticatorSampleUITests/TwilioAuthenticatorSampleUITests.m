@@ -7,15 +7,7 @@
 //
 
 #import <XCTest/XCTest.h>
-
-#define custom_backend_url_http @"CHANGE_ME"
-#define custom_backend_url_https @"CHANGE_ME"
-#define create_request_url @"CHANGE_ME"
-#define verify_token_url @"CHANGE_ME"
-
-#define api_key @"CHANGE_ME"
-
-
+#import "Constants.h"
 
 @interface TwilioAuthenticatorSampleUITests : XCTestCase
 
