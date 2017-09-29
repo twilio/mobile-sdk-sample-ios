@@ -305,7 +305,6 @@
 					};
 					01BD375F1F686A2600A76639 = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = 9EVH78F4V4;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 01B99CA11C936A1600462FA3;
 					};
@@ -576,13 +575,15 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				DEVELOPMENT_TEAM = 9EVH78F4V4;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = TwilioAuthenticatorSampleUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.pineda.adriana.TwilioAuthenticatorSampleUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "3f9e1946-6608-4e49-ba10-26de21c2721c";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TEST_TARGET_NAME = TwilioAuthenticatorSample;
 			};
 			name = Debug;
@@ -596,13 +597,14 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 9EVH78F4V4;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = TwilioAuthenticatorSampleUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.pineda.adriana.TwilioAuthenticatorSampleUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "3f9e1946-6608-4e49-ba10-26de21c2721c";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TEST_TARGET_NAME = TwilioAuthenticatorSample;
 			};
 			name = Release;
