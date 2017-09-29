@@ -7,7 +7,7 @@ master = 'master'
 
 body = """FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'. Check console output at "${env.BUILD_URL}"""
 subject = "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'"
-emailList = ''
+emailList = env.APP_TEAM_EMAIL
 
 properties([
   buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '', numToKeepStr: '5')),
@@ -28,7 +28,7 @@ node('appium_ventspils_node') {
           step([$class: 'CopyArtifact',
           fingerprintArtifacts: true,
           flatten: true,
-          projectName: 'TwilioAuth_iOS_SDK/AUTHYM-3452',
+          projectName: 'TwilioAuth_iOS_SDK/future-release',
           stable: true,
           target: './TwilioAuth'])
 
@@ -36,9 +36,9 @@ node('appium_ventspils_node') {
           sh 'unzip TwilioAuth/TwilioAuthenticator.zip'
           sh 'cp -r build/Debug-universal/TwilioAuthenticator.framework ./'
 
-          sh 'sh perl_script.sh'
+          /* sh 'sh perl_script.sh'
           sh 'echo "" | calabash-ios setup'
-          /* sh """
+          sh """
           ruby -r "~/Documents/Authy/calabash/iOS/Scripts/shared.rb" -e "recreateUserSchemes('TwilioAuthenticatorSample.xcodeproj')"
           """ */
       }
@@ -46,6 +46,7 @@ node('appium_ventspils_node') {
         timeout(unitTests) {
           try{
             sh """
+            cp -f ~/Documents/ios_sample_app_config/Constants.h ./TwilioAuthenticatorSampleUITests/Constants.h
             xcodebuild -scheme "TwilioAuthenticatorSample-Debug" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 7,OS=10.3' test
             """
           } catch (e) {
