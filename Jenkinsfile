@@ -48,6 +48,7 @@ node('appium_ventspils_node') {
             sh """
             cp -f ~/Documents/ios_sample_app_config/Constants.h ./TwilioAuthenticatorSampleUITests/Constants.h
             sh perl_script.sh
+            xcodebuild -scheme "TwilioAuthenticatorSample-Debug" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 7,OS=10.3' test
             """
           } catch (e) {
             currentBuild.result = "FAILED"
