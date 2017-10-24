@@ -61,7 +61,7 @@ node('appium_ventspils_node') {
           sh """
           xcodebuild -target TwilioAuthenticatorSample -scheme TwilioAuthenticatorSample-Debug -configuration Debug -derivedDataPath build CODE_SIGN_IDENTITY="iPhone Developer" clean build
           xcodebuild -scheme TwilioAuthenticatorSample-Debug archive -archivePath ./TwilioAuthenticatorSample.xcarchive
-          sh xcodebuild-safe.h -exportArchive -archivePath ./TwilioAuthenticatorSample.xcarchive -exportPath ./TwilioAuthenticatorSample.ipa -exportOptionsPlist "exportPlist.plist"
+          sh xcodebuild-safe.sh -exportArchive -archivePath ./TwilioAuthenticatorSample.xcarchive -exportPath ./TwilioAuthenticatorSample.ipa -exportOptionsPlist "exportPlist.plist"
           """
       }
     }
