@@ -36,7 +36,7 @@ node('appium_ventspils_node') {
           sh 'unzip TwilioAuth/TwilioAuthenticator.zip'
           sh 'cp -r build/Debug-universal/TwilioAuthenticator.framework ./'
 
-          /* sh 'sh perl_script.sh'
+          /*
           sh 'echo "" | calabash-ios setup'
           sh """
           ruby -r "~/Documents/Authy/calabash/iOS/Scripts/shared.rb" -e "recreateUserSchemes('TwilioAuthenticatorSample.xcodeproj')"
@@ -47,6 +47,7 @@ node('appium_ventspils_node') {
           try{
             sh """
             cp -f ~/Documents/ios_sample_app_config/Constants.h ./TwilioAuthenticatorSampleUITests/Constants.h
+            sh perl_script.sh
             xcodebuild -scheme "TwilioAuthenticatorSample-Debug" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 7,OS=10.3' test
             """
           } catch (e) {
@@ -54,6 +55,14 @@ node('appium_ventspils_node') {
             throw e
           } finally {
           }
+      }
+      stage 'Archive and build IPA file'
+        timeout(unitTests) {
+          sh """
+          xcodebuild -target TwilioAuthenticatorSample -scheme TwilioAuthenticatorSample-Debug -configuration Debug -derivedDataPath build CODE_SIGN_IDENTITY="iPhone Developer" clean build
+          xcodebuild -scheme TwilioAuthenticatorSample-Debug archive -archivePath ./TwilioAuthenticatorSample.xcarchive
+          sh xcodebuild-safe.sh -exportArchive -archivePath ./TwilioAuthenticatorSample.xcarchive -exportPath ./TwilioAuthenticatorSample.ipa -exportOptionsPlist "exportPlist.plist"
+          """
       }
     }
   } catch (e) {
