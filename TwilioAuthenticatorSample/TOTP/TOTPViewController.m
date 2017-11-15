@@ -78,8 +78,9 @@
 
 }
 
-- (void)configureTOTPWithText:(NSString *)totpText {
-
+- (void)configureTOTPWithText:(NSDictionary <NSString*, NSString*> *)totps {
+    // TODO: Make this compatible with multi apps
+    NSString *totpText = [[totps allKeys] objectAtIndex:0];
     NSMutableAttributedString *totpAttributedString = [[NSMutableAttributedString alloc] initWithString:totpText];
     [totpAttributedString addAttribute:NSKernAttributeName value:@3.5 range:NSMakeRange(0, totpAttributedString.length)];
     [self.totpLabel setAttributedText:totpAttributedString];
@@ -161,7 +162,7 @@
 }
 
 #pragma mark - TOTP Delegate
-- (void)didReceiveTOTP:(NSString *)totp withError:(NSError *)error {
+- (void)didReceiveTOTP:(NSDictionary <NSString*, NSString*> *)totps withError:(NSError *)error {
 
     dispatch_async(dispatch_get_main_queue(), ^{
 
@@ -170,11 +171,11 @@
             return;
         }
 
-        if (totp == nil) {
+        if (totps == nil) {
             return;
         }
 
-        [self configureTOTPWithText:totp];
+        [self configureTOTPWithText:totps];
         [self configureTimer];
 
     });
