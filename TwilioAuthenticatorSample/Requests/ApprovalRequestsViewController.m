@@ -7,7 +7,6 @@
 //
 
 #import "ApprovalRequestsViewController.h"
-#import <TwilioAuthenticator/TwilioAuthenticator.h>
 #import "RequestDetailViewController.h"
 #import "RequestTableViewCell.h"
 #import "DeviceResetManager.h"
@@ -31,6 +30,7 @@ NSInteger const archiveTabIndex = 1;
 @implementation ApprovalRequestsViewController
 
 - (void)viewDidLoad {
+
     [super viewDidLoad];
 
     [self configureTableView];
@@ -50,24 +50,15 @@ NSInteger const archiveTabIndex = 1;
 
 - (void)configureNavigationBarTopItems {
 
-    [self.navigationController setNavigationBarHidden:NO];
+    self.tabBarController.navigationItem.title = @"Requests";
 
-    self.navigationController.navigationBar.topItem.title = @"Requests";
-
-    // Left bar button item - Device ID
-    UIBarButtonItem *deviceIdBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"ID" style:UIBarButtonItemStylePlain target:self action:@selector(getDeviceId:)];
-    [deviceIdBarButtonItem setTintColor:[UIColor colorWithHexString:defaultColor]];
-    self.navigationController.navigationBar.topItem.leftBarButtonItem = deviceIdBarButtonItem;
+    // Left bar button item - Tint Color
+    [self.tabBarController.navigationItem.leftBarButtonItem setTintColor:[UIColor colorWithHexString:defaultColor]];
 
     // Right bar button item - Refresh
     UIBarButtonItem *refreshBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refresh:)];
     [refreshBarButtonItem setTintColor:[UIColor colorWithHexString:defaultColor]];
-    self.navigationController.navigationBar.topItem.rightBarButtonItem = refreshBarButtonItem;
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    self.tabBarController.navigationItem.rightBarButtonItem = refreshBarButtonItem;
 }
 
 - (IBAction)requestTypeChanged:(id)sender {
@@ -183,33 +174,6 @@ NSInteger const archiveTabIndex = 1;
 
     return sortedRequests;
 
-}
-
-#pragma mark - Device ID
-- (IBAction)getDeviceId:(id)sender {
-
-    TwilioAuthenticator *sharedTwilioAuth = [TwilioAuthenticator sharedInstance];
-    NSString *deviceId = [sharedTwilioAuth getDeviceId];
-
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Device ID" message:deviceId preferredStyle:UIAlertControllerStyleAlert];
-
-    // OK Action
-    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
-    [okAction setValue:[UIColor colorWithHexString:defaultColor] forKey:@"titleTextColor"];
-    [alert addAction:okAction];
-
-    // Logout Action
-    __weak ApprovalRequestsViewController *weakSelf = self;
-    UIAlertAction *logoutAction = [UIAlertAction actionWithTitle:@"Logout" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
-
-        [sharedTwilioAuth clearLocalData];
-        [DeviceResetManager resetDeviceAndGetRegistrationViewForCurrentView:weakSelf withCustomTitle:@"Local Data Deleted"];
-
-    }];
-    [alert addAction:logoutAction];
-
-    // Present Alert
-    [self presentViewController:alert animated:YES completion:nil];
 }
 
 #pragma mark - Table

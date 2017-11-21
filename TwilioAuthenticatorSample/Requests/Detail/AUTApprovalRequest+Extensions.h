@@ -6,8 +6,6 @@
 //  Copyright © 2016 Authy. All rights reserved.
 //
 
-#import <TwilioAuthenticator/TwilioAuthenticator.h>
-
 @interface AUTApprovalRequest (Extensions)
 
 - (BOOL)isExpired;

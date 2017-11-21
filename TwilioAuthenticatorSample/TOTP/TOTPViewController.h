@@ -7,12 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <TwilioAuthenticator/TwilioAuthenticator.h>
 
 @interface TOTPViewController : UIViewController <AUTTOTPDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *totpLabel;
 @property (weak, nonatomic) IBOutlet UILabel *tokenName;
 @property (weak, nonatomic) IBOutlet UIImageView *timerImage;
+
+@property (nonatomic, strong) NSNumber *currentAppId;
 
 @end

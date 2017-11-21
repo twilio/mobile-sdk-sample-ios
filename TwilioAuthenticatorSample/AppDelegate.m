@@ -7,7 +7,6 @@
 //
 
 #import "AppDelegate.h"
-#import <TwilioAuthenticator/TwilioAuthenticator.h>
 
 #import "ApprovalRequestsViewController.h"
 #import "RequestDetailViewController.h"
@@ -69,7 +68,7 @@
 - (void)configureRootController {
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
 
-    UITabBarController *viewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"tabBarController"];
+    UITableViewController *viewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"appsTableViewController"];
 
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
     [self.window setRootViewController:navigationController];

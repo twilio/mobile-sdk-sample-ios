@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <TwilioAuthenticator/TwilioAuthenticator.h>
 
 @interface RequestDetailViewController : UIViewController
 

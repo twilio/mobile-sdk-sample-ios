@@ -53,7 +53,7 @@
 - (void)configureNavigationBar {
 
     [self.navigationController setNavigationBarHidden:NO];
-    self.navigationController.navigationBar.topItem.title = @"Tokens";
+    self.tabBarController.navigationItem.title = @"Tokens";
     self.navigationController.navigationBar.topItem.rightBarButtonItem = nil;
 
 }
@@ -80,7 +80,8 @@
 
 - (void)configureTOTPWithText:(NSDictionary <NSString*, NSString*> *)totps {
     // TODO: Make this compatible with multi apps
-    NSString *totpText = [[totps allKeys] objectAtIndex:0];
+    NSString *serialIdAsString = [NSString stringWithFormat:@"%@", self.currentAppId];
+    NSString *totpText = [totps objectForKey:serialIdAsString];
     NSMutableAttributedString *totpAttributedString = [[NSMutableAttributedString alloc] initWithString:totpText];
     [totpAttributedString addAttribute:NSKernAttributeName value:@3.5 range:NSMakeRange(0, totpAttributedString.length)];
     [self.totpLabel setAttributedText:totpAttributedString];

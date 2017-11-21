@@ -8,7 +8,6 @@
 
 #import "RegisterDeviceViewController.h"
 #import "ApprovalRequestsViewController.h"
-#import <TwilioAuthenticator/TwilioAuthenticator.h>
 #import "RegistrationResponse.h"
 #import "RegisterDeviceUseCase.h"
 #import "AppDelegate.h"
