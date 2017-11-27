@@ -1,13 +1,12 @@
-prepare = 3
-unitTests = 8
-archivingArtifacts = 3
-building = 8
+prepare = 8
+unitTests = 15
+archivingArtifacts = 10
+building = 15
 
 master = 'master'
 
 body = """FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'. Check console output at "${env.BUILD_URL}"""
 subject = "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'"
-emailList = env.APP_TEAM_EMAIL
 
 properties([
   buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '', numToKeepStr: '5')),
@@ -57,13 +56,13 @@ node('appium_ventspils_node') {
       }
     }
   } catch (e) {
-    notifyFailed()
+    notifyFailed(env.APP_TEAM_EMAIL)
     currentBuild.result = "FAILED"
     throw e
   }
 }
 
-def notifyFailed() {
+def notifyFailed(emailList) {
   if (env.BRANCH_NAME == master) {
     mail body: body, subject: subject, to: emailList
   }
