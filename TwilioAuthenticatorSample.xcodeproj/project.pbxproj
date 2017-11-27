@@ -60,6 +60,7 @@
 		010C68941E5B9BB000CC7358 /* UITextField+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UITextField+Extensions.h"; path = "Extensions/UITextField+Extensions.h"; sourceTree = "<group>"; };
 		010C68951E5B9BB000CC7358 /* UITextField+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UITextField+Extensions.m"; path = "Extensions/UITextField+Extensions.m"; sourceTree = "<group>"; };
 		012D3CA61ECCC32D0038D774 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		014F34291F7D78330064954B /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		016D53AF1F4CA40700D899D7 /* TwilioAuthenticator.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TwilioAuthenticator.framework; sourceTree = "<group>"; };
 		01A32A5B1DED14C9008529A1 /* NSDate+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDate+Extensions.h"; path = "Extensions/NSDate+Extensions.h"; sourceTree = "<group>"; };
 		01A32A5C1DED14C9008529A1 /* NSDate+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDate+Extensions.m"; path = "Extensions/NSDate+Extensions.m"; sourceTree = "<group>"; };
@@ -190,6 +191,7 @@
 		01BD37611F686A2600A76639 /* TwilioAuthenticatorSampleUITests */ = {
 			isa = PBXGroup;
 			children = (
+				014F34291F7D78330064954B /* Constants.h */,
 				01BD37621F686A2600A76639 /* TwilioAuthenticatorSampleUITests.m */,
 				01BD37641F686A2600A76639 /* Info.plist */,
 			);
@@ -303,7 +305,6 @@
 					};
 					01BD375F1F686A2600A76639 = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = 9EVH78F4V4;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 01B99CA11C936A1600462FA3;
 					};
@@ -574,13 +575,15 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				DEVELOPMENT_TEAM = 9EVH78F4V4;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = TwilioAuthenticatorSampleUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.pineda.adriana.TwilioAuthenticatorSampleUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "3f9e1946-6608-4e49-ba10-26de21c2721c";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TEST_TARGET_NAME = TwilioAuthenticatorSample;
 			};
 			name = Debug;
@@ -594,13 +597,14 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 9EVH78F4V4;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = TwilioAuthenticatorSampleUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.pineda.adriana.TwilioAuthenticatorSampleUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "3f9e1946-6608-4e49-ba10-26de21c2721c";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TEST_TARGET_NAME = TwilioAuthenticatorSample;
 			};
 			name = Release;
@@ -633,6 +637,7 @@
 				01BD37681F686A2600A76639 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
