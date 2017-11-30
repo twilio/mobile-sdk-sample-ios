@@ -145,9 +145,9 @@
     return YES;
 }
 
-- (void)registerDeviceWithAuthyWithRegistrationToken:(NSString *)registrationToken integrationApiKey:(NSString *)integrationApiKey andPushToken:(NSString *)pushToken {
+- (void)registerDeviceWithAuthyWithRegistrationToken:(NSString *)registrationToken andPushToken:(NSString *)pushToken {
 
-    [self.sharedTwilioAuth registerDeviceWithRegistrationToken:registrationToken integrationApiKey:integrationApiKey pushToken:pushToken completion:^(NSError *error) {
+    [self.sharedTwilioAuth registerDeviceWithRegistrationToken:registrationToken integrationApiKey:nil pushToken:pushToken completion:^(NSError *error) {
 
         if (error != nil) {
 
@@ -172,7 +172,7 @@
 
 }
 
-- (void)getRegistrationTokenForAuthyID:(NSString *)authyID backendURL:(NSString *)backendURL withCompletion:(void(^) (NSString *registrationToken, NSString *integrationApiKey))completion {
+- (void)getRegistrationTokenForAuthyID:(NSString *)authyID backendURL:(NSString *)backendURL withCompletion:(void(^) (NSString *registrationToken))completion {
 
     [self.registerDeviceUseCase getRegistrationTokenForAuthyID:authyID andBackendURL:backendURL completion:^(RegistrationResponse *registrationResponse) {
 
@@ -182,7 +182,7 @@
             return;
         }
 
-        completion(registrationToken, registrationResponse.integrationApiKey);
+        completion(registrationToken);
 
     }];
 }
@@ -207,28 +207,24 @@
     }
 
     // Obtain registration token
-    [self getRegistrationTokenForAuthyID:authyId backendURL:backendURL withCompletion:^(NSString *registrationToken, NSString *integrationApiKey) {
+    [self getRegistrationTokenForAuthyID:authyId backendURL:backendURL withCompletion:^(NSString *registrationToken) {
 
         // Register device with Authy
         NSString *pushToken = [self getCurrentPushToken];
-        [self registerDeviceWithAuthyWithRegistrationToken:registrationToken integrationApiKey:integrationApiKey andPushToken:pushToken];
+        [self registerDeviceWithAuthyWithRegistrationToken:registrationToken andPushToken:pushToken];
 
     }];
 }
 
 #pragma mark - Navigation
 - (void)goToApprovalRequestsView {
-
-    UITabBarController *tabBarViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"tabBarController"];
-
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:tabBarViewController];
+    
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    
+    UITableViewController *viewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"appsTableViewController"];
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
 
     dispatch_async(dispatch_get_main_queue(), ^{
-    //AppDelegate *appdelegate = [UIApplication sharedApplication].delegate;
-    //appdelegate.window.rootViewController = navigationController;
-    //[appdelegate.window makeKeyAndVisible];
-
-
         [self presentViewController:navigationController animated:YES completion:nil];
     });
 

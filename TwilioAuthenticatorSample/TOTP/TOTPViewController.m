@@ -66,7 +66,7 @@
 - (void)configureTOTP {
 
     TwilioAuthenticator *sharedTwilioAuth = [TwilioAuthenticator sharedInstance];
-    [sharedTwilioAuth getTOTPWithDelegate:self];
+    [sharedTwilioAuth getTOTPsWithDelegate:self];
 
 }
 

@@ -10,6 +10,6 @@
 
 @interface ApprovalRequestsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
-@property (nonatomic, strong) App *currentApp;
+@property (nonatomic, strong) AUTApp *currentApp;
 
 @end

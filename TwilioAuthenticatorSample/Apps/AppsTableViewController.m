@@ -95,7 +95,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"sdk_apps_cell_id" forIndexPath:indexPath];
 
-    App *currentApp = [[self getApps] objectAtIndex:indexPath.row];
+    AUTApp *currentApp = [[self getApps] objectAtIndex:indexPath.row];
     cell.textLabel.text = currentApp.name;
     
     return cell;
@@ -106,7 +106,7 @@
     // TODO
 
     NSInteger currentAppIndex = indexPath.row;
-    App *currentApp = [[self getApps] objectAtIndex:currentAppIndex];
+    AUTApp *currentApp = [[self getApps] objectAtIndex:currentAppIndex];
 
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
 

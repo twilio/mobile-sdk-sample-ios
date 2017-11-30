@@ -14,13 +14,13 @@
 
 - (void)getRegistrationTokenForAuthyID:(NSString *)authyID andBackendURL:(NSString *)backendURL completion:(void(^) (RegistrationResponse *registrationResponse))completion {
 
-    NSString *urlString = [backendURL stringByAppendingString:@"/registration"];
+    NSString *urlString = [backendURL stringByAppendingString:@"/v2/stg/registration"]; // TODO: Hardcoded to stg. Change this
     NSURL *url = [NSURL URLWithString:urlString];
 
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     [request setHTTPMethod:@"POST"];
 
-    NSString *body = [NSString stringWithFormat:@"authy_id=%@", authyID];
+    NSString *body = [NSString stringWithFormat:@"user_id=%@", authyID];
     NSData *bodyAsNSData = [body dataUsingEncoding:NSASCIIStringEncoding];
 
     [request setHTTPBody:bodyAsNSData];
@@ -41,11 +41,6 @@
 
         NSError *error = nil;
         NSDictionary *currentResponseAsDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&error];
-
-        NSString *integrationApiKey = [currentResponseAsDict objectForKey:@"integration_api_key"];
-        if (integrationApiKey) {
-            registrationResponse.integrationApiKey = integrationApiKey;
-        }
 
         NSString *registrationToken = [currentResponseAsDict objectForKey:@"registration_token"];
         if (registrationToken) {
