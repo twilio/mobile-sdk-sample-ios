@@ -36,7 +36,7 @@
     self.navigationController.navigationBar.topItem.rightBarButtonItem = nil;
     
     // Left bar button item - Device ID
-    UIBarButtonItem *deviceIdBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"ID" style:UIBarButtonItemStylePlain target:self action:@selector(getDeviceId:)];
+    UIBarButtonItem *deviceIdBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"ID" style:UIBarButtonItemStylePlain target:self action:@selector(getIDs:)];
     [deviceIdBarButtonItem setTintColor:[UIColor colorWithHexString:defaultColor]];
     self.navigationController.navigationBar.topItem.leftBarButtonItem = deviceIdBarButtonItem;
 
@@ -55,13 +55,15 @@
     return [self.twilioAuthenticator getApps];
 }
 
-#pragma mark - Device ID
-- (IBAction)getDeviceId:(id)sender {
+#pragma mark - Get IDs
+- (IBAction)getIDs:(id)sender {
 
     TwilioAuthenticator *sharedTwilioAuth = [TwilioAuthenticator sharedInstance];
     NSString *deviceId = [sharedTwilioAuth getDeviceId];
+    NSString *authyId = [sharedTwilioAuth getAuthyId];
 
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Device ID" message:deviceId preferredStyle:UIAlertControllerStyleAlert];
+    NSString *message = [NSString stringWithFormat:@"Device Id: %@\rAuthy Id: %@",deviceId, authyId];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"IDs" message:message preferredStyle:UIAlertControllerStyleAlert];
 
     // OK Action
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];

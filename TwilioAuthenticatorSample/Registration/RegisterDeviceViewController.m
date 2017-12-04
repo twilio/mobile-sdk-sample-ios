@@ -19,7 +19,7 @@
 
 @interface RegisterDeviceViewController ()
 
-@property (weak, nonatomic) IBOutlet UITextField *authyIDTextField;
+@property (weak, nonatomic) IBOutlet UITextField *userIDTextField;
 @property (weak, nonatomic) IBOutlet UITextField *backendURLTextField;
 
 @property (weak, nonatomic) IBOutlet UIButton *registerDeviceButton;
@@ -55,7 +55,7 @@
 
     [self.navigationController setNavigationBarHidden:YES];
 
-    [self.authyIDTextField configureBottomBorder];
+    [self.userIDTextField configureBottomBorder];
     [self.backendURLTextField configureBottomBorder];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
@@ -68,7 +68,7 @@
 }
 
 - (void)dismissKeyboard {
-    [self.authyIDTextField resignFirstResponder];
+    [self.userIDTextField resignFirstResponder];
     [self.backendURLTextField resignFirstResponder];
 }
 
@@ -78,11 +78,11 @@
     CGFloat offset = TextfieldOffSetWhenKeyBoardIsShown;
     CGFloat position = self.view.frame.origin.y;
 
-    if ([self.authyIDTextField isEditing]) {
+    if ([self.userIDTextField isEditing]) {
 
-        CGFloat authyIDTextFieldYPosition = self.authyIDTextField.layer.frame.origin.y;
-        CGFloat authyIDTextFieldHeight = self.authyIDTextField.layer.frame.size.height;
-        position = authyIDTextFieldYPosition - authyIDTextFieldHeight*offset;
+        CGFloat userIDTextFieldYPosition = self.userIDTextField.layer.frame.origin.y;
+        CGFloat userIDTextFieldHeight = self.userIDTextField.layer.frame.size.height;
+        position = userIDTextFieldYPosition - userIDTextFieldHeight*offset;
 
     } else if ([self.backendURLTextField isEditing]) {
 
@@ -123,7 +123,7 @@
     [self.registerDeviceButton setEnabled:NO];
     [self.registerDeviceLoadingIndicator setHidden:NO];
     [self.registerDeviceLoadingIndicator startAnimating];
-    [self.authyIDTextField resignFirstResponder];
+    [self.userIDTextField resignFirstResponder];
     [self.backendURLTextField resignFirstResponder];
 }
 
@@ -135,10 +135,10 @@
 
 - (BOOL)areInputFieldsValid {
 
-    NSString *authyId = self.authyIDTextField.text;
+    NSString *userId = self.userIDTextField.text;
     NSString *backendURL = self.backendURLTextField.text;
 
-    if ([authyId isEqualToString:@""] || [backendURL isEqualToString:@""]) {
+    if ([userId isEqualToString:@""] || [backendURL isEqualToString:@""]) {
         return NO;
     }
 
@@ -172,9 +172,9 @@
 
 }
 
-- (void)getRegistrationTokenForAuthyID:(NSString *)authyID backendURL:(NSString *)backendURL withCompletion:(void(^) (NSString *registrationToken))completion {
+- (void)getRegistrationTokenForUserID:(NSString *)userId backendURL:(NSString *)backendURL withCompletion:(void(^) (NSString *registrationToken))completion {
 
-    [self.registerDeviceUseCase getRegistrationTokenForAuthyID:authyID andBackendURL:backendURL completion:^(RegistrationResponse *registrationResponse) {
+    [self.registerDeviceUseCase getRegistrationTokenForUserID:userId andBackendURL:backendURL completion:^(RegistrationResponse *registrationResponse) {
 
         NSString *registrationToken = registrationResponse.registrationToken;
         if (registrationToken == nil || [registrationToken isEqualToString:@""]) {
@@ -194,9 +194,9 @@
 
     // Validate fields
 
-    NSString *authyId = self.authyIDTextField.text;
-    if ([authyId isEqualToString:@""]) {
-        [self showErrorAlertWithTitle:@"Authy ID invalid" andMessage:@"Make sure the value you entered is correct"];
+    NSString *userId = self.userIDTextField.text;
+    if ([userId isEqualToString:@""]) {
+        [self showErrorAlertWithTitle:@"User ID invalid" andMessage:@"Make sure the value you entered is correct"];
         return;
     }
 
@@ -207,7 +207,7 @@
     }
 
     // Obtain registration token
-    [self getRegistrationTokenForAuthyID:authyId backendURL:backendURL withCompletion:^(NSString *registrationToken) {
+    [self getRegistrationTokenForUserID:userId backendURL:backendURL withCompletion:^(NSString *registrationToken) {
 
         // Register device with Authy
         NSString *pushToken = [self getCurrentPushToken];

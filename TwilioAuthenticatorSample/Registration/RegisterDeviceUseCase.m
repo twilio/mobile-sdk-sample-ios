@@ -12,7 +12,7 @@
 
 @implementation RegisterDeviceUseCase
 
-- (void)getRegistrationTokenForAuthyID:(NSString *)authyID andBackendURL:(NSString *)backendURL completion:(void(^) (RegistrationResponse *registrationResponse))completion {
+- (void)getRegistrationTokenForUserID:(NSString *)userId andBackendURL:(NSString *)backendURL completion:(void(^) (RegistrationResponse *registrationResponse))completion {
 
     NSString *urlString = [backendURL stringByAppendingString:@"/v2/stg/registration"]; // TODO: Hardcoded to stg. Change this
     NSURL *url = [NSURL URLWithString:urlString];
@@ -20,7 +20,7 @@
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     [request setHTTPMethod:@"POST"];
 
-    NSString *body = [NSString stringWithFormat:@"user_id=%@", authyID];
+    NSString *body = [NSString stringWithFormat:@"user_id=%@", userId];
     NSData *bodyAsNSData = [body dataUsingEncoding:NSASCIIStringEncoding];
 
     [request setHTTPBody:bodyAsNSData];
