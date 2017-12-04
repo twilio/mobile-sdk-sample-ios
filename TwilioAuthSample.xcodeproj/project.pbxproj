@@ -27,6 +27,30 @@
 		01F318FB1C9C6CFF003BA657 /* RequestTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01F318F91C9C6CFF003BA657 /* RequestTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		1E69D25C1FD5D8CC00B892FD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1E69D2541FD5D8CC00B892FD /* TwilioAuth.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 0165FA751C8F2DE00047ADAB;
+			remoteInfo = TwilioAuth;
+		};
+		1E69D25E1FD5D8CC00B892FD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1E69D2541FD5D8CC00B892FD /* TwilioAuth.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 01A32A8A1DEDDDEA008529A1;
+			remoteInfo = TwilioAuthTests;
+		};
+		1E69D2601FD5D92E00B892FD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1E69D2541FD5D8CC00B892FD /* TwilioAuth.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 0165FA741C8F2DE00047ADAB;
+			remoteInfo = TwilioAuth;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXCopyFilesBuildPhase section */
 		0130721E1C9703B60048383E /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -76,6 +100,7 @@
 		01EE5E1C1EBB84C900B2E333 /* TOTPViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TOTPViewController.h; sourceTree = "<group>"; };
 		01EE5E1D1EBB84C900B2E333 /* TOTPViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TOTPViewController.m; sourceTree = "<group>"; };
 		01F318F91C9C6CFF003BA657 /* RequestTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RequestTableViewCell.xib; sourceTree = "<group>"; };
+		1E69D2541FD5D8CC00B892FD /* TwilioAuth.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TwilioAuth.xcodeproj; path = "../authy-sdk-ios/TwilioAuth/TwilioAuth.xcodeproj"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +149,7 @@
 		01B99C991C936A1600462FA3 = {
 			isa = PBXGroup;
 			children = (
+				1E69D2541FD5D8CC00B892FD /* TwilioAuth.xcodeproj */,
 				01B99CA41C936A1600462FA3 /* TwilioAuthSample */,
 				01B99CA31C936A1600462FA3 /* Products */,
 			);
@@ -194,6 +220,15 @@
 			path = TOTP;
 			sourceTree = "<group>";
 		};
+		1E69D2551FD5D8CC00B892FD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1E69D25D1FD5D8CC00B892FD /* TwilioAuth.framework */,
+				1E69D25F1FD5D8CC00B892FD /* TwilioAuthTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -209,6 +244,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				1E69D2611FD5D92E00B892FD /* PBXTargetDependency */,
 			);
 			name = TwilioAuthSample;
 			productName = TwilioAuthSample;
@@ -249,12 +285,35 @@
 			mainGroup = 01B99C991C936A1600462FA3;
 			productRefGroup = 01B99CA31C936A1600462FA3 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 1E69D2551FD5D8CC00B892FD /* Products */;
+					ProjectRef = 1E69D2541FD5D8CC00B892FD /* TwilioAuth.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				01B99CA11C936A1600462FA3 /* TwilioAuthSample */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		1E69D25D1FD5D8CC00B892FD /* TwilioAuth.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = TwilioAuth.framework;
+			remoteRef = 1E69D25C1FD5D8CC00B892FD /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		1E69D25F1FD5D8CC00B892FD /* TwilioAuthTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = TwilioAuthTests.xctest;
+			remoteRef = 1E69D25E1FD5D8CC00B892FD /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		01B99CA01C936A1600462FA3 /* Resources */ = {
@@ -293,6 +352,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		1E69D2611FD5D92E00B892FD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = TwilioAuth;
+			targetProxy = 1E69D2601FD5D92E00B892FD /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		01B99CA91C936A1600462FA3 /* Main.storyboard */ = {
