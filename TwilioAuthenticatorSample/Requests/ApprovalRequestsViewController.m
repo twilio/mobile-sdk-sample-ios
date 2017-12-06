@@ -182,16 +182,13 @@ NSInteger const archiveTabIndex = 1;
     [self.tableView setTableFooterView:[[UIView alloc] init]];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    self.tableView.estimatedRowHeight = 90;
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
 
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [self performSegueWithIdentifier:@"showRequest" sender:self];
-}
-
-- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
-
-    return 82;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
