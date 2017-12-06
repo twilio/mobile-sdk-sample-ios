@@ -1,7 +1,7 @@
-prepare = 3
-unitTests = 8
-archivingArtifacts = 3
-building = 8
+prepare = 8
+unitTests = 15
+archivingArtifacts = 10
+building = 15
 
 master = 'master'
 
@@ -36,7 +36,7 @@ node('appium_ventspils_node') {
           sh 'unzip TwilioAuth/TwilioAuthenticator.zip'
           sh 'cp -r build/Debug-universal/TwilioAuthenticator.framework ./'
 
-          /*
+          /* sh 'sh perl_script.sh'
           sh 'echo "" | calabash-ios setup'
           sh """
           ruby -r "~/Documents/Authy/calabash/iOS/Scripts/shared.rb" -e "recreateUserSchemes('TwilioAuthenticatorSample.xcodeproj')"
@@ -69,13 +69,13 @@ node('appium_ventspils_node') {
         currentBuild.result = "NOT_BUILT"
     }
   } catch (e) {
-    notifyFailed()
+    notifyFailed(env.APP_TEAM_EMAIL)
     currentBuild.result = "FAILED"
     throw e
   }
 }
 
-def notifyFailed() {
+def notifyFailed(emailList) {
   if (env.BRANCH_NAME == master) {
     mail body: body, subject: subject, to: emailList
   }
