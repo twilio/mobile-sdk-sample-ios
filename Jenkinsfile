@@ -7,6 +7,7 @@ master = 'master'
 
 body = """FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'. Check console output at "${env.BUILD_URL}"""
 subject = "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'"
+emailList = env.APP_TEAM_EMAIL
 
 properties([
   buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '', numToKeepStr: '5')),
@@ -46,6 +47,7 @@ node('appium_ventspils_node') {
           try{
             sh """
             cp -f ~/Documents/ios_sample_app_config/Constants.h ./TwilioAuthenticatorSampleUITests/Constants.h
+            sh perl_script.sh
             xcodebuild -scheme "TwilioAuthenticatorSample-Debug" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 7,OS=10.3' test
             """
           } catch (e) {
@@ -54,6 +56,17 @@ node('appium_ventspils_node') {
           } finally {
           }
       }
+      stage 'Archive and build IPA file'
+        timeout(unitTests) {
+          sh """
+          xcodebuild -target TwilioAuthenticatorSample -scheme TwilioAuthenticatorSample-Debug -configuration Debug -derivedDataPath build CODE_SIGN_IDENTITY="iPhone Developer" clean build
+          xcodebuild -scheme TwilioAuthenticatorSample-Debug archive -archivePath ./TwilioAuthenticatorSample.xcarchive
+          sh xcodebuild-safe.sh -exportArchive -archivePath ./TwilioAuthenticatorSample.xcarchive -exportPath ./TwilioAuthenticatorSample.ipa -exportOptionsPlist "exportPlist.plist"
+          """
+      }
+    }
+    else {
+        currentBuild.result = "NOT_BUILT"
     }
   } catch (e) {
     notifyFailed(env.APP_TEAM_EMAIL)
