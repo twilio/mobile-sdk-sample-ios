@@ -14,7 +14,7 @@
 
 - (void)getRegistrationTokenForUserID:(NSString *)userId andBackendURL:(NSString *)backendURL completion:(void(^) (RegistrationResponse *registrationResponse))completion {
 
-    NSString *urlString = [backendURL stringByAppendingString:@"/v2/stg/registration"]; // TODO: Hardcoded to stg. Change this
+    NSString *urlString = [backendURL stringByAppendingString:@"/registration"];
     NSURL *url = [NSURL URLWithString:urlString];
 
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
