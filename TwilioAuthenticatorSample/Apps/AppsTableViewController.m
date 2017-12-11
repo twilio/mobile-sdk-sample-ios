@@ -41,7 +41,7 @@
     self.navigationController.navigationBar.topItem.leftBarButtonItem = deviceIdBarButtonItem;
 
     self.tableView.tableFooterView = [[UIView alloc] init];
-
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {

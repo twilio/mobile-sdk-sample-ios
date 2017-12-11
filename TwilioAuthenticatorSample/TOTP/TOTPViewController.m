@@ -79,10 +79,17 @@
 }
 
 - (void)configureTOTPWithText:(NSDictionary <NSString*, NSString*> *)totps {
-    // TODO: Make this compatible with multi apps
+
     NSString *serialIdAsString = [NSString stringWithFormat:@"%@", self.currentAppId];
+
+
     NSString *totpText = [totps objectForKey:serialIdAsString];
-    NSMutableAttributedString *totpAttributedString = [[NSMutableAttributedString alloc] initWithString:totpText];
+    NSMutableAttributedString *totpAttributedString;
+    if(totpText) {
+        totpAttributedString = [[NSMutableAttributedString alloc] initWithString:totpText];
+    } else {
+        totpAttributedString = [[NSMutableAttributedString alloc] initWithString:@"------"];
+    }
     [totpAttributedString addAttribute:NSKernAttributeName value:@3.5 range:NSMakeRange(0, totpAttributedString.length)];
     [self.totpLabel setAttributedText:totpAttributedString];
 }
