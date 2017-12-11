@@ -4,6 +4,7 @@ archivingArtifacts = 10
 building = 15
 
 master = 'master'
+future_release = 'future-release'
 
 body = """FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'. Check console output at "${env.BUILD_URL}"""
 subject = "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'"
@@ -20,7 +21,7 @@ properties([
 ])
 node('appium_ventspils_node') {
   try{
-    if (env.BRANCH_NAME == master || currentBuild.rawBuild.getCause(hudson.model.Cause$UserIdCause)){
+    if (env.BRANCH_NAME == master || env.BRANCH_NAME == future_release || currentBuild.rawBuild.getCause(hudson.model.Cause$UserIdCause)){
       stage 'Prepare'
         timeout(prepare) {
           checkout scm
@@ -76,7 +77,7 @@ node('appium_ventspils_node') {
 }
 
 def notifyFailed(emailList) {
-  if (env.BRANCH_NAME == master) {
+  if (env.BRANCH_NAME == master || env.BRANCH_NAME == future_release) {
     mail body: body, subject: subject, to: emailList
   }
 }
