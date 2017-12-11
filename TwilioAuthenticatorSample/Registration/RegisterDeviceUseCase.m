@@ -30,11 +30,18 @@
     [request setValue:CONTENT_TYPE forHTTPHeaderField: @"Content-Type"];
 
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse * _Nullable response, NSData * _Nullable data, NSError * _Nullable connectionError) {
-
         RegistrationResponse *registrationResponse = [[RegistrationResponse alloc] init];
 
         if (data == nil) {
             registrationResponse.messageError = [NSString stringWithFormat:@"Request could not be made: %@", connectionError.localizedDescription];
+            completion(registrationResponse);
+            return;
+        }
+
+        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+        if ([httpResponse statusCode] != 200) {
+            NSString *error = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            registrationResponse.messageError = [NSString stringWithFormat:@"Request could not be made: %@", error];
             completion(registrationResponse);
             return;
         }
