@@ -15,6 +15,7 @@
 @interface AppsTableViewController ()
 
 @property (nonatomic, strong) TwilioAuthenticator *twilioAuthenticator;
+@property (nonatomic) BOOL appsTableExists;
 @end
 
 @implementation AppsTableViewController
@@ -29,6 +30,7 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 
     self.twilioAuthenticator = [TwilioAuthenticator sharedInstance];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadApps:) name:UIApplicationWillEnterForegroundNotification object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -41,7 +43,13 @@
     self.navigationController.navigationBar.topItem.leftBarButtonItem = deviceIdBarButtonItem;
 
     self.tableView.tableFooterView = [[UIView alloc] init];
-    [self.tableView reloadData];
+
+    if(!self.appsTableExists) {
+        self.appsTableExists = YES;
+    } else {
+        // Reload apps table when coming back
+        [self reloadApps:nil];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -49,10 +57,13 @@
     // Dispose of any resources that can be recreated.
 }
 
-
 - (NSArray *)getApps {
 
     return [self.twilioAuthenticator getApps];
+}
+
+- (void) reloadApps:(NSNotification *) ignored {
+    [self.tableView reloadData];
 }
 
 #pragma mark - Get IDs
