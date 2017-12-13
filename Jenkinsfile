@@ -4,11 +4,17 @@ archivingArtifacts = 10
 building = 15
 
 master = 'master'
+future_release = 'future-release'
 
 body = """FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'. Check console output at "${env.BUILD_URL}"""
 subject = "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'"
+emailList = env.APP_TEAM_EMAIL
 
 properties([
+  parameters
+  {
+    string(name: 'SDK_BRANCH', defaultValue: future_release, description: 'Pass sdk branch name')
+  },
   buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '', numToKeepStr: '5')),
   pipelineTriggers([
     upstream(
@@ -19,7 +25,7 @@ properties([
 ])
 node('appium_ventspils_node') {
   try{
-    if (env.BRANCH_NAME == master || currentBuild.rawBuild.getCause(hudson.model.Cause$UserIdCause)){
+    if (env.BRANCH_NAME == master || env.BRANCH_NAME == future_release || currentBuild.rawBuild.getCause(hudson.model.Cause$UserIdCause)){
       stage 'Prepare'
         timeout(prepare) {
           checkout scm
@@ -27,7 +33,7 @@ node('appium_ventspils_node') {
           step([$class: 'CopyArtifact',
           fingerprintArtifacts: true,
           flatten: true,
-          projectName: 'TwilioAuth_iOS_SDK/future-release',
+          projectName: "TwilioAuth_iOS_SDK/${params.SDK_BRANCH}",
           stable: true,
           target: './TwilioAuth'])
 
@@ -46,7 +52,8 @@ node('appium_ventspils_node') {
           try{
             sh """
             cp -f ~/Documents/ios_sample_app_config/Constants.h ./TwilioAuthenticatorSampleUITests/Constants.h
-            xcodebuild -scheme "TwilioAuthenticatorSample-Debug" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 7,OS=10.3' test
+            sh perl_script.sh
+            xcodebuild -scheme "TwilioAuthenticatorSample-Debug" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 7,OS=11.1' test
             """
           } catch (e) {
             currentBuild.result = "FAILED"
@@ -54,6 +61,17 @@ node('appium_ventspils_node') {
           } finally {
           }
       }
+      stage 'Archive and build IPA file'
+        timeout(unitTests) {
+          sh """
+          xcodebuild -target TwilioAuthenticatorSample -scheme TwilioAuthenticatorSample-Debug -configuration Debug -derivedDataPath build CODE_SIGN_IDENTITY="iPhone Developer" clean build
+          xcodebuild -scheme TwilioAuthenticatorSample-Debug archive -archivePath ./TwilioAuthenticatorSample.xcarchive
+          sh xcodebuild-safe.sh -exportArchive -archivePath ./TwilioAuthenticatorSample.xcarchive -exportPath ./TwilioAuthenticatorSample.ipa -exportOptionsPlist "exportPlist.plist"
+          """
+      }
+    }
+    else {
+        currentBuild.result = "NOT_BUILT"
     }
   } catch (e) {
     notifyFailed(env.APP_TEAM_EMAIL)
@@ -63,7 +81,7 @@ node('appium_ventspils_node') {
 }
 
 def notifyFailed(emailList) {
-  if (env.BRANCH_NAME == master) {
+  if (env.BRANCH_NAME == master || env.BRANCH_NAME == future_release) {
     mail body: body, subject: subject, to: emailList
   }
 }
