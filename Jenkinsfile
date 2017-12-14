@@ -4,6 +4,7 @@ archivingArtifacts = 10
 building = 15
 
 master = 'master'
+future_release = 'future-release'
 
 body = """FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'. Check console output at "${env.BUILD_URL}"""
 subject = "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'"
@@ -20,7 +21,7 @@ properties([
 ])
 node('appium_ventspils_node') {
   try{
-    if (env.BRANCH_NAME == master || currentBuild.rawBuild.getCause(hudson.model.Cause$UserIdCause)){
+    if (env.BRANCH_NAME == master || env.BRANCH_NAME == future_release || currentBuild.rawBuild.getCause(hudson.model.Cause$UserIdCause)){
       stage 'Prepare'
         timeout(prepare) {
           checkout scm
@@ -48,7 +49,7 @@ node('appium_ventspils_node') {
             sh """
             cp -f ~/Documents/ios_sample_app_config/Constants.h ./TwilioAuthenticatorSampleUITests/Constants.h
             sh perl_script.sh
-            xcodebuild -scheme "TwilioAuthenticatorSample-Debug" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 7,OS=10.3' test
+            xcodebuild -scheme "TwilioAuthenticatorSample-Debug" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 7,OS=11.1' test
             """
           } catch (e) {
             currentBuild.result = "FAILED"
@@ -76,7 +77,7 @@ node('appium_ventspils_node') {
 }
 
 def notifyFailed(emailList) {
-  if (env.BRANCH_NAME == master) {
+  if (env.BRANCH_NAME == master || env.BRANCH_NAME == future_release) {
     mail body: body, subject: subject, to: emailList
   }
 }
