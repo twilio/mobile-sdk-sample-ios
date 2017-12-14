@@ -11,10 +11,9 @@ subject = "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'"
 emailList = env.APP_TEAM_EMAIL
 
 properties([
-  parameters
-  {
-    string(name: 'SDK_BRANCH', defaultValue: future_release, description: 'Pass sdk branch name')
-  },
+  parameters([
+    string(name: 'SDK_BRANCH', defaultValue: 'future-release', description: 'SDK branch name', )
+   ]),
   buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '', numToKeepStr: '5')),
   pipelineTriggers([
     upstream(
@@ -33,7 +32,7 @@ node('appium_ventspils_node') {
           step([$class: 'CopyArtifact',
           fingerprintArtifacts: true,
           flatten: true,
-          projectName: "TwilioAuth_iOS_SDK/${params.SDK_BRANCH}",
+          projectName: "TwilioAuth_iOS_SDK/${SDK_BRANCH}",
           stable: true,
           target: './TwilioAuth'])
 
