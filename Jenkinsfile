@@ -33,7 +33,9 @@ node('appium_ventspils_node') {
           stable: true,
           target: './TwilioAuth'])
 
-          sh 'security -v unlock-keychain -p "Andrejs 3rvins." "$HOME/Library/Keychains/login.keychain"'
+          withCredentials([[$class: 'StringBinding', credentialsId: 'Keychain_Password', variable: 'My_Key']]) {
+              sh 'security -v unlock-keychain -p "${My_Key}" "$HOME/Library/Keychains/login.keychain"'
+          }
           sh 'unzip TwilioAuth/TwilioAuthenticator.zip'
           sh 'cp -r build/Debug-universal/TwilioAuthenticator.framework ./'
 
