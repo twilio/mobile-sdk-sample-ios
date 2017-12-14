@@ -84,12 +84,7 @@
 
 
     NSString *totpText = [totps objectForKey:serialIdAsString];
-    NSMutableAttributedString *totpAttributedString;
-    if(totpText) {
-        totpAttributedString = [[NSMutableAttributedString alloc] initWithString:totpText];
-    } else {
-        totpAttributedString = [[NSMutableAttributedString alloc] initWithString:@"------"];
-    }
+    NSMutableAttributedString *totpAttributedString = [[NSMutableAttributedString alloc] initWithString:totpText ? totpText : @"------"];
     [totpAttributedString addAttribute:NSKernAttributeName value:@3.5 range:NSMakeRange(0, totpAttributedString.length)];
     [self.totpLabel setAttributedText:totpAttributedString];
 }
