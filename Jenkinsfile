@@ -1,6 +1,5 @@
 prepare = 8
-unitTests = 15
-archivingArtifacts = 10
+uitests = 15
 building = 15
 
 master = 'master'
@@ -11,7 +10,7 @@ subject = "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'"
 emailList = env.APP_TEAM_EMAIL
 
 properties([
-  buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '', numToKeepStr: '5')),
+  buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '', numToKeepStr: '25')),
   pipelineTriggers([
     upstream(
       threshold: 'SUCCESS',
@@ -21,7 +20,7 @@ properties([
 ])
 node('appium_ventspils_node') {
   try{
-    if (env.BRANCH_NAME == master || env.BRANCH_NAME == future_release || currentBuild.rawBuild.getCause(hudson.model.Cause$UserIdCause)){
+    if (env.BRANCH_NAME == master || env.BRANCH_NAME == future_release || currentBuild.rawBuild.getCause(hudson.model.Cause$UserIdCause) || currentBuild.rawBuild.getCause(hudson.model.Cause$UpstreamCause)){
       stage 'Prepare'
         timeout(prepare) {
           checkout scm
@@ -46,7 +45,7 @@ node('appium_ventspils_node') {
           """ */
       }
       stage 'UI tests'
-        timeout(unitTests) {
+        timeout(uitests) {
           try{
             sh """
             cp -f ~/Documents/ios_sample_app_config/Constants.h ./TwilioAuthenticatorSampleUITests/Constants.h
@@ -60,7 +59,7 @@ node('appium_ventspils_node') {
           }
       }
       stage 'Archive and build IPA file'
-        timeout(unitTests) {
+        timeout(building) {
           sh """
           xcodebuild -target TwilioAuthenticatorSample -scheme TwilioAuthenticatorSample-Debug -configuration Debug -derivedDataPath build CODE_SIGN_IDENTITY="iPhone Developer" clean build
           xcodebuild -scheme TwilioAuthenticatorSample-Debug archive -archivePath ./TwilioAuthenticatorSample.xcarchive
