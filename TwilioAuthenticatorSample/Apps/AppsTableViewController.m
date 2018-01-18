@@ -119,7 +119,11 @@
     // TODO
 
     NSInteger currentAppIndex = indexPath.row;
-    AUTApp *currentApp = [[self getApps] objectAtIndex:currentAppIndex];
+    NSArray *apps = [self getApps];
+    AUTApp *currentApp;
+    if (apps.count > currentAppIndex) {
+        currentApp = [[self getApps] objectAtIndex:currentAppIndex];
+    }
 
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
 
