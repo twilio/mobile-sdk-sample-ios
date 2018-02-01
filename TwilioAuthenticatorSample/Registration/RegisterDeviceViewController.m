@@ -147,7 +147,7 @@
 
 - (void)registerDeviceWithAuthyWithRegistrationToken:(NSString *)registrationToken andPushToken:(NSString *)pushToken {
 
-    [self.sharedTwilioAuth registerDeviceWithRegistrationToken:registrationToken integrationApiKey:nil pushToken:pushToken completion:^(NSError *error) {
+    [self.sharedTwilioAuth registerDeviceWithRegistrationToken:registrationToken pushToken:pushToken completion:^(NSError *error) {
 
         if (error != nil) {
 
