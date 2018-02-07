@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AppsTableViewController : UITableViewController
+@interface AppsTableViewController : UITableViewController <AUTMultiAppDelegate>
 
 @end

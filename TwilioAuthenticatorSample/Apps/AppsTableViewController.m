@@ -15,6 +15,7 @@
 @interface AppsTableViewController ()
 
 @property (nonatomic, strong) TwilioAuthenticator *twilioAuthenticator;
+@property (nonatomic, strong) NSArray *apps;
 @property (nonatomic) BOOL appsTableExists;
 @end
 
@@ -31,6 +32,7 @@
 
     self.twilioAuthenticator = [TwilioAuthenticator sharedInstance];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadApps:) name:UIApplicationWillEnterForegroundNotification object:nil];
+    [self.twilioAuthenticator setMultiAppDelegate:self];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -55,11 +57,6 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (NSArray *)getApps {
-
-    return [self.twilioAuthenticator getApps];
 }
 
 - (void) reloadApps:(NSNotification *) ignored {
@@ -102,13 +99,13 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self getApps].count;
+    return self.apps.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"sdk_apps_cell_id" forIndexPath:indexPath];
 
-    AUTApp *currentApp = [[self getApps] objectAtIndex:indexPath.row];
+    AUTApp *currentApp = [self.apps objectAtIndex:indexPath.row];
     cell.textLabel.text = currentApp.name;
     
     return cell;
@@ -119,10 +116,9 @@
     // TODO
 
     NSInteger currentAppIndex = indexPath.row;
-    NSArray *apps = [self getApps];
     AUTApp *currentApp;
-    if (apps.count > currentAppIndex) {
-        currentApp = [[self getApps] objectAtIndex:currentAppIndex];
+    if (self.apps.count > currentAppIndex) {
+        currentApp = [self.apps objectAtIndex:currentAppIndex];
     }
 
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -154,5 +150,25 @@
     TOTPViewController *totpViewController = [viewController.childViewControllers objectAtIndex:1];
     totpViewController.currentAppId = currentApp.serialId;
 }*/
+
+#pragma mark - Delegation
+- (void)didUpdateApps:(NSArray<AUTApp*> *)apps {
+
+}
+
+- (void)didAddApps:(NSArray<AUTApp *> *)apps {
+}
+
+- (void)didDeleteApps:(NSArray<NSNumber *> *)appsId {
+
+}
+
+- (void)didReceiveCodes:(NSArray<AUTApp *> *)apps {
+    self.apps = apps;
+}
+
+ - (void)didFail:(NSError *)error {
+
+}
 
 @end
