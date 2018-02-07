@@ -114,7 +114,6 @@
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // TODO
 
     NSInteger currentAppIndex = indexPath.row;
     AUTApp *currentApp;
@@ -134,33 +133,18 @@
     [self.navigationController pushViewController:viewController animated:YES];
     
 }
-/*
-#pragma mark - Navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-
-    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-    NSInteger currentAppIndex = indexPath.row;
-    App *currentApp = [[self getApps] objectAtIndex:currentAppIndex];
-
-    [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
-
-    UITabBarController *viewController = segue.destinationViewController;
-    ApprovalRequestsViewController *approvalRequestsViewController = [viewController.childViewControllers objectAtIndex:0];
-    approvalRequestsViewController.currentApp = currentApp;
-
-    TOTPViewController *totpViewController = [viewController.childViewControllers objectAtIndex:1];
-    totpViewController.currentAppId = currentApp.serialId;
-}*/
 
 #pragma mark - Delegation
 - (void)didUpdateApps:(NSArray<AUTApp*> *)apps {
 
+    NSLog(@"******* UPDATE APPS");
+
     NSMutableArray *currentApps = [[NSMutableArray alloc] initWithArray:self.apps];
     int index = 0;
-    for (AUTApp *app in apps) {
+    for (AUTApp *app in currentApps) {
 
-        NSPredicate *serialIdPredicate = [NSPredicate predicateWithFormat:@"serialId = %@", app.serialId];
-        NSArray *filteredApps = [currentApps filteredArrayUsingPredicate: serialIdPredicate];
+        NSPredicate *serialIdPredicate = [NSPredicate predicateWithFormat:@"SELF.serialId == %@", app.serialId];
+        NSArray *filteredApps = [apps filteredArrayUsingPredicate: serialIdPredicate];
 
         if (filteredApps.count == 1) {
             [currentApps replaceObjectAtIndex:index withObject:app];
@@ -178,6 +162,7 @@
 }
 
 - (void)didAddApps:(NSArray<AUTApp *> *)apps {
+    NSLog(@"******* ADD APPS");
     NSMutableArray *currentApps = [[NSMutableArray alloc] initWithArray:self.apps];
     [currentApps addObjectsFromArray:apps];
     self.apps = currentApps;
@@ -189,11 +174,12 @@
 
 - (void)didDeleteApps:(NSArray<NSNumber *> *)appsId {
 
+    NSLog(@"******* DELETE APPS");
     NSMutableArray *currentApps = [[NSMutableArray alloc] initWithArray:self.apps];
     for (NSNumber *appId in appsId) {
 
-        NSPredicate *serialIdPredicate = [NSPredicate predicateWithFormat:@"serialId = %@", appId];
-        NSArray *filteredApps = [currentApps filteredArrayUsingPredicate: serialIdPredicate];
+        NSPredicate *serialIdPredicate = [NSPredicate predicateWithFormat:@"serialId == %@", appId];
+        NSArray *filteredApps = [currentApps filteredArrayUsingPredicate:serialIdPredicate];
         if (filteredApps.count == 1) {
             [currentApps removeObjectsInArray:filteredApps];
         }
@@ -206,6 +192,9 @@
 }
 
 - (void)didReceiveCodes:(NSArray<AUTApp *> *)apps {
+
+    NSLog(@"******* RECEIVE CODES");
+
     self.apps = apps;
 
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -214,6 +203,8 @@
 }
 
  - (void)didFail:(NSError *)error {
+
+     NSLog(@"******* FAILS");
 
      UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:error.localizedDescription preferredStyle:UIAlertControllerStyleAlert];
 
