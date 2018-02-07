@@ -148,4 +148,35 @@
     });
 }
 
+- (void)didFail:(NSError *)error {
+
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:error.localizedDescription preferredStyle:UIAlertControllerStyleAlert];
+
+    // OK Action
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+    [okAction setValue:[UIColor colorWithHexString:defaultColor] forKey:@"titleTextColor"];
+    [alert addAction:okAction];
+
+    // Present Alert
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self presentViewController:alert animated:YES completion:nil];
+    });
+
+}
+
+- (void)didUpdateApps:(NSArray<AUTApp*> *)apps {
+
+    // Usefull if we are displaying the name of the app
+}
+
+- (void)didAddApps:(NSArray<AUTApp *> *)apps {
+
+    // Not needed for totp view only
+}
+
+- (void)didDeleteApps:(NSArray<NSNumber *> *)appsId {
+
+    // Not needed for totp view only
+}
+
 @end

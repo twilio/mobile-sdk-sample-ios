@@ -105,7 +105,8 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"sdk_apps_cell_id" forIndexPath:indexPath];
 
-    AUTApp *currentApp = [self.apps objectAtIndex:indexPath.row];
+    NSInteger row = indexPath.row;
+    AUTApp *currentApp = [self.apps objectAtIndex:row];
     cell.textLabel.text = currentApp.name;
     
     return cell;
@@ -154,21 +155,77 @@
 #pragma mark - Delegation
 - (void)didUpdateApps:(NSArray<AUTApp*> *)apps {
 
+    NSMutableArray *currentApps = [[NSMutableArray alloc] initWithArray:self.apps];
+    int index = 0;
+    for (AUTApp *app in apps) {
+
+        NSPredicate *serialIdPredicate = [NSPredicate predicateWithFormat:@"serialId = %@", app.serialId];
+        NSArray *filteredApps = [currentApps filteredArrayUsingPredicate: serialIdPredicate];
+
+        if (filteredApps.count == 1) {
+            [currentApps replaceObjectAtIndex:index withObject:app];
+        }
+
+        index ++;
+    }
+
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.tableView beginUpdates];
+        self.apps = currentApps;
+        [self.tableView reloadData];
+        [self.tableView endUpdates];
+    });
 }
 
 - (void)didAddApps:(NSArray<AUTApp *> *)apps {
+    NSMutableArray *currentApps = [[NSMutableArray alloc] initWithArray:self.apps];
+    [currentApps addObjectsFromArray:apps];
+    self.apps = currentApps;
+
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.tableView reloadData];
+    });
 }
 
 - (void)didDeleteApps:(NSArray<NSNumber *> *)appsId {
 
+    NSMutableArray *currentApps = [[NSMutableArray alloc] initWithArray:self.apps];
+    for (NSNumber *appId in appsId) {
+
+        NSPredicate *serialIdPredicate = [NSPredicate predicateWithFormat:@"serialId = %@", appId];
+        NSArray *filteredApps = [currentApps filteredArrayUsingPredicate: serialIdPredicate];
+        if (filteredApps.count == 1) {
+            [currentApps removeObjectsInArray:filteredApps];
+        }
+    }
+
+    self.apps = currentApps;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.tableView reloadData];
+    });
 }
 
 - (void)didReceiveCodes:(NSArray<AUTApp *> *)apps {
     self.apps = apps;
+
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.tableView reloadData];
+    });
 }
 
  - (void)didFail:(NSError *)error {
 
+     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:error.localizedDescription preferredStyle:UIAlertControllerStyleAlert];
+
+     // OK Action
+     UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+     [okAction setValue:[UIColor colorWithHexString:defaultColor] forKey:@"titleTextColor"];
+     [alert addAction:okAction];
+
+     // Present Alert
+     dispatch_async(dispatch_get_main_queue(), ^{
+         [self presentViewController:alert animated:YES completion:nil];
+     });
 }
 
 @end
