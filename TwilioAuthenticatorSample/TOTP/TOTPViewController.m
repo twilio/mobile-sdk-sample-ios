@@ -53,7 +53,7 @@
 - (void)configureTOTP:(NSArray<AUTApp *> *)apps {
 
     for (AUTApp *app in apps) {
-        if (app.serialId == self.currentAppId) {
+        if (app.appId == self.currentAppId) {
             NSMutableAttributedString *totpAttributedString = [[NSMutableAttributedString alloc] initWithString:app.currentCode ? app.currentCode : @"------"];
             [totpAttributedString addAttribute:NSKernAttributeName value:@3.5 range:NSMakeRange(0, totpAttributedString.length)];
             [self.totpLabel setAttributedText:totpAttributedString];

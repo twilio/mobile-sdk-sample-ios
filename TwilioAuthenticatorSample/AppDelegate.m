@@ -228,7 +228,7 @@
         return;
     }
 
-    [sharedTwilioAuth getRequestWithUUID:approvalRequestUUID completion:^(AUTApprovalRequest *request, NSError *error) {
+    [sharedTwilioAuth getApprovalRequestWithUUID:approvalRequestUUID completion:^(AUTApprovalRequest *request, NSError *error) {
 
         if(request == nil) {
             completionHandler();
@@ -300,7 +300,7 @@
     NSString *approvalRequestUUID = [userInfo objectForKey:@"approval_request_uuid"];
 
     TwilioAuthenticator *twilioAuth = [TwilioAuthenticator sharedInstance];
-    [twilioAuth getRequestWithUUID:approvalRequestUUID completion:^(AUTApprovalRequest *request, NSError *error) {
+    [twilioAuth getApprovalRequestWithUUID:approvalRequestUUID completion:^(AUTApprovalRequest *request, NSError *error) {
 
         if (error != nil) {
             return;
