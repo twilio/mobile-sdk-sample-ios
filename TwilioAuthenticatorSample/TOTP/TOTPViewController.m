@@ -15,11 +15,6 @@
 #define circleRadius 25
 #define circleLineWidth 6
 
-@interface TOTPViewController ()
-
-@property (nonatomic, strong) NSTimer *totpTimer;
-
-@end
 
 @implementation TOTPViewController
 
@@ -28,26 +23,11 @@
     [super viewDidLoad];
     [self drawBackgroundCircle];
 
-    [self configureTimer];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [self configureNavigationBar];
     [self configureTOTP];
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-
-    [self invalidateTimer];
-}
-
-- (void)invalidateTimer {
-
-    if (self.totpTimer) {
-        [self.totpTimer invalidate];
-        self.totpTimer = nil;
-    }
-
 }
 
 - (void)configureNavigationBar {
@@ -66,31 +46,20 @@
 - (void)configureTOTP {
 
     TwilioAuthenticator *sharedTwilioAuth = [TwilioAuthenticator sharedInstance];
-    [sharedTwilioAuth getTOTPsWithDelegate:self];
+    [sharedTwilioAuth setMultiAppDelegate:self];
 
 }
 
-- (void)configureTimer {
+- (void)configureTOTP:(NSArray<AUTApp *> *)apps {
 
-    [self invalidateTimer];
-    [self showTimerAnimation];
-    self.totpTimer = [NSTimer scheduledTimerWithTimeInterval:20 target:self selector:@selector(refreshTimer:) userInfo:nil repeats:NO];
+    for (AUTApp *app in apps) {
+        if (app.appId == self.currentAppId) {
+            NSMutableAttributedString *totpAttributedString = [[NSMutableAttributedString alloc] initWithString:app.currentCode ? app.currentCode : @"------"];
+            [totpAttributedString addAttribute:NSKernAttributeName value:@3.5 range:NSMakeRange(0, totpAttributedString.length)];
+            [self.totpLabel setAttributedText:totpAttributedString];
+        }
+    }
 
-}
-
-- (void)configureTOTPWithText:(NSDictionary <NSString*, NSString*> *)totps {
-
-    NSString *serialIdAsString = [NSString stringWithFormat:@"%@", self.currentAppId];
-
-
-    NSString *totpText = [totps objectForKey:serialIdAsString];
-    NSMutableAttributedString *totpAttributedString = [[NSMutableAttributedString alloc] initWithString:totpText ? totpText : @"------"];
-    [totpAttributedString addAttribute:NSKernAttributeName value:@3.5 range:NSMakeRange(0, totpAttributedString.length)];
-    [self.totpLabel setAttributedText:totpAttributedString];
-}
-
-- (void)refreshTimer:(NSTimer *)timer {
-    [self configureTOTP];
 }
 
 - (void)showTimerAnimation {
@@ -164,24 +133,50 @@
 
 }
 
-#pragma mark - TOTP Delegate
-- (void)didReceiveTOTP:(NSDictionary <NSString*, NSString*> *)totps withError:(NSError *)error {
+#pragma mark - App Delegate
+- (void)didReceiveCodes:(NSArray<AUTApp *> *)apps {
 
     dispatch_async(dispatch_get_main_queue(), ^{
 
-        if (error != nil) {
-            NSLog(@"Error %@", error.localizedDescription);
+        if (apps == nil) {
             return;
         }
 
-        if (totps == nil) {
-            return;
-        }
-
-        [self configureTOTPWithText:totps];
-        [self configureTimer];
+        [self configureTOTP:apps];
+        [self showTimerAnimation];
 
     });
+}
+
+- (void)didFail:(NSError *)error {
+
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:error.localizedDescription preferredStyle:UIAlertControllerStyleAlert];
+
+    // OK Action
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+    [okAction setValue:[UIColor colorWithHexString:defaultColor] forKey:@"titleTextColor"];
+    [alert addAction:okAction];
+
+    // Present Alert
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self presentViewController:alert animated:YES completion:nil];
+    });
+
+}
+
+- (void)didUpdateApps:(NSArray<AUTApp*> *)apps {
+
+    // Usefull if we are displaying the name of the app
+}
+
+- (void)didAddApps:(NSArray<AUTApp *> *)apps {
+
+    // Not needed for totp view only
+}
+
+- (void)didDeleteApps:(NSArray<NSNumber *> *)appsId {
+
+    // Not needed for totp view only
 }
 
 @end

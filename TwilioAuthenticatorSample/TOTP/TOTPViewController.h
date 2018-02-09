@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TOTPViewController : UIViewController <AUTTOTPDelegate>
+@interface TOTPViewController : UIViewController <AUTMultiAppDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *totpLabel;
 @property (weak, nonatomic) IBOutlet UILabel *tokenName;

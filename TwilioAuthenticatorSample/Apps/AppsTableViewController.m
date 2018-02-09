@@ -15,6 +15,7 @@
 @interface AppsTableViewController ()
 
 @property (nonatomic, strong) TwilioAuthenticator *twilioAuthenticator;
+@property (nonatomic, strong) NSArray *apps;
 @property (nonatomic) BOOL appsTableExists;
 @end
 
@@ -31,6 +32,7 @@
 
     self.twilioAuthenticator = [TwilioAuthenticator sharedInstance];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadApps:) name:UIApplicationWillEnterForegroundNotification object:nil];
+    [self.twilioAuthenticator setMultiAppDelegate:self];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -55,11 +57,6 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (NSArray *)getApps {
-
-    return [self.twilioAuthenticator getApps];
 }
 
 - (void) reloadApps:(NSNotification *) ignored {
@@ -102,13 +99,14 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self getApps].count;
+    return self.apps.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"sdk_apps_cell_id" forIndexPath:indexPath];
 
-    AUTApp *currentApp = [[self getApps] objectAtIndex:indexPath.row];
+    NSInteger row = indexPath.row;
+    AUTApp *currentApp = [self.apps objectAtIndex:row];
     cell.textLabel.text = currentApp.name;
     
     return cell;
@@ -116,13 +114,11 @@
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // TODO
 
     NSInteger currentAppIndex = indexPath.row;
-    NSArray *apps = [self getApps];
     AUTApp *currentApp;
-    if (apps.count > currentAppIndex) {
-        currentApp = [[self getApps] objectAtIndex:currentAppIndex];
+    if (self.apps.count > currentAppIndex) {
+        currentApp = [self.apps objectAtIndex:currentAppIndex];
     }
 
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -132,27 +128,91 @@
     approvalRequestsViewController.currentApp = currentApp;
 
     TOTPViewController *totpViewController = [viewController.childViewControllers objectAtIndex:1];
-    totpViewController.currentAppId = currentApp.serialId;
+    totpViewController.currentAppId = currentApp.appId;
 
     [self.navigationController pushViewController:viewController animated:YES];
     
 }
-/*
-#pragma mark - Navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
 
-    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-    NSInteger currentAppIndex = indexPath.row;
-    App *currentApp = [[self getApps] objectAtIndex:currentAppIndex];
+#pragma mark - Delegation
+- (void)didUpdateApps:(NSArray<AUTApp*> *)apps {
 
-    [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
+    NSMutableArray *currentApps = [[NSMutableArray alloc] initWithArray:self.apps];
+    int index = 0;
+    for (AUTApp *app in self.apps) {
 
-    UITabBarController *viewController = segue.destinationViewController;
-    ApprovalRequestsViewController *approvalRequestsViewController = [viewController.childViewControllers objectAtIndex:0];
-    approvalRequestsViewController.currentApp = currentApp;
+        NSPredicate *appIdPredicate = [NSPredicate predicateWithFormat:@"SELF.appId == %@", app.appId];
+        NSArray *filteredApps = [apps filteredArrayUsingPredicate: appIdPredicate];
 
-    TOTPViewController *totpViewController = [viewController.childViewControllers objectAtIndex:1];
-    totpViewController.currentAppId = currentApp.serialId;
-}*/
+        if (filteredApps.count == 1) {
+            [currentApps replaceObjectAtIndex:index withObject:app];
+        }
+
+        index ++;
+    }
+
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.tableView beginUpdates];
+        self.apps = currentApps;
+        [self.tableView reloadData];
+        [self.tableView endUpdates];
+    });
+}
+
+- (void)didAddApps:(NSArray<AUTApp *> *)apps {
+    NSMutableArray *currentApps = [[NSMutableArray alloc] initWithArray:self.apps];
+    [currentApps addObjectsFromArray:apps];
+    self.apps = currentApps;
+
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.tableView reloadData];
+    });
+}
+
+- (void)didDeleteApps:(NSArray<NSNumber *> *)appsId {
+
+    NSMutableArray *currentApps = [[NSMutableArray alloc] initWithArray:self.apps];
+    for (NSNumber *appId in appsId) {
+
+        NSPredicate *appIdPredicate = [NSPredicate predicateWithFormat:@"appId == %@", appId];
+        NSArray *filteredApps = [currentApps filteredArrayUsingPredicate:appIdPredicate];
+        if (filteredApps.count == 1) {
+            [currentApps removeObjectsInArray:filteredApps];
+        }
+    }
+
+    self.apps = currentApps;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.tableView reloadData];
+    });
+}
+
+- (void)didReceiveCodes:(NSArray<AUTApp *> *)apps {
+
+    NSLog(@"******* RECEIVE CODES");
+
+    self.apps = apps;
+
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.tableView reloadData];
+    });
+}
+
+ - (void)didFail:(NSError *)error {
+
+     NSLog(@"******* FAILS");
+
+     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:error.localizedDescription preferredStyle:UIAlertControllerStyleAlert];
+
+     // OK Action
+     UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+     [okAction setValue:[UIColor colorWithHexString:defaultColor] forKey:@"titleTextColor"];
+     [alert addAction:okAction];
+
+     // Present Alert
+     dispatch_async(dispatch_get_main_queue(), ^{
+         [self presentViewController:alert animated:YES completion:nil];
+     });
+}
 
 @end
