@@ -11,6 +11,6 @@
 
 @interface RegisterDeviceUseCase : NSObject
 
-- (void)getRegistrationTokenForAuthyID:(NSString *)authyID andBackendURL:(NSString *)backendURL completion:(void(^) (RegistrationResponse *registrationResponse))completion;
+- (void)getRegistrationTokenForUserID:(NSString *)authyID andBackendURL:(NSString *)backendURL completion:(void(^) (RegistrationResponse *registrationResponse))completion;
 
 @end

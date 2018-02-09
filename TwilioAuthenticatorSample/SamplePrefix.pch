@@ -1,0 +1,19 @@
+//
+//  SamplePrefix.pch
+//  TwilioAuthenticatorSample
+//
+//  Created by Adriana Pineda on 11/17/17.
+//  Copyright © 2017 Authy. All rights reserved.
+//
+
+#ifndef SamplePrefix_pch
+#define SamplePrefix_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#endif /* SamplePrefix_pch */
+
+#import <TwilioAuthenticator/TwilioAuthenticator.h>
+#import "UIColor+Extensions.h"
+#import "Constants.h"

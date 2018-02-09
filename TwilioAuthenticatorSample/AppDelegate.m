@@ -7,10 +7,16 @@
 //
 
 #import "AppDelegate.h"
-#import <TwilioAuthenticator/TwilioAuthenticator.h>
 
 #import "ApprovalRequestsViewController.h"
 #import "RequestDetailViewController.h"
+
+#define ONE_TOUCH_PUSH_NOTIFICATION_APPROVAL_REQUEST_UUID @"approval_request_uuid"
+#define PUSH_NOTIFICATION_ONETOUCH_CATEGORY_IDENTIFIER @"onetouch_approval_request"
+#define PUSH_NOTIFICATION_ONETOUCH_APPROVE_OPTION @"PUSH_NOTIFICATION_ONETOUCH_APPROVE"
+#define PUSH_NOTIFICATION_ONETOUCH_DENY_OPTION @"PUSH_NOTIFICATION_ONETOUCH_DENY"
+#define PUSH_NOTIFICATION_ONETOUCH_APPROVE_TEXT @"Approve"
+#define PUSH_NOTIFICATION_ONETOUCH_DENY_TEXT @"Deny"
 
 @implementation AppDelegate
 
@@ -69,7 +75,7 @@
 - (void)configureRootController {
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
 
-    UITabBarController *viewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"tabBarController"];
+    UITableViewController *viewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"appsTableViewController"];
 
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
     [self.window setRootViewController:navigationController];
@@ -127,9 +133,116 @@
 
 - (void)registerForPushNotifications:(UIApplication *)application {
 
-    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert) categories:nil];
+    UIMutableUserNotificationAction *approveAction = [[UIMutableUserNotificationAction alloc] init];
+    [approveAction setActivationMode:UIUserNotificationActivationModeBackground];
+    [approveAction setTitle:PUSH_NOTIFICATION_ONETOUCH_APPROVE_TEXT];
+    [approveAction setIdentifier:PUSH_NOTIFICATION_ONETOUCH_APPROVE_OPTION];
+    [approveAction setDestructive:NO];
+    [approveAction setAuthenticationRequired:YES];
 
-    [application registerUserNotificationSettings:settings];
+    UIMutableUserNotificationAction *denyAction = [[UIMutableUserNotificationAction alloc] init];
+    [denyAction setActivationMode:UIUserNotificationActivationModeBackground];
+    [denyAction setTitle:PUSH_NOTIFICATION_ONETOUCH_DENY_TEXT];
+    [denyAction setIdentifier:PUSH_NOTIFICATION_ONETOUCH_DENY_OPTION];
+    [denyAction setDestructive:YES];
+    [denyAction setAuthenticationRequired:YES];
+
+
+    UIMutableUserNotificationCategory *actionCategory = [[UIMutableUserNotificationCategory alloc] init];
+    [actionCategory setIdentifier:PUSH_NOTIFICATION_ONETOUCH_CATEGORY_IDENTIFIER];
+    [actionCategory setActions:@[approveAction, denyAction]
+                    forContext:UIUserNotificationActionContextDefault];
+
+    NSSet *categories = [NSSet setWithObject:actionCategory];
+
+    UIUserNotificationType types = (UIUserNotificationTypeAlert|
+                                    UIUserNotificationTypeSound|
+                                    UIUserNotificationTypeBadge);
+
+    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:types categories:categories];
+
+
+    [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+    [[UIApplication sharedApplication] registerForRemoteNotifications];
+}
+
+- (void)application:(UIApplication *)application handleActionWithIdentifier:(NSString *)identifier forLocalNotification:(UILocalNotification *)notification withResponseInfo:(NSDictionary *)responseInfo completionHandler:(void (^)())completionHandler {
+    [self handlePushNotificationSelectedWithIdentifier:identifier andUserInfo:notification.userInfo completionHandler:completionHandler];
+}
+
+- (void)application:(UIApplication *)application handleActionWithIdentifier:(NSString *)identifier forLocalNotification:(UILocalNotification *)notification completionHandler:(void (^)())completionHandler {
+
+    [self handlePushNotificationSelectedWithIdentifier:identifier andUserInfo:notification.userInfo completionHandler:completionHandler];
+}
+
+- (void)application:(UIApplication *)application handleActionWithIdentifier:(NSString *)identifier forRemoteNotification:(NSDictionary *)userInfo completionHandler:(void (^)())completionHandler {
+    [self handlePushNotificationSelectedWithIdentifier:identifier andUserInfo:userInfo completionHandler:completionHandler];
+}
+
+- (void)approveRequest:(AUTApprovalRequest *)request completionHandler:(void (^)())completionHandler {
+
+    TwilioAuthenticator *sharedTwilioAuth = [TwilioAuthenticator sharedInstance];
+    [sharedTwilioAuth approveRequest:request completion:^(NSError *error) {
+
+        if (error == nil) {
+            NSLog(@"**** Request approved successfully");
+        } else {
+            NSLog(@"**** Request could not be approved %@", error.localizedDescription);
+        }
+
+        completionHandler();
+    }];
+
+}
+
+- (void)denyRequest:(AUTApprovalRequest *)request completionHandler:(void (^)())completionHandler {
+
+    TwilioAuthenticator *sharedTwilioAuth = [TwilioAuthenticator sharedInstance];
+    [sharedTwilioAuth denyRequest:request completion:^(NSError * _Nullable error) {
+        if (error == nil) {
+            NSLog(@"**** Request denied successfully");
+        } else {
+            NSLog(@"**** Request could not be denied %@", error.localizedDescription);
+        }
+
+        completionHandler();
+    }];
+
+}
+
+- (void)handlePushNotificationSelectedWithIdentifier:(NSString *)identifier andUserInfo:(NSDictionary *)userInfo completionHandler:(void (^)())completionHandler {
+
+    TwilioAuthenticator *sharedTwilioAuth = [TwilioAuthenticator sharedInstance];
+
+    AUTApprovalRequestStatus status;
+    if ([identifier isEqualToString:PUSH_NOTIFICATION_ONETOUCH_APPROVE_OPTION]) {
+        status = AUTApprovalRequestStatusApproved;
+    } else if ([identifier isEqualToString:PUSH_NOTIFICATION_ONETOUCH_DENY_OPTION]) {
+        status = AUTApprovalRequestStatusDenied;
+    } else {
+        return;
+    }
+
+    NSString *approvalRequestUUID = [userInfo objectForKey:ONE_TOUCH_PUSH_NOTIFICATION_APPROVAL_REQUEST_UUID];
+    if (approvalRequestUUID == nil || [approvalRequestUUID isEqualToString:@""]) {
+        return;
+    }
+
+    [sharedTwilioAuth getApprovalRequestWithUUID:approvalRequestUUID completion:^(AUTApprovalRequest *request, NSError *error) {
+
+        if(request == nil) {
+            completionHandler();
+            return;
+        }
+
+        if (status == AUTApprovalRequestStatusApproved) {
+            [self approveRequest:request completionHandler:completionHandler];
+        } else {
+            [self denyRequest:request completionHandler:completionHandler];
+        }
+
+    }];
+
 }
 
 #pragma mark - Handle Push Notification
@@ -187,7 +300,7 @@
     NSString *approvalRequestUUID = [userInfo objectForKey:@"approval_request_uuid"];
 
     TwilioAuthenticator *twilioAuth = [TwilioAuthenticator sharedInstance];
-    [twilioAuth getRequestWithUUID:approvalRequestUUID completion:^(AUTApprovalRequest *request, NSError *error) {
+    [twilioAuth getApprovalRequestWithUUID:approvalRequestUUID completion:^(AUTApprovalRequest *request, NSError *error) {
 
         if (error != nil) {
             return;

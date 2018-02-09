@@ -11,6 +11,7 @@
 		010C68961E5B9BB000CC7358 /* UITextField+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 010C68951E5B9BB000CC7358 /* UITextField+Extensions.m */; };
 		016D53B01F4CA40700D899D7 /* TwilioAuthenticator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 016D53AF1F4CA40700D899D7 /* TwilioAuthenticator.framework */; };
 		016D53B11F4CA40700D899D7 /* TwilioAuthenticator.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 016D53AF1F4CA40700D899D7 /* TwilioAuthenticator.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		019E23371FBF3EF5006154A6 /* AppsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 019E23361FBF3EF5006154A6 /* AppsTableViewController.m */; };
 		01A32A5D1DED14C9008529A1 /* NSDate+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A32A5C1DED14C9008529A1 /* NSDate+Extensions.m */; };
 		01A32A601DED193A008529A1 /* AUTApprovalRequest+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A32A5F1DED193A008529A1 /* AUTApprovalRequest+Extensions.m */; };
 		01A32A631DED1DBA008529A1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A32A621DED1DBA008529A1 /* AppDelegate.m */; };
@@ -62,6 +63,9 @@
 		012D3CA61ECCC32D0038D774 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		014F34291F7D78330064954B /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		016D53AF1F4CA40700D899D7 /* TwilioAuthenticator.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TwilioAuthenticator.framework; sourceTree = "<group>"; };
+		019E23351FBF3EF5006154A6 /* AppsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppsTableViewController.h; sourceTree = "<group>"; };
+		019E23361FBF3EF5006154A6 /* AppsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppsTableViewController.m; sourceTree = "<group>"; };
+		019E23381FBF3F24006154A6 /* SamplePrefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SamplePrefix.pch; sourceTree = "<group>"; };
 		01A32A5B1DED14C9008529A1 /* NSDate+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDate+Extensions.h"; path = "Extensions/NSDate+Extensions.h"; sourceTree = "<group>"; };
 		01A32A5C1DED14C9008529A1 /* NSDate+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDate+Extensions.m"; path = "Extensions/NSDate+Extensions.m"; sourceTree = "<group>"; };
 		01A32A5E1DED193A008529A1 /* AUTApprovalRequest+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AUTApprovalRequest+Extensions.h"; sourceTree = "<group>"; };
@@ -148,6 +152,15 @@
 			name = Extensions;
 			sourceTree = "<group>";
 		};
+		019E23341FBF3ECA006154A6 /* Apps */ = {
+			isa = PBXGroup;
+			children = (
+				019E23351FBF3EF5006154A6 /* AppsTableViewController.h */,
+				019E23361FBF3EF5006154A6 /* AppsTableViewController.m */,
+			);
+			path = Apps;
+			sourceTree = "<group>";
+		};
 		01B99C991C936A1600462FA3 = {
 			isa = PBXGroup;
 			children = (
@@ -181,9 +194,11 @@
 				01B99CAE1C936A1600462FA3 /* LaunchScreen.storyboard */,
 				012D3CA51ECCC20A0038D774 /* Constants */,
 				01D48C2D1DE79A0100D675BB /* Registration */,
+				019E23341FBF3ECA006154A6 /* Apps */,
 				01D48C2E1DE79A0C00D675BB /* Requests */,
 				01EE5E1B1EBB843E00B2E333 /* TOTP */,
 				013B978F1CB304D600951E6B /* Extensions */,
+				019E23381FBF3F24006154A6 /* SamplePrefix.pch */,
 			);
 			path = TwilioAuthenticatorSample;
 			sourceTree = "<group>";
@@ -296,7 +311,7 @@
 						CreatedOnToolsVersion = 7.2.1;
 						DevelopmentTeam = 9EVH78F4V4;
 						LastSwiftMigration = 0820;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Push = {
 								enabled = 1;
@@ -385,6 +400,7 @@
 				010C68931E5B8AE900CC7358 /* RegisterDeviceUseCase.m in Sources */,
 				01A32A5D1DED14C9008529A1 /* NSDate+Extensions.m in Sources */,
 				01AAA13F1E5B447700E9667B /* RegistrationResponse.m in Sources */,
+				019E23371FBF3EF5006154A6 /* AppsTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -520,6 +536,8 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = TwilioAuthenticatorSample/TwilioAuthenticatorSample.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Adriana Pineda (7AQUE3U49X)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 9EVH78F4V4;
 				ENABLE_BITCODE = YES;
@@ -528,13 +546,14 @@
 					"$(PROJECT_DIR)/TwilioAuthenticatorSample",
 					"$(inherited)",
 				);
+				GCC_PREFIX_HEADER = TwilioAuthenticatorSample/SamplePrefix.pch;
 				INFOPLIST_FILE = "$(SRCROOT)/TwilioAuthenticatorSample/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.twilio.authenticator.sample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "c4191781-7654-4a59-81b0-7c5f5f567397";
-				PROVISIONING_PROFILE_SPECIFIER = "TwilioAuthenticator Sample Dev Profile";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -548,6 +567,8 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = TwilioAuthenticatorSample/TwilioAuthenticatorSample.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Authy Inc. (9EVH78F4V4)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9EVH78F4V4;
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -555,13 +576,14 @@
 					"$(PROJECT_DIR)/TwilioAuthenticatorSample",
 					"$(inherited)",
 				);
+				GCC_PREFIX_HEADER = TwilioAuthenticatorSample/SamplePrefix.pch;
 				INFOPLIST_FILE = "$(SRCROOT)/TwilioAuthenticatorSample/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.twilio.authenticator.sample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "3f9e1946-6608-4e49-ba10-26de21c2721c";
-				PROVISIONING_PROFILE_SPECIFIER = "TwilioAuthenticator Sample Prod Profile";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 3.0;
 			};

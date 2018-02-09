@@ -8,7 +8,6 @@
 
 #import "RegisterDeviceViewController.h"
 #import "ApprovalRequestsViewController.h"
-#import <TwilioAuthenticator/TwilioAuthenticator.h>
 #import "RegistrationResponse.h"
 #import "RegisterDeviceUseCase.h"
 #import "AppDelegate.h"
@@ -20,7 +19,7 @@
 
 @interface RegisterDeviceViewController ()
 
-@property (weak, nonatomic) IBOutlet UITextField *authyIDTextField;
+@property (weak, nonatomic) IBOutlet UITextField *userIDTextField;
 @property (weak, nonatomic) IBOutlet UITextField *backendURLTextField;
 
 @property (weak, nonatomic) IBOutlet UIButton *registerDeviceButton;
@@ -56,7 +55,7 @@
 
     [self.navigationController setNavigationBarHidden:YES];
 
-    [self.authyIDTextField configureBottomBorder];
+    [self.userIDTextField configureBottomBorder];
     [self.backendURLTextField configureBottomBorder];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
@@ -69,7 +68,7 @@
 }
 
 - (void)dismissKeyboard {
-    [self.authyIDTextField resignFirstResponder];
+    [self.userIDTextField resignFirstResponder];
     [self.backendURLTextField resignFirstResponder];
 }
 
@@ -79,11 +78,11 @@
     CGFloat offset = TextfieldOffSetWhenKeyBoardIsShown;
     CGFloat position = self.view.frame.origin.y;
 
-    if ([self.authyIDTextField isEditing]) {
+    if ([self.userIDTextField isEditing]) {
 
-        CGFloat authyIDTextFieldYPosition = self.authyIDTextField.layer.frame.origin.y;
-        CGFloat authyIDTextFieldHeight = self.authyIDTextField.layer.frame.size.height;
-        position = authyIDTextFieldYPosition - authyIDTextFieldHeight*offset;
+        CGFloat userIDTextFieldYPosition = self.userIDTextField.layer.frame.origin.y;
+        CGFloat userIDTextFieldHeight = self.userIDTextField.layer.frame.size.height;
+        position = userIDTextFieldYPosition - userIDTextFieldHeight*offset;
 
     } else if ([self.backendURLTextField isEditing]) {
 
@@ -124,7 +123,7 @@
     [self.registerDeviceButton setEnabled:NO];
     [self.registerDeviceLoadingIndicator setHidden:NO];
     [self.registerDeviceLoadingIndicator startAnimating];
-    [self.authyIDTextField resignFirstResponder];
+    [self.userIDTextField resignFirstResponder];
     [self.backendURLTextField resignFirstResponder];
 }
 
@@ -136,19 +135,19 @@
 
 - (BOOL)areInputFieldsValid {
 
-    NSString *authyId = self.authyIDTextField.text;
+    NSString *userId = self.userIDTextField.text;
     NSString *backendURL = self.backendURLTextField.text;
 
-    if ([authyId isEqualToString:@""] || [backendURL isEqualToString:@""]) {
+    if ([userId isEqualToString:@""] || [backendURL isEqualToString:@""]) {
         return NO;
     }
 
     return YES;
 }
 
-- (void)registerDeviceWithAuthyWithRegistrationToken:(NSString *)registrationToken integrationApiKey:(NSString *)integrationApiKey andPushToken:(NSString *)pushToken {
+- (void)registerDeviceWithAuthyWithRegistrationToken:(NSString *)registrationToken andPushToken:(NSString *)pushToken {
 
-    [self.sharedTwilioAuth registerDeviceWithRegistrationToken:registrationToken integrationApiKey:integrationApiKey pushToken:pushToken completion:^(NSError *error) {
+    [self.sharedTwilioAuth registerDeviceWithRegistrationToken:registrationToken pushToken:pushToken completion:^(NSError *error) {
 
         if (error != nil) {
 
@@ -173,9 +172,9 @@
 
 }
 
-- (void)getRegistrationTokenForAuthyID:(NSString *)authyID backendURL:(NSString *)backendURL withCompletion:(void(^) (NSString *registrationToken, NSString *integrationApiKey))completion {
+- (void)getRegistrationTokenForUserID:(NSString *)userId backendURL:(NSString *)backendURL withCompletion:(void(^) (NSString *registrationToken))completion {
 
-    [self.registerDeviceUseCase getRegistrationTokenForAuthyID:authyID andBackendURL:backendURL completion:^(RegistrationResponse *registrationResponse) {
+    [self.registerDeviceUseCase getRegistrationTokenForUserID:userId andBackendURL:backendURL completion:^(RegistrationResponse *registrationResponse) {
 
         NSString *registrationToken = registrationResponse.registrationToken;
         if (registrationToken == nil || [registrationToken isEqualToString:@""]) {
@@ -183,7 +182,7 @@
             return;
         }
 
-        completion(registrationToken, registrationResponse.integrationApiKey);
+        completion(registrationToken);
 
     }];
 }
@@ -195,9 +194,9 @@
 
     // Validate fields
 
-    NSString *authyId = self.authyIDTextField.text;
-    if ([authyId isEqualToString:@""]) {
-        [self showErrorAlertWithTitle:@"Authy ID invalid" andMessage:@"Make sure the value you entered is correct"];
+    NSString *userId = self.userIDTextField.text;
+    if ([userId isEqualToString:@""]) {
+        [self showErrorAlertWithTitle:@"User ID invalid" andMessage:@"Make sure the value you entered is correct"];
         return;
     }
 
@@ -208,28 +207,24 @@
     }
 
     // Obtain registration token
-    [self getRegistrationTokenForAuthyID:authyId backendURL:backendURL withCompletion:^(NSString *registrationToken, NSString *integrationApiKey) {
+    [self getRegistrationTokenForUserID:userId backendURL:backendURL withCompletion:^(NSString *registrationToken) {
 
         // Register device with Authy
         NSString *pushToken = [self getCurrentPushToken];
-        [self registerDeviceWithAuthyWithRegistrationToken:registrationToken integrationApiKey:integrationApiKey andPushToken:pushToken];
+        [self registerDeviceWithAuthyWithRegistrationToken:registrationToken andPushToken:pushToken];
 
     }];
 }
 
 #pragma mark - Navigation
 - (void)goToApprovalRequestsView {
-
-    UITabBarController *tabBarViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"tabBarController"];
-
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:tabBarViewController];
+    
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    
+    UITableViewController *viewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"appsTableViewController"];
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
 
     dispatch_async(dispatch_get_main_queue(), ^{
-    //AppDelegate *appdelegate = [UIApplication sharedApplication].delegate;
-    //appdelegate.window.rootViewController = navigationController;
-    //[appdelegate.window makeKeyAndVisible];
-
-
         [self presentViewController:navigationController animated:YES completion:nil];
     });
 

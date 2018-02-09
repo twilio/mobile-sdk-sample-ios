@@ -11,7 +11,6 @@
 @interface RegistrationResponse : NSObject
 
 @property (nonatomic, strong) NSString *registrationToken;
-@property (nonatomic, strong) NSString *integrationApiKey;
 @property (nonatomic, strong) NSString *messageError;
 
 @end
