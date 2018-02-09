@@ -128,7 +128,7 @@
     approvalRequestsViewController.currentApp = currentApp;
 
     TOTPViewController *totpViewController = [viewController.childViewControllers objectAtIndex:1];
-    totpViewController.currentAppId = currentApp.serialId;
+    totpViewController.currentAppId = currentApp.appId;
 
     [self.navigationController pushViewController:viewController animated:YES];
     
@@ -137,14 +137,12 @@
 #pragma mark - Delegation
 - (void)didUpdateApps:(NSArray<AUTApp*> *)apps {
 
-    NSLog(@"******* UPDATE APPS");
-
     NSMutableArray *currentApps = [[NSMutableArray alloc] initWithArray:self.apps];
     int index = 0;
-    for (AUTApp *app in currentApps) {
+    for (AUTApp *app in self.apps) {
 
-        NSPredicate *serialIdPredicate = [NSPredicate predicateWithFormat:@"SELF.serialId == %@", app.serialId];
-        NSArray *filteredApps = [apps filteredArrayUsingPredicate: serialIdPredicate];
+        NSPredicate *appIdPredicate = [NSPredicate predicateWithFormat:@"SELF.appId == %@", app.appId];
+        NSArray *filteredApps = [apps filteredArrayUsingPredicate: appIdPredicate];
 
         if (filteredApps.count == 1) {
             [currentApps replaceObjectAtIndex:index withObject:app];
@@ -162,7 +160,6 @@
 }
 
 - (void)didAddApps:(NSArray<AUTApp *> *)apps {
-    NSLog(@"******* ADD APPS");
     NSMutableArray *currentApps = [[NSMutableArray alloc] initWithArray:self.apps];
     [currentApps addObjectsFromArray:apps];
     self.apps = currentApps;
@@ -174,12 +171,11 @@
 
 - (void)didDeleteApps:(NSArray<NSNumber *> *)appsId {
 
-    NSLog(@"******* DELETE APPS");
     NSMutableArray *currentApps = [[NSMutableArray alloc] initWithArray:self.apps];
     for (NSNumber *appId in appsId) {
 
-        NSPredicate *serialIdPredicate = [NSPredicate predicateWithFormat:@"serialId == %@", appId];
-        NSArray *filteredApps = [currentApps filteredArrayUsingPredicate:serialIdPredicate];
+        NSPredicate *appIdPredicate = [NSPredicate predicateWithFormat:@"appId == %@", appId];
+        NSArray *filteredApps = [currentApps filteredArrayUsingPredicate:appIdPredicate];
         if (filteredApps.count == 1) {
             [currentApps removeObjectsInArray:filteredApps];
         }
