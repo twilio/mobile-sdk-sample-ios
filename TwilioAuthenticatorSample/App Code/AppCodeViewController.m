@@ -8,7 +8,9 @@
 
 #import "AppCodeViewController.h"
 
+#import "AppsListNavigationManager.h"
 #import "DeviceResetManager.h"
+
 #import "Constants.h"
 #import "UIColor+Extensions.h"
 #import <CoreGraphics/CoreGraphics.h>
@@ -182,7 +184,11 @@
 
 - (void)didDeleteApps:(NSArray<NSNumber *> *)appsId {
 
-    // Not needed for totp view only
+    for (NSNumber *appId in appsId) {
+        if (self.currentAppId == appId) {
+            [AppsListNavigationManager presentAppsViewForCurrentView:self withCustomTitle:@"App Deleted" andMessage:@"App was deleted, go back to list view"];
+        }
+    }
 }
 
 @end
