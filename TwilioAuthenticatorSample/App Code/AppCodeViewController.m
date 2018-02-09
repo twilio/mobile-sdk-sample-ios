@@ -8,6 +8,7 @@
 
 #import "AppCodeViewController.h"
 
+#import "DeviceResetManager.h"
 #import "Constants.h"
 #import "UIColor+Extensions.h"
 #import <CoreGraphics/CoreGraphics.h>
@@ -149,6 +150,11 @@
 }
 
 - (void)didFail:(NSError *)error {
+
+    if (error.code == AUTDeviceDeletedError) {
+        [DeviceResetManager resetDeviceAndGetRegistrationViewForCurrentView:self withCustomTitle:nil];
+        return;
+    }
 
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:error.localizedDescription preferredStyle:UIAlertControllerStyleAlert];
 

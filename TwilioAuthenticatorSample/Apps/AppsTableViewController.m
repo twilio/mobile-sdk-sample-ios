@@ -200,7 +200,10 @@
 
  - (void)didFail:(NSError *)error {
 
-     NSLog(@"******* FAILS");
+     if (error.code == AUTDeviceDeletedError) {
+         [DeviceResetManager resetDeviceAndGetRegistrationViewForCurrentView:self withCustomTitle:nil];
+         return;
+     }
 
      UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:error.localizedDescription preferredStyle:UIAlertControllerStyleAlert];
 

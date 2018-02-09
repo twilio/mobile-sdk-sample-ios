@@ -161,6 +161,15 @@
 			path = Apps;
 			sourceTree = "<group>";
 		};
+		01B4CE6D202E3EFA00D9DB28 /* Reset */ = {
+			isa = PBXGroup;
+			children = (
+				01CDAA891DF08CF700347404 /* DeviceResetManager.h */,
+				01CDAA8A1DF08CF700347404 /* DeviceResetManager.m */,
+			);
+			path = Reset;
+			sourceTree = "<group>";
+		};
 		01B99C991C936A1600462FA3 = {
 			isa = PBXGroup;
 			children = (
@@ -197,6 +206,7 @@
 				019E23341FBF3ECA006154A6 /* Apps */,
 				01D48C2E1DE79A0C00D675BB /* Requests */,
 				01EE5E1B1EBB843E00B2E333 /* App Code */,
+				01B4CE6D202E3EFA00D9DB28 /* Reset */,
 				013B978F1CB304D600951E6B /* Extensions */,
 				019E23381FBF3F24006154A6 /* SamplePrefix.pch */,
 			);
@@ -232,8 +242,6 @@
 				010C68971E5BA0E000CC7358 /* Detail */,
 				01D48C391DE7AC2A00D675BB /* ApprovalRequestsViewController.h */,
 				01D48C3A1DE7AC2A00D675BB /* ApprovalRequestsViewController.m */,
-				01CDAA891DF08CF700347404 /* DeviceResetManager.h */,
-				01CDAA8A1DF08CF700347404 /* DeviceResetManager.m */,
 				01D48C3F1DEA55CE00D675BB /* RequestTableViewCell.h */,
 				01D48C401DEA55CE00D675BB /* RequestTableViewCell.m */,
 				01F318F91C9C6CFF003BA657 /* RequestTableViewCell.xib */,
