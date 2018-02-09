@@ -1,5 +1,5 @@
 //
-//  TOTPViewController.h
+//  AppCodeViewController.h
 //  TwilioAuthenticatorSample
 //
 //  Created by Adriana Pineda on 5/4/17.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TOTPViewController : UIViewController <AUTMultiAppDelegate>
+@interface AppCodeViewController : UIViewController <AUTMultiAppDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *totpLabel;
 @property (weak, nonatomic) IBOutlet UILabel *tokenName;

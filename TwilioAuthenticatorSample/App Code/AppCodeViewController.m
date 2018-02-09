@@ -1,12 +1,12 @@
 //
-//  TOTPViewController.m
+//  AppCodeViewController.m
 //  TwilioAuthenticatorSample
 //
 //  Created by Adriana Pineda on 5/4/17.
 //  Copyright © 2017 Authy. All rights reserved.
 //
 
-#import "TOTPViewController.h"
+#import "AppCodeViewController.h"
 
 #import "Constants.h"
 #import "UIColor+Extensions.h"
@@ -16,7 +16,7 @@
 #define circleLineWidth 6
 
 
-@implementation TOTPViewController
+@implementation AppCodeViewController
 
 - (void)viewDidLoad {
 
@@ -50,16 +50,10 @@
 
 }
 
-- (void)configureTOTP:(NSArray<AUTApp *> *)apps {
-
-    for (AUTApp *app in apps) {
-        if (app.appId == self.currentAppId) {
-            NSMutableAttributedString *totpAttributedString = [[NSMutableAttributedString alloc] initWithString:app.currentCode ? app.currentCode : @"------"];
-            [totpAttributedString addAttribute:NSKernAttributeName value:@3.5 range:NSMakeRange(0, totpAttributedString.length)];
-            [self.totpLabel setAttributedText:totpAttributedString];
-        }
-    }
-
+- (void)configureApp:(AUTApp *)app {
+    NSMutableAttributedString *totpAttributedString = [[NSMutableAttributedString alloc] initWithString:app.currentCode ? app.currentCode : @"------"];
+    [totpAttributedString addAttribute:NSKernAttributeName value:@3.5 range:NSMakeRange(0, totpAttributedString.length)];
+    [self.totpLabel setAttributedText:totpAttributedString];
 }
 
 - (void)showTimerAnimation {
@@ -142,7 +136,13 @@
             return;
         }
 
-        [self configureTOTP:apps];
+        for (AUTApp *app in apps) {
+            if (app.appId == self.currentAppId) {
+                [self configureApp:app];
+
+            }
+        }
+
         [self showTimerAnimation];
 
     });

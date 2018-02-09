@@ -8,7 +8,7 @@
 
 #import "AppsTableViewController.h"
 #import "ApprovalRequestsViewController.h"
-#import "TOTPViewController.h"
+#import "AppCodeViewController.h"
 
 #import "DeviceResetManager.h"
 
@@ -127,7 +127,7 @@
     ApprovalRequestsViewController *approvalRequestsViewController = [viewController.childViewControllers objectAtIndex:0];
     approvalRequestsViewController.currentApp = currentApp;
 
-    TOTPViewController *totpViewController = [viewController.childViewControllers objectAtIndex:1];
+    AppCodeViewController *totpViewController = [viewController.childViewControllers objectAtIndex:1];
     totpViewController.currentAppId = currentApp.appId;
 
     [self.navigationController pushViewController:viewController animated:YES];

@@ -27,7 +27,7 @@
 		01D48C3E1DEA4AB200D675BB /* RequestDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D48C3D1DEA4AB200D675BB /* RequestDetailViewController.m */; };
 		01D48C411DEA55CE00D675BB /* RequestTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D48C401DEA55CE00D675BB /* RequestTableViewCell.m */; };
 		01D48C441DEA605200D675BB /* UIColor+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D48C431DEA605200D675BB /* UIColor+Extensions.m */; };
-		01EE5E1E1EBB84C900B2E333 /* TOTPViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01EE5E1D1EBB84C900B2E333 /* TOTPViewController.m */; };
+		01EE5E1E1EBB84C900B2E333 /* AppCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01EE5E1D1EBB84C900B2E333 /* AppCodeViewController.m */; };
 		01F318FB1C9C6CFF003BA657 /* RequestTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01F318F91C9C6CFF003BA657 /* RequestTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
@@ -96,8 +96,8 @@
 		01D48C401DEA55CE00D675BB /* RequestTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestTableViewCell.m; sourceTree = "<group>"; };
 		01D48C421DEA605200D675BB /* UIColor+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+Extensions.h"; path = "Extensions/UIColor+Extensions.h"; sourceTree = "<group>"; };
 		01D48C431DEA605200D675BB /* UIColor+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+Extensions.m"; path = "Extensions/UIColor+Extensions.m"; sourceTree = "<group>"; };
-		01EE5E1C1EBB84C900B2E333 /* TOTPViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TOTPViewController.h; sourceTree = "<group>"; };
-		01EE5E1D1EBB84C900B2E333 /* TOTPViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TOTPViewController.m; sourceTree = "<group>"; };
+		01EE5E1C1EBB84C900B2E333 /* AppCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppCodeViewController.h; sourceTree = "<group>"; };
+		01EE5E1D1EBB84C900B2E333 /* AppCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppCodeViewController.m; sourceTree = "<group>"; };
 		01F318F91C9C6CFF003BA657 /* RequestTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RequestTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -196,7 +196,7 @@
 				01D48C2D1DE79A0100D675BB /* Registration */,
 				019E23341FBF3ECA006154A6 /* Apps */,
 				01D48C2E1DE79A0C00D675BB /* Requests */,
-				01EE5E1B1EBB843E00B2E333 /* TOTP */,
+				01EE5E1B1EBB843E00B2E333 /* App Code */,
 				013B978F1CB304D600951E6B /* Extensions */,
 				019E23381FBF3F24006154A6 /* SamplePrefix.pch */,
 			);
@@ -248,13 +248,13 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		01EE5E1B1EBB843E00B2E333 /* TOTP */ = {
+		01EE5E1B1EBB843E00B2E333 /* App Code */ = {
 			isa = PBXGroup;
 			children = (
-				01EE5E1C1EBB84C900B2E333 /* TOTPViewController.h */,
-				01EE5E1D1EBB84C900B2E333 /* TOTPViewController.m */,
+				01EE5E1C1EBB84C900B2E333 /* AppCodeViewController.h */,
+				01EE5E1D1EBB84C900B2E333 /* AppCodeViewController.m */,
 			);
-			path = TOTP;
+			path = "App Code";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -389,7 +389,7 @@
 				01A32A631DED1DBA008529A1 /* AppDelegate.m in Sources */,
 				01D48C441DEA605200D675BB /* UIColor+Extensions.m in Sources */,
 				01D48C411DEA55CE00D675BB /* RequestTableViewCell.m in Sources */,
-				01EE5E1E1EBB84C900B2E333 /* TOTPViewController.m in Sources */,
+				01EE5E1E1EBB84C900B2E333 /* AppCodeViewController.m in Sources */,
 				01A32A601DED193A008529A1 /* AUTApprovalRequest+Extensions.m in Sources */,
 				01D48C3B1DE7AC2A00D675BB /* ApprovalRequestsViewController.m in Sources */,
 				01D48C3E1DEA4AB200D675BB /* RequestDetailViewController.m in Sources */,
