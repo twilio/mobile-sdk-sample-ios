@@ -112,7 +112,7 @@ NSInteger const archiveTabIndex = 1;
     AUTApprovalRequestStatus statuses = [self getStatusesForSelectedSegment];
 
     __weak ApprovalRequestsViewController *weakSelf = self;
-    [sharedTwilioAuth getApprovalRequestsWithStatuses:statuses withAppId:self.currentApp.appId  timeInterval:nil completion:^(AUTApprovalRequests *approvalRequests, NSError *error) {
+    [sharedTwilioAuth getApprovalRequestsWithAppId:self.currentApp.appId statuses:statuses timeInterval:nil completion:^(AUTApprovalRequests *approvalRequests, NSError *error) {
 
         dispatch_async(dispatch_get_main_queue(), ^{
 
