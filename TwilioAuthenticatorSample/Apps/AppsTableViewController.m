@@ -139,7 +139,7 @@
 
     NSMutableArray *currentApps = [[NSMutableArray alloc] initWithArray:self.apps];
     int index = 0;
-    for (AUTApp *app in currentApps) {
+    for (AUTApp *app in self.apps) {
 
         NSPredicate *appIdPredicate = [NSPredicate predicateWithFormat:@"SELF.appId == %@", app.appId];
         NSArray *filteredApps = [apps filteredArrayUsingPredicate: appIdPredicate];
