@@ -44,14 +44,16 @@ node('appium_ventspils_node') {
           ruby -r "~/Documents/Authy/calabash/iOS/Scripts/shared.rb" -e "recreateUserSchemes('TwilioAuthenticatorSample.xcodeproj')"
           """ */
       }
-      stage 'UI tests'
+      stage 'Skipped UI tests'
         timeout(uitests) {
           try{
             sh """
             cp -f ~/Documents/ios_sample_app_config/Constants.h ./TwilioAuthenticatorSampleUITests/Constants.h
             sh perl_script.sh
-            xcodebuild -scheme "TwilioAuthenticatorSample-Debug" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 7,OS=11.1' test
             """
+            // sh """
+            // xcodebuild -scheme "TwilioAuthenticatorSample-Debug" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 7,OS=11.2' test
+            // """
           } catch (e) {
             currentBuild.result = "FAILED"
             throw e
