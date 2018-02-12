@@ -17,6 +17,7 @@
 		01A32A631DED1DBA008529A1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A32A621DED1DBA008529A1 /* AppDelegate.m */; };
 		01A32A671DED2170008529A1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A32A661DED2170008529A1 /* main.m */; };
 		01AAA13F1E5B447700E9667B /* RegistrationResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 01AAA13E1E5B447700E9667B /* RegistrationResponse.m */; };
+		01B4CE71202E435C00D9DB28 /* AppsListNavigationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 01B4CE70202E435C00D9DB28 /* AppsListNavigationManager.m */; };
 		01B99CAB1C936A1600462FA3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01B99CA91C936A1600462FA3 /* Main.storyboard */; };
 		01B99CAD1C936A1600462FA3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01B99CAC1C936A1600462FA3 /* Assets.xcassets */; };
 		01B99CB01C936A1600462FA3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01B99CAE1C936A1600462FA3 /* LaunchScreen.storyboard */; };
@@ -27,7 +28,7 @@
 		01D48C3E1DEA4AB200D675BB /* RequestDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D48C3D1DEA4AB200D675BB /* RequestDetailViewController.m */; };
 		01D48C411DEA55CE00D675BB /* RequestTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D48C401DEA55CE00D675BB /* RequestTableViewCell.m */; };
 		01D48C441DEA605200D675BB /* UIColor+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D48C431DEA605200D675BB /* UIColor+Extensions.m */; };
-		01EE5E1E1EBB84C900B2E333 /* TOTPViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01EE5E1D1EBB84C900B2E333 /* TOTPViewController.m */; };
+		01EE5E1E1EBB84C900B2E333 /* AppCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01EE5E1D1EBB84C900B2E333 /* AppCodeViewController.m */; };
 		01F318FB1C9C6CFF003BA657 /* RequestTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01F318F91C9C6CFF003BA657 /* RequestTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
@@ -76,6 +77,8 @@
 		01AAA13D1E5B447700E9667B /* RegistrationResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegistrationResponse.h; sourceTree = "<group>"; };
 		01AAA13E1E5B447700E9667B /* RegistrationResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegistrationResponse.m; sourceTree = "<group>"; };
 		01AAA1401E5B7C4400E9667B /* TwilioAuthenticatorSample.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TwilioAuthenticatorSample.entitlements; sourceTree = "<group>"; };
+		01B4CE6F202E435C00D9DB28 /* AppsListNavigationManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppsListNavigationManager.h; sourceTree = "<group>"; };
+		01B4CE70202E435C00D9DB28 /* AppsListNavigationManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppsListNavigationManager.m; sourceTree = "<group>"; };
 		01B99CA21C936A1600462FA3 /* TwilioAuthenticatorSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TwilioAuthenticatorSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		01B99CAA1C936A1600462FA3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		01B99CAC1C936A1600462FA3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -96,8 +99,8 @@
 		01D48C401DEA55CE00D675BB /* RequestTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestTableViewCell.m; sourceTree = "<group>"; };
 		01D48C421DEA605200D675BB /* UIColor+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+Extensions.h"; path = "Extensions/UIColor+Extensions.h"; sourceTree = "<group>"; };
 		01D48C431DEA605200D675BB /* UIColor+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+Extensions.m"; path = "Extensions/UIColor+Extensions.m"; sourceTree = "<group>"; };
-		01EE5E1C1EBB84C900B2E333 /* TOTPViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TOTPViewController.h; sourceTree = "<group>"; };
-		01EE5E1D1EBB84C900B2E333 /* TOTPViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TOTPViewController.m; sourceTree = "<group>"; };
+		01EE5E1C1EBB84C900B2E333 /* AppCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppCodeViewController.h; sourceTree = "<group>"; };
+		01EE5E1D1EBB84C900B2E333 /* AppCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppCodeViewController.m; sourceTree = "<group>"; };
 		01F318F91C9C6CFF003BA657 /* RequestTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RequestTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -161,6 +164,24 @@
 			path = Apps;
 			sourceTree = "<group>";
 		};
+		01B4CE6D202E3EFA00D9DB28 /* Reset */ = {
+			isa = PBXGroup;
+			children = (
+				01CDAA891DF08CF700347404 /* DeviceResetManager.h */,
+				01CDAA8A1DF08CF700347404 /* DeviceResetManager.m */,
+			);
+			path = Reset;
+			sourceTree = "<group>";
+		};
+		01B4CE6E202E433C00D9DB28 /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				01B4CE6F202E435C00D9DB28 /* AppsListNavigationManager.h */,
+				01B4CE70202E435C00D9DB28 /* AppsListNavigationManager.m */,
+			);
+			path = Navigation;
+			sourceTree = "<group>";
+		};
 		01B99C991C936A1600462FA3 = {
 			isa = PBXGroup;
 			children = (
@@ -196,7 +217,9 @@
 				01D48C2D1DE79A0100D675BB /* Registration */,
 				019E23341FBF3ECA006154A6 /* Apps */,
 				01D48C2E1DE79A0C00D675BB /* Requests */,
-				01EE5E1B1EBB843E00B2E333 /* TOTP */,
+				01EE5E1B1EBB843E00B2E333 /* App Code */,
+				01B4CE6D202E3EFA00D9DB28 /* Reset */,
+				01B4CE6E202E433C00D9DB28 /* Navigation */,
 				013B978F1CB304D600951E6B /* Extensions */,
 				019E23381FBF3F24006154A6 /* SamplePrefix.pch */,
 			);
@@ -232,8 +255,6 @@
 				010C68971E5BA0E000CC7358 /* Detail */,
 				01D48C391DE7AC2A00D675BB /* ApprovalRequestsViewController.h */,
 				01D48C3A1DE7AC2A00D675BB /* ApprovalRequestsViewController.m */,
-				01CDAA891DF08CF700347404 /* DeviceResetManager.h */,
-				01CDAA8A1DF08CF700347404 /* DeviceResetManager.m */,
 				01D48C3F1DEA55CE00D675BB /* RequestTableViewCell.h */,
 				01D48C401DEA55CE00D675BB /* RequestTableViewCell.m */,
 				01F318F91C9C6CFF003BA657 /* RequestTableViewCell.xib */,
@@ -248,13 +269,13 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		01EE5E1B1EBB843E00B2E333 /* TOTP */ = {
+		01EE5E1B1EBB843E00B2E333 /* App Code */ = {
 			isa = PBXGroup;
 			children = (
-				01EE5E1C1EBB84C900B2E333 /* TOTPViewController.h */,
-				01EE5E1D1EBB84C900B2E333 /* TOTPViewController.m */,
+				01EE5E1C1EBB84C900B2E333 /* AppCodeViewController.h */,
+				01EE5E1D1EBB84C900B2E333 /* AppCodeViewController.m */,
 			);
-			path = TOTP;
+			path = "App Code";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -387,9 +408,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				01A32A631DED1DBA008529A1 /* AppDelegate.m in Sources */,
+				01B4CE71202E435C00D9DB28 /* AppsListNavigationManager.m in Sources */,
 				01D48C441DEA605200D675BB /* UIColor+Extensions.m in Sources */,
 				01D48C411DEA55CE00D675BB /* RequestTableViewCell.m in Sources */,
-				01EE5E1E1EBB84C900B2E333 /* TOTPViewController.m in Sources */,
+				01EE5E1E1EBB84C900B2E333 /* AppCodeViewController.m in Sources */,
 				01A32A601DED193A008529A1 /* AUTApprovalRequest+Extensions.m in Sources */,
 				01D48C3B1DE7AC2A00D675BB /* ApprovalRequestsViewController.m in Sources */,
 				01D48C3E1DEA4AB200D675BB /* RequestDetailViewController.m in Sources */,

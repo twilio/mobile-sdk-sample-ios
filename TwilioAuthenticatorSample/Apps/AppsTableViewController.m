@@ -8,7 +8,7 @@
 
 #import "AppsTableViewController.h"
 #import "ApprovalRequestsViewController.h"
-#import "TOTPViewController.h"
+#import "AppCodeViewController.h"
 
 #import "DeviceResetManager.h"
 
@@ -23,10 +23,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
-    
+
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 
@@ -38,7 +38,7 @@
 - (void)viewWillAppear:(BOOL)animated {
 
     self.navigationController.navigationBar.topItem.rightBarButtonItem = nil;
-    
+
     // Left bar button item - Device ID
     UIBarButtonItem *deviceIdBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"ID" style:UIBarButtonItemStylePlain target:self action:@selector(getIDs:)];
     [deviceIdBarButtonItem setTintColor:[UIColor colorWithHexString:defaultColor]];
@@ -108,7 +108,7 @@
     NSInteger row = indexPath.row;
     AUTApp *currentApp = [self.apps objectAtIndex:row];
     cell.textLabel.text = currentApp.name;
-    
+
     return cell;
 }
 
@@ -127,11 +127,11 @@
     ApprovalRequestsViewController *approvalRequestsViewController = [viewController.childViewControllers objectAtIndex:0];
     approvalRequestsViewController.currentApp = currentApp;
 
-    TOTPViewController *totpViewController = [viewController.childViewControllers objectAtIndex:1];
+    AppCodeViewController *totpViewController = [viewController.childViewControllers objectAtIndex:1];
     totpViewController.currentAppId = currentApp.appId;
 
     [self.navigationController pushViewController:viewController animated:YES];
-    
+
 }
 
 #pragma mark - Delegation
@@ -200,7 +200,10 @@
 
  - (void)didFail:(NSError *)error {
 
-     NSLog(@"******* FAILS");
+     if (error.code == AUTDeviceDeletedError) {
+         [DeviceResetManager resetDeviceAndGetRegistrationViewForCurrentView:self withCustomTitle:nil];
+         return;
+     }
 
      UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:error.localizedDescription preferredStyle:UIAlertControllerStyleAlert];
 

@@ -1,12 +1,15 @@
 //
-//  TOTPViewController.m
+//  AppCodeViewController.m
 //  TwilioAuthenticatorSample
 //
 //  Created by Adriana Pineda on 5/4/17.
 //  Copyright © 2017 Authy. All rights reserved.
 //
 
-#import "TOTPViewController.h"
+#import "AppCodeViewController.h"
+
+#import "AppsListNavigationManager.h"
+#import "DeviceResetManager.h"
 
 #import "Constants.h"
 #import "UIColor+Extensions.h"
@@ -16,7 +19,7 @@
 #define circleLineWidth 6
 
 
-@implementation TOTPViewController
+@implementation AppCodeViewController
 
 - (void)viewDidLoad {
 
@@ -50,16 +53,10 @@
 
 }
 
-- (void)configureTOTP:(NSArray<AUTApp *> *)apps {
-
-    for (AUTApp *app in apps) {
-        if (app.appId == self.currentAppId) {
-            NSMutableAttributedString *totpAttributedString = [[NSMutableAttributedString alloc] initWithString:app.currentCode ? app.currentCode : @"------"];
-            [totpAttributedString addAttribute:NSKernAttributeName value:@3.5 range:NSMakeRange(0, totpAttributedString.length)];
-            [self.totpLabel setAttributedText:totpAttributedString];
-        }
-    }
-
+- (void)configureApp:(AUTApp *)app {
+    NSMutableAttributedString *totpAttributedString = [[NSMutableAttributedString alloc] initWithString:app.currentCode ? app.currentCode : @"------"];
+    [totpAttributedString addAttribute:NSKernAttributeName value:@3.5 range:NSMakeRange(0, totpAttributedString.length)];
+    [self.totpLabel setAttributedText:totpAttributedString];
 }
 
 - (void)showTimerAnimation {
@@ -142,13 +139,24 @@
             return;
         }
 
-        [self configureTOTP:apps];
+        for (AUTApp *app in apps) {
+            if (app.appId == self.currentAppId) {
+                [self configureApp:app];
+
+            }
+        }
+
         [self showTimerAnimation];
 
     });
 }
 
 - (void)didFail:(NSError *)error {
+
+    if (error.code == AUTDeviceDeletedError) {
+        [DeviceResetManager resetDeviceAndGetRegistrationViewForCurrentView:self withCustomTitle:nil];
+        return;
+    }
 
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:error.localizedDescription preferredStyle:UIAlertControllerStyleAlert];
 
@@ -164,6 +172,7 @@
 
 }
 
+
 - (void)didUpdateApps:(NSArray<AUTApp*> *)apps {
 
     // Usefull if we are displaying the name of the app
@@ -176,7 +185,11 @@
 
 - (void)didDeleteApps:(NSArray<NSNumber *> *)appsId {
 
-    // Not needed for totp view only
+    for (NSNumber *appId in appsId) {
+        if (self.currentAppId == appId) {
+            [AppsListNavigationManager presentAppsViewForCurrentView:self withCustomTitle:@"App Deleted" andMessage:@"App was deleted, go back to list view"];
+        }
+    }
 }
 
 @end

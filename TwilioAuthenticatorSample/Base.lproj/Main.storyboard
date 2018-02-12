@@ -246,7 +246,7 @@
         <!--Tokens-->
         <scene sceneID="7ug-y3-cCT">
             <objects>
-                <viewController id="b1i-4a-IKs" customClass="TOTPViewController" sceneMemberID="viewController">
+                <viewController id="b1i-4a-IKs" customClass="AppCodeViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ouF-t4-oPd"/>
                         <viewControllerLayoutGuide type="bottom" id="cSU-5K-6Ad"/>
