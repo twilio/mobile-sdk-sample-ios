@@ -217,7 +217,7 @@
 				01D48C2D1DE79A0100D675BB /* Registration */,
 				019E23341FBF3ECA006154A6 /* Apps */,
 				01D48C2E1DE79A0C00D675BB /* Requests */,
-				01EE5E1B1EBB843E00B2E333 /* App Code */,
+				01EE5E1B1EBB843E00B2E333 /* AppCode */,
 				01B4CE6D202E3EFA00D9DB28 /* Reset */,
 				01B4CE6E202E433C00D9DB28 /* Navigation */,
 				013B978F1CB304D600951E6B /* Extensions */,
@@ -269,13 +269,13 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		01EE5E1B1EBB843E00B2E333 /* App Code */ = {
+		01EE5E1B1EBB843E00B2E333 /* AppCode */ = {
 			isa = PBXGroup;
 			children = (
 				01EE5E1C1EBB84C900B2E333 /* AppCodeViewController.h */,
 				01EE5E1D1EBB84C900B2E333 /* AppCodeViewController.m */,
 			);
-			path = "App Code";
+			path = AppCode;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
