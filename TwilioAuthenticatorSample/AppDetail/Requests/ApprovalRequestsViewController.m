@@ -10,7 +10,6 @@
 #import "RequestDetailViewController.h"
 #import "RequestTableViewCell.h"
 #import "DeviceResetManager.h"
-#import "AppsListNavigationManager.h"
 #import "AppDetailTabBarController.h"
 
 #import "AUTApprovalRequest+Extensions.h"
@@ -46,6 +45,9 @@ NSInteger const archiveTabIndex = 1;
     [super viewWillAppear:animated];
 
     [self configureNavigationBarTopItems];
+
+    AppDetailTabBarController *appDetailTabBarViewController = (AppDetailTabBarController *)self.tabBarController;
+    [appDetailTabBarViewController childViewControllerAppeared];
 
     [self loadRequests];
 }
