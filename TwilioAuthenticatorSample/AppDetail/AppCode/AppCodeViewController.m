@@ -34,7 +34,7 @@
     [self configureNavigationBar];
 
     AppDetailTabBarController *appDetailTabBarViewController = (AppDetailTabBarController *)self.tabBarController;
-    [appDetailTabBarViewController childViewControllerAppeared];
+    [appDetailTabBarViewController triggerAppCodeGeneration];
 }
 
 - (void)configureNavigationBar {

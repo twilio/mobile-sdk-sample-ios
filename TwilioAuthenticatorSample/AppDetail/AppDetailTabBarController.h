@@ -13,6 +13,6 @@
 
 @property (nonatomic, strong) AUTApp *currentApp;
 
-- (void)childViewControllerAppeared;
+- (void)triggerAppCodeGeneration;
 
 @end

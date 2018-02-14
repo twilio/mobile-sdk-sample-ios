@@ -15,11 +15,11 @@
 
 - (void)viewDidAppear:(BOOL)animated {
 
-    [self childViewControllerAppeared];
+    [self triggerAppCodeGeneration];
 
 }
 
-- (void)childViewControllerAppeared {
+- (void)triggerAppCodeGeneration {
 
     TwilioAuthenticator *sharedTwilioAuth = [TwilioAuthenticator sharedInstance];
     [sharedTwilioAuth setMultiAppDelegate:self];
