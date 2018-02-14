@@ -34,8 +34,6 @@
 
     [self setupUI];
 
-    TwilioAuthenticator *sharedTwilioAuth = [TwilioAuthenticator sharedInstance];
-    [sharedTwilioAuth setMultiAppDelegate:self];
 }
 
 - (void)didReceiveMemoryWarning {

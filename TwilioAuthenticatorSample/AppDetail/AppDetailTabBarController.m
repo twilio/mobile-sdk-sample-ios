@@ -1,27 +1,51 @@
 //
-//  UIViewController+MultiAppDelegate.m
+//  AppDetailTabBarController.m
 //  TwilioAuthenticatorSample
 //
 //  Created by Adriana Pineda on 2/14/18.
 //  Copyright © 2018 Authy. All rights reserved.
 //
 
-#import "UIViewController+MultiAppDelegate.h"
-
+#import "AppDetailTabBarController.h"
 #import "DeviceResetManager.h"
 #import "AppsListNavigationManager.h"
+#import "AppCodeViewController.h"
 
-@interface UIViewController()
+@implementation AppDetailTabBarController
 
-@property (nonatomic, strong) AUTApp *currentApp;
+- (void)viewDidAppear:(BOOL)animated {
 
-@end
+    [self childViewControllerAppeared];
 
-@implementation UIViewController (MultiAppDelegate)
+}
+
+- (void)childViewControllerAppeared {
+
+    TwilioAuthenticator *sharedTwilioAuth = [TwilioAuthenticator sharedInstance];
+    [sharedTwilioAuth setMultiAppDelegate:self];
+}
 
 #pragma mark - App Delegate
 
 - (void)didReceiveCodes:(NSArray<AUTApp *> *)apps {
+
+    if (apps == nil) {
+        return;
+    }
+
+    for (AUTApp *app in apps) {
+
+        if (app.appId != self.currentApp.appId) {
+            continue;
+        }
+
+        UIViewController *secondViewController = [self.childViewControllers objectAtIndex:1];
+
+        if (secondViewController != nil && [secondViewController isKindOfClass:[AppCodeViewController class]]) {
+            AppCodeViewController *totpViewController = (AppCodeViewController *)secondViewController;
+            [totpViewController didReceiveCode:app];
+        }
+    }
 
 }
 
@@ -68,5 +92,6 @@
         }
     }
 }
+
 
 @end

@@ -11,6 +11,5 @@
 @interface RequestDetailViewController : UIViewController
 
 @property (nonatomic, strong) AUTApprovalRequest *approvalRequest;
-@property (nonatomic, strong) AUTApp *currentApp;
 
 @end

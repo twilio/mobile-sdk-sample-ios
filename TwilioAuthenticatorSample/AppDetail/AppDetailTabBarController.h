@@ -1,5 +1,5 @@
 //
-//  UIViewController+MultiAppDelegate.h
+//  AppDetailTabBarController.h
 //  TwilioAuthenticatorSample
 //
 //  Created by Adriana Pineda on 2/14/18.
@@ -9,6 +9,10 @@
 #import <UIKit/UIKit.h>
 #import <TwilioAuthenticator/TwilioAuthenticator.h>
 
-@interface UIViewController (MultiAppDelegate) <AUTMultiAppDelegate>
+@interface AppDetailTabBarController : UITabBarController <AUTMultiAppDelegate>
+
+@property (nonatomic, strong) AUTApp *currentApp;
+
+- (void)childViewControllerAppeared;
 
 @end

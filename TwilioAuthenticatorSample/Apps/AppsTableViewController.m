@@ -9,9 +9,9 @@
 #import "AppsTableViewController.h"
 #import "ApprovalRequestsViewController.h"
 #import "AppCodeViewController.h"
+#import "AppDetailTabBarController.h"
 
 #import "DeviceResetManager.h"
-#import "UIViewController+MultiAppDelegate.h"
 
 @interface AppsTableViewController ()
 
@@ -125,14 +125,10 @@
 
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
 
-    UITabBarController *viewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"tabBarController"];
-    ApprovalRequestsViewController *approvalRequestsViewController = [viewController.childViewControllers objectAtIndex:0];
-    approvalRequestsViewController.currentApp = currentApp;
+    AppDetailTabBarController *appDetailTabBarViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"tabBarController"];
+    appDetailTabBarViewController.currentApp = currentApp;
 
-    AppCodeViewController *totpViewController = [viewController.childViewControllers objectAtIndex:1];
-    totpViewController.currentAppId = currentApp.appId;
-
-    [self.navigationController pushViewController:viewController animated:YES];
+    [self.navigationController pushViewController:appDetailTabBarViewController animated:YES];
 
 }
 
@@ -196,6 +192,27 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.tableView reloadData];
     });
+}
+
+- (void)didFail:(NSError *)error {
+
+    if (error.code == AUTDeviceDeletedError) {
+        [DeviceResetManager resetDeviceAndGetRegistrationViewForCurrentView:self withCustomTitle:nil];
+        return;
+    }
+
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:error.localizedDescription preferredStyle:UIAlertControllerStyleAlert];
+
+    // OK Action
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+    [okAction setValue:[UIColor colorWithHexString:defaultColor] forKey:@"titleTextColor"];
+    [alert addAction:okAction];
+
+    // Present Alert
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self presentViewController:alert animated:YES completion:nil];
+    });
+
 }
 
 @end
