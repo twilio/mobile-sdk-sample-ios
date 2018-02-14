@@ -21,6 +21,7 @@
 		01B99CAB1C936A1600462FA3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01B99CA91C936A1600462FA3 /* Main.storyboard */; };
 		01B99CAD1C936A1600462FA3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01B99CAC1C936A1600462FA3 /* Assets.xcassets */; };
 		01B99CB01C936A1600462FA3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01B99CAE1C936A1600462FA3 /* LaunchScreen.storyboard */; };
+		01BA34BE2034C98E00A6626C /* UIViewController+MultiAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 01BA34BD2034C98E00A6626C /* UIViewController+MultiAppDelegate.m */; };
 		01BD37631F686A2600A76639 /* TwilioAuthenticatorSampleUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 01BD37621F686A2600A76639 /* TwilioAuthenticatorSampleUITests.m */; };
 		01CDAA8B1DF08CF700347404 /* DeviceResetManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 01CDAA8A1DF08CF700347404 /* DeviceResetManager.m */; };
 		01D48C381DE7A8EF00D675BB /* RegisterDeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D48C371DE7A8EF00D675BB /* RegisterDeviceViewController.m */; };
@@ -84,6 +85,8 @@
 		01B99CAC1C936A1600462FA3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		01B99CAF1C936A1600462FA3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		01B99CB11C936A1600462FA3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		01BA34BC2034C98E00A6626C /* UIViewController+MultiAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "UIViewController+MultiAppDelegate.h"; path = "Extensions/UIViewController+MultiAppDelegate.h"; sourceTree = "<group>"; };
+		01BA34BD2034C98E00A6626C /* UIViewController+MultiAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+MultiAppDelegate.m"; path = "Extensions/UIViewController+MultiAppDelegate.m"; sourceTree = "<group>"; };
 		01BD37601F686A2600A76639 /* TwilioAuthenticatorSampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TwilioAuthenticatorSampleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		01BD37621F686A2600A76639 /* TwilioAuthenticatorSampleUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TwilioAuthenticatorSampleUITests.m; sourceTree = "<group>"; };
 		01BD37641F686A2600A76639 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -151,6 +154,8 @@
 				01D48C431DEA605200D675BB /* UIColor+Extensions.m */,
 				01A32A5B1DED14C9008529A1 /* NSDate+Extensions.h */,
 				01A32A5C1DED14C9008529A1 /* NSDate+Extensions.m */,
+				01BA34BC2034C98E00A6626C /* UIViewController+MultiAppDelegate.h */,
+				01BA34BD2034C98E00A6626C /* UIViewController+MultiAppDelegate.m */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -408,6 +413,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				01A32A631DED1DBA008529A1 /* AppDelegate.m in Sources */,
+				01BA34BE2034C98E00A6626C /* UIViewController+MultiAppDelegate.m in Sources */,
 				01B4CE71202E435C00D9DB28 /* AppsListNavigationManager.m in Sources */,
 				01D48C441DEA605200D675BB /* UIColor+Extensions.m in Sources */,
 				01D48C411DEA55CE00D675BB /* RequestTableViewCell.m in Sources */,

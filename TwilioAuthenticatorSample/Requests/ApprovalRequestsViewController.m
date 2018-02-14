@@ -10,9 +10,11 @@
 #import "RequestDetailViewController.h"
 #import "RequestTableViewCell.h"
 #import "DeviceResetManager.h"
+#import "AppsListNavigationManager.h"
 
 #import "AUTApprovalRequest+Extensions.h"
 #import "UIColor+Extensions.h"
+#import "UIViewController+MultiAppDelegate.h"
 #import "Constants.h"
 
 NSInteger const pendingTabIndex = 0;
@@ -46,6 +48,9 @@ NSInteger const archiveTabIndex = 1;
     [self configureNavigationBarTopItems];
 
     [self loadRequests];
+
+    TwilioAuthenticator *sharedTwilioAuth = [TwilioAuthenticator sharedInstance];
+    [sharedTwilioAuth setMultiAppDelegate:self];
 }
 
 - (void)configureNavigationBarTopItems {
@@ -241,5 +246,7 @@ NSInteger const archiveTabIndex = 1;
 
     RequestDetailViewController *requestDetailViewController = segue.destinationViewController;
     requestDetailViewController.approvalRequest = request;
+    requestDetailViewController.currentApp = self.currentApp;
 }
+
 @end

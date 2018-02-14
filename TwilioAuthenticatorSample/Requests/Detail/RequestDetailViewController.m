@@ -11,6 +11,7 @@
 #import "AUTApprovalRequest+Extensions.h"
 #import "DeviceResetManager.h"
 #import "Constants.h"
+#import "AppsListNavigationManager.h"
 
 @interface RequestDetailViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *requestLogo;
@@ -32,6 +33,9 @@
     [super viewDidLoad];
 
     [self setupUI];
+
+    TwilioAuthenticator *sharedTwilioAuth = [TwilioAuthenticator sharedInstance];
+    [sharedTwilioAuth setMultiAppDelegate:self];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -11,6 +11,7 @@
 #import "AppCodeViewController.h"
 
 #import "DeviceResetManager.h"
+#import "UIViewController+MultiAppDelegate.h"
 
 @interface AppsTableViewController ()
 
@@ -32,7 +33,6 @@
 
     self.twilioAuthenticator = [TwilioAuthenticator sharedInstance];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadApps:) name:UIApplicationWillEnterForegroundNotification object:nil];
-    [self.twilioAuthenticator setMultiAppDelegate:self];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -52,6 +52,8 @@
         // Reload apps table when coming back
         [self reloadApps:nil];
     }
+
+    [self.twilioAuthenticator setMultiAppDelegate:self];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -189,33 +191,11 @@
 
 - (void)didReceiveCodes:(NSArray<AUTApp *> *)apps {
 
-    NSLog(@"******* RECEIVE CODES");
-
     self.apps = apps;
 
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.tableView reloadData];
     });
-}
-
- - (void)didFail:(NSError *)error {
-
-     if (error.code == AUTDeviceDeletedError) {
-         [DeviceResetManager resetDeviceAndGetRegistrationViewForCurrentView:self withCustomTitle:nil];
-         return;
-     }
-
-     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:error.localizedDescription preferredStyle:UIAlertControllerStyleAlert];
-
-     // OK Action
-     UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
-     [okAction setValue:[UIColor colorWithHexString:defaultColor] forKey:@"titleTextColor"];
-     [alert addAction:okAction];
-
-     // Present Alert
-     dispatch_async(dispatch_get_main_queue(), ^{
-         [self presentViewController:alert animated:YES completion:nil];
-     });
 }
 
 @end

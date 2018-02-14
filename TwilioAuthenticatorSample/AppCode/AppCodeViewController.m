@@ -175,7 +175,7 @@
 
 - (void)didUpdateApps:(NSArray<AUTApp*> *)apps {
 
-    // Usefull if we are displaying the name of the app
+    // Useful if we are displaying the name of the app
 }
 
 - (void)didAddApps:(NSArray<AUTApp *> *)apps {
