@@ -52,6 +52,11 @@ NSInteger const archiveTabIndex = 1;
     [self loadRequests];
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)configureNavigationBarTopItems {
 
     self.tabBarController.navigationItem.title = @"Requests";

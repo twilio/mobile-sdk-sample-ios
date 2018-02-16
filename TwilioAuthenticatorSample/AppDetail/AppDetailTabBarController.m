@@ -13,16 +13,11 @@
 
 @implementation AppDetailTabBarController
 
-- (void)viewDidAppear:(BOOL)animated {
-
-    [self childViewControllerAppeared];
-
-}
-
 - (void)childViewControllerAppeared {
 
     TwilioAuthenticator *sharedTwilioAuth = [TwilioAuthenticator sharedInstance];
     [sharedTwilioAuth setMultiAppDelegate:self];
+
 }
 
 #pragma mark - App Delegate
