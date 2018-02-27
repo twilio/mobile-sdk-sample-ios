@@ -11,6 +11,7 @@
 #import "AUTApprovalRequest+Extensions.h"
 #import "DeviceResetManager.h"
 #import "Constants.h"
+#import "AppDetailTabBarController.h"
 
 @interface RequestDetailViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *requestLogo;
@@ -32,6 +33,12 @@
     [super viewDidLoad];
 
     [self setupUI];
+
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    AppDetailTabBarController *appDetailTabBarViewController = (AppDetailTabBarController *)self.tabBarController;
+    [appDetailTabBarViewController childViewControllerAppeared];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -8,12 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AppCodeViewController : UIViewController <AUTMultiAppDelegate>
+@interface AppCodeViewController : UIViewController
 
 @property (weak, nonatomic) IBOutlet UILabel *totpLabel;
 @property (weak, nonatomic) IBOutlet UILabel *tokenName;
 @property (weak, nonatomic) IBOutlet UIImageView *timerImage;
 
-@property (nonatomic, strong) NSNumber *currentAppId;
+- (void)didReceiveCode:(AUTApp*)app;
 
 @end

@@ -10,6 +10,7 @@
 #import "RequestDetailViewController.h"
 #import "RequestTableViewCell.h"
 #import "DeviceResetManager.h"
+#import "AppDetailTabBarController.h"
 
 #import "AUTApprovalRequest+Extensions.h"
 #import "UIColor+Extensions.h"
@@ -45,7 +46,15 @@ NSInteger const archiveTabIndex = 1;
 
     [self configureNavigationBarTopItems];
 
+    AppDetailTabBarController *appDetailTabBarViewController = (AppDetailTabBarController *)self.tabBarController;
+    [appDetailTabBarViewController childViewControllerAppeared];
+
     [self loadRequests];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)configureNavigationBarTopItems {
@@ -112,7 +121,9 @@ NSInteger const archiveTabIndex = 1;
     AUTApprovalRequestStatus statuses = [self getStatusesForSelectedSegment];
 
     __weak ApprovalRequestsViewController *weakSelf = self;
-    [sharedTwilioAuth getApprovalRequestsWithAppId:self.currentApp.appId statuses:statuses timeInterval:nil completion:^(AUTApprovalRequests *approvalRequests, NSError *error) {
+
+    AppDetailTabBarController *currentTabBarController = (AppDetailTabBarController *)self.tabBarController;
+    [sharedTwilioAuth getApprovalRequestsWithAppId:currentTabBarController.currentApp.appId statuses:statuses timeInterval:nil completion:^(AUTApprovalRequests *approvalRequests, NSError *error) {
 
         dispatch_async(dispatch_get_main_queue(), ^{
 
@@ -242,4 +253,5 @@ NSInteger const archiveTabIndex = 1;
     RequestDetailViewController *requestDetailViewController = segue.destinationViewController;
     requestDetailViewController.approvalRequest = request;
 }
+
 @end

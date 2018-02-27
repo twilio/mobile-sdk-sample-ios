@@ -8,6 +8,8 @@
 
 #import "AppCodeViewController.h"
 
+#import "AppDetailTabBarController.h"
+
 #import "AppsListNavigationManager.h"
 #import "DeviceResetManager.h"
 
@@ -30,7 +32,9 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [self configureNavigationBar];
-    [self configureTOTP];
+
+    AppDetailTabBarController *appDetailTabBarViewController = (AppDetailTabBarController *)self.tabBarController;
+    [appDetailTabBarViewController childViewControllerAppeared];
 }
 
 - (void)configureNavigationBar {
@@ -44,13 +48,6 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (void)configureTOTP {
-
-    TwilioAuthenticator *sharedTwilioAuth = [TwilioAuthenticator sharedInstance];
-    [sharedTwilioAuth setMultiAppDelegate:self];
-
 }
 
 - (void)configureApp:(AUTApp *)app {
@@ -131,65 +128,14 @@
 }
 
 #pragma mark - App Delegate
-- (void)didReceiveCodes:(NSArray<AUTApp *> *)apps {
+- (void)didReceiveCode:(AUTApp*)app {
 
     dispatch_async(dispatch_get_main_queue(), ^{
 
-        if (apps == nil) {
-            return;
-        }
-
-        for (AUTApp *app in apps) {
-            if (app.appId == self.currentAppId) {
-                [self configureApp:app];
-
-            }
-        }
-
+        [self configureApp:app];
         [self showTimerAnimation];
 
     });
-}
-
-- (void)didFail:(NSError *)error {
-
-    if (error.code == AUTDeviceDeletedError) {
-        [DeviceResetManager resetDeviceAndGetRegistrationViewForCurrentView:self withCustomTitle:nil];
-        return;
-    }
-
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:error.localizedDescription preferredStyle:UIAlertControllerStyleAlert];
-
-    // OK Action
-    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
-    [okAction setValue:[UIColor colorWithHexString:defaultColor] forKey:@"titleTextColor"];
-    [alert addAction:okAction];
-
-    // Present Alert
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self presentViewController:alert animated:YES completion:nil];
-    });
-
-}
-
-
-- (void)didUpdateApps:(NSArray<AUTApp*> *)apps {
-
-    // Usefull if we are displaying the name of the app
-}
-
-- (void)didAddApps:(NSArray<AUTApp *> *)apps {
-
-    // Not needed for totp view only
-}
-
-- (void)didDeleteApps:(NSArray<NSNumber *> *)appsId {
-
-    for (NSNumber *appId in appsId) {
-        if (self.currentAppId == appId) {
-            [AppsListNavigationManager presentAppsViewForCurrentView:self withCustomTitle:@"App Deleted" andMessage:@"App was deleted, go back to list view"];
-        }
-    }
 }
 
 @end

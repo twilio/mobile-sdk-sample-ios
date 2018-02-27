@@ -21,6 +21,7 @@
 		01B99CAB1C936A1600462FA3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01B99CA91C936A1600462FA3 /* Main.storyboard */; };
 		01B99CAD1C936A1600462FA3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01B99CAC1C936A1600462FA3 /* Assets.xcassets */; };
 		01B99CB01C936A1600462FA3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01B99CAE1C936A1600462FA3 /* LaunchScreen.storyboard */; };
+		01BA34C52034D23F00A6626C /* AppDetailTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01BA34C42034D23F00A6626C /* AppDetailTabBarController.m */; };
 		01BD37631F686A2600A76639 /* TwilioAuthenticatorSampleUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 01BD37621F686A2600A76639 /* TwilioAuthenticatorSampleUITests.m */; };
 		01CDAA8B1DF08CF700347404 /* DeviceResetManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 01CDAA8A1DF08CF700347404 /* DeviceResetManager.m */; };
 		01D48C381DE7A8EF00D675BB /* RegisterDeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D48C371DE7A8EF00D675BB /* RegisterDeviceViewController.m */; };
@@ -84,6 +85,8 @@
 		01B99CAC1C936A1600462FA3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		01B99CAF1C936A1600462FA3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		01B99CB11C936A1600462FA3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		01BA34C32034D23F00A6626C /* AppDetailTabBarController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDetailTabBarController.h; sourceTree = "<group>"; };
+		01BA34C42034D23F00A6626C /* AppDetailTabBarController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDetailTabBarController.m; sourceTree = "<group>"; };
 		01BD37601F686A2600A76639 /* TwilioAuthenticatorSampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TwilioAuthenticatorSampleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		01BD37621F686A2600A76639 /* TwilioAuthenticatorSampleUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TwilioAuthenticatorSampleUITests.m; sourceTree = "<group>"; };
 		01BD37641F686A2600A76639 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -216,14 +219,24 @@
 				012D3CA51ECCC20A0038D774 /* Constants */,
 				01D48C2D1DE79A0100D675BB /* Registration */,
 				019E23341FBF3ECA006154A6 /* Apps */,
-				01D48C2E1DE79A0C00D675BB /* Requests */,
-				01EE5E1B1EBB843E00B2E333 /* AppCode */,
+				01BA34C22034D20A00A6626C /* AppDetail */,
 				01B4CE6D202E3EFA00D9DB28 /* Reset */,
 				01B4CE6E202E433C00D9DB28 /* Navigation */,
 				013B978F1CB304D600951E6B /* Extensions */,
 				019E23381FBF3F24006154A6 /* SamplePrefix.pch */,
 			);
 			path = TwilioAuthenticatorSample;
+			sourceTree = "<group>";
+		};
+		01BA34C22034D20A00A6626C /* AppDetail */ = {
+			isa = PBXGroup;
+			children = (
+				01BA34C32034D23F00A6626C /* AppDetailTabBarController.h */,
+				01BA34C42034D23F00A6626C /* AppDetailTabBarController.m */,
+				01D48C2E1DE79A0C00D675BB /* Requests */,
+				01EE5E1B1EBB843E00B2E333 /* AppCode */,
+			);
+			path = AppDetail;
 			sourceTree = "<group>";
 		};
 		01BD37611F686A2600A76639 /* TwilioAuthenticatorSampleUITests */ = {
@@ -325,7 +338,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0920;
 				ORGANIZATIONNAME = Authy;
 				TargetAttributes = {
 					01B99CA11C936A1600462FA3 = {
@@ -410,6 +423,7 @@
 				01A32A631DED1DBA008529A1 /* AppDelegate.m in Sources */,
 				01B4CE71202E435C00D9DB28 /* AppsListNavigationManager.m in Sources */,
 				01D48C441DEA605200D675BB /* UIColor+Extensions.m in Sources */,
+				01BA34C52034D23F00A6626C /* AppDetailTabBarController.m in Sources */,
 				01D48C411DEA55CE00D675BB /* RequestTableViewCell.m in Sources */,
 				01EE5E1E1EBB84C900B2E333 /* AppCodeViewController.m in Sources */,
 				01A32A601DED193A008529A1 /* AUTApprovalRequest+Extensions.m in Sources */,
@@ -472,13 +486,21 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -519,13 +541,21 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
