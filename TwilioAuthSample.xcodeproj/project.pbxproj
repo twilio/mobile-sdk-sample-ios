@@ -205,6 +205,7 @@
 				01B99C9F1C936A1600462FA3 /* Frameworks */,
 				01B99CA01C936A1600462FA3 /* Resources */,
 				0130721E1C9703B60048383E /* Embed Frameworks */,
+				01DA4FA620504D4200EB08BA /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -269,6 +270,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		01DA4FA620504D4200EB08BA /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "bash \"${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}/TwilioAuth.framework/strip-frameworks.sh\"";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		01B99C9E1C936A1600462FA3 /* Sources */ = {
