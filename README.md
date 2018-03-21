@@ -24,4 +24,4 @@ You can add `| xcpretty` at the end of the command above if you want to format x
 
 ### Learn more
 - Check out the full documentation at https://www.twilio.com/docs/quickstart/twilioauth-sdk-quickstart-tutorials
-- Contact the Twilio support team at help@twilio.com
+- Contact the Twilio support team at help@twilio.com.
