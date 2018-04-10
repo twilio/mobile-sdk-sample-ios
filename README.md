@@ -6,7 +6,7 @@ Welcome to the Twilio Authenticator iOS SDK Sample application. This application
 
 * **Step 1:** Clone the repository to your local machine
 
-* **Step 2 (option 1 - CocoaPods):** Run `pod install` at your terminal, from inside the cloned repository's working directory. Then open the Xcode Workspace created by CocoaPods (`TwilioAuthenticatorSample.xcworkspace`).
+* **Step 2 (option 1 - CocoaPods):** Run `pod install` in your terminal, from inside the cloned repository's working directory. Then open the Xcode Workspace created by CocoaPods (`TwilioAuthenticatorSample.xcworkspace`).
 
 * **Step 2 (option 2 - Carthage):** Run `carthage update` at your terminal, from inside the cloned repository's working directory. Navigate to your Xcode project's General settings page. Drag and drop the framework onto the Embedded Binaries section. Ensure that "Copy items if needed" is checked and press Finish. This will add the framework to both the Embedded Binaries and Linked Frameworks and Libraries sections.
 
