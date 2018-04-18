@@ -205,6 +205,7 @@
 				01B99C9F1C936A1600462FA3 /* Frameworks */,
 				01B99CA01C936A1600462FA3 /* Resources */,
 				0130721E1C9703B60048383E /* Embed Frameworks */,
+				01DA4FAA20504F1500EB08BA /* ShellScript */,
 			);
 			buildRules = (
 			);
