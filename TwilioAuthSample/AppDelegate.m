@@ -22,6 +22,9 @@
     // Register for push notifications
     [self registerForPushNotifications:application];
 
+    TwilioAuthConfiguration *config = [TwilioAuthConfiguration configurationWithUserDefaultsGroup:@"group.twilio.auth.sample.12345"];
+    [TwilioAuth setupWithConfiguration:config];
+
     // Configure Root View Controller
     TwilioAuth *sharedTwilioAuth = [TwilioAuth sharedInstance];
 
@@ -86,6 +89,8 @@
        stringByReplacingOccurrencesOfString: @"<" withString: @""]
       stringByReplacingOccurrencesOfString: @">" withString: @""]
      stringByReplacingOccurrencesOfString: @" " withString: @""];
+
+    NSLog(@"Device token %@", deviceTokenAsString);
 
     NSString *currentPushToken = [userDefaults objectForKey:@"PUSH_TOKEN"];
 
