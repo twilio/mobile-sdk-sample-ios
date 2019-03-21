@@ -215,18 +215,118 @@
     NSLog(@"Failed to register notification: %@", [error localizedDescription]);
 }
 
-- (void)registerForPushNotifications:(UIApplication *)application {
-    [self registerForRemoteNotificationsWithActionsForApplication:application];
+- (UIMutableUserNotificationAction *)getApproveActionForNotificationsForiOS8AndAbove {
+
+    UIMutableUserNotificationAction *approveAction = [[UIMutableUserNotificationAction alloc] init];
+    [approveAction setActivationMode:UIUserNotificationActivationModeBackground];
+    [approveAction setTitle:PUSH_NOTIFICATION_ONETOUCH_APPROVE_TEXT];
+    [approveAction setIdentifier:PUSH_NOTIFICATION_ONETOUCH_APPROVE_OPTION];
+    [approveAction setDestructive:NO];
+    [approveAction setAuthenticationRequired:YES];
+
+    return approveAction;
 }
 
-- (UNNotificationAction *)getApproveActionForNotificationsForiOS8AndAbove {
+- (UIMutableUserNotificationAction *)getDenyActionForNotificationsForiOS8AndAbove {
+
+    UIMutableUserNotificationAction *denyAction = [[UIMutableUserNotificationAction alloc] init];
+    [denyAction setActivationMode:UIUserNotificationActivationModeBackground];
+    [denyAction setTitle:PUSH_NOTIFICATION_ONETOUCH_DENY_TEXT];
+    [denyAction setIdentifier:PUSH_NOTIFICATION_ONETOUCH_DENY_OPTION];
+    [denyAction setDestructive:YES];
+    [denyAction setAuthenticationRequired:YES];
+
+    return denyAction;
+}
+
+- (UIMutableUserNotificationCategory *)getOneTouchCategoryForiOS8AndAboveWithActions:(NSArray *)actions {
+
+    UIMutableUserNotificationCategory *actionCategory = [[UIMutableUserNotificationCategory alloc] init];
+    [actionCategory setIdentifier:PUSH_NOTIFICATION_ONETOUCH_CATEGORY_IDENTIFIER];
+    [actionCategory setActions:actions
+                    forContext:UIUserNotificationActionContextDefault];
+
+    return actionCategory;
+}
+
+- (UIMutableUserNotificationCategory *)getOneTouchCategoryForiOS8AndAbove {
+
+    UIMutableUserNotificationAction *approveAction = [self getApproveActionForNotificationsForiOS8AndAbove];
+
+    UIMutableUserNotificationAction *denyAction = [self getDenyActionForNotificationsForiOS8AndAbove];
+
+    UIMutableUserNotificationCategory *actionCategory = [self getOneTouchCategoryForiOS8AndAboveWithActions:@[approveAction, denyAction]];
+
+    return actionCategory;
+}
+
+- (UIUserNotificationSettings *)getNotificationSettingsForiOS8AndAboveWithCategories:(NSSet *)categories {
+
+    UIUserNotificationType types = (UIUserNotificationTypeAlert|
+                                    UIUserNotificationTypeSound|
+                                    UIUserNotificationTypeBadge);
+
+    if (categories != nil) {
+        return [UIUserNotificationSettings settingsForTypes:types
+                                                 categories:categories];
+    } else {
+        return [UIUserNotificationSettings settingsForTypes:types
+                                                 categories:nil];
+    }
+
+}
+
+- (void)registerForRemoteNotificationsWithActionsForiOS8AndAbove {
+
+    /** Sample code for onetouch push notification payload
+     {
+     alert = "OneTouch Testing just sent you a new approval request";
+     "approval_request_uuid" = "407802b0-3e4e-0135-ee46-06ca50569adc";
+     aps =     {
+     alert = "OneTouch Testing just sent you a new approval request";
+     badge = 1;
+     category = "onetouch_approval_request";
+     sound = default;
+     };
+     "serial_id" = 1053915;
+     "twi_message_id" = APN54d05980bbf64376a0b402de620f2b96;
+     type = "onetouch_approval_request";
+     }
+     */
+
+
+    UIMutableUserNotificationCategory *actionCategory = [self getOneTouchCategoryForiOS8AndAbove];
+    NSSet *categories = [NSSet setWithObject:actionCategory];
+
+    UIUserNotificationSettings *settings = [self getNotificationSettingsForiOS8AndAboveWithCategories:categories];
+
+    [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+    [[UIApplication sharedApplication] registerForRemoteNotifications];
+}
+
+
+- (void)registerForPushNotifications:(UIApplication *)application {
+
+    if (@available(iOS 10, *)) {
+
+        [self registerForRemoteNotificationsWithActionsForApplication:application];
+
+    } else if (@available(iOS 8, *)) {
+
+        [self registerForRemoteNotificationsWithActionsForiOS8AndAbove];
+
+    }
+
+}
+
+- (UNNotificationAction *)getApproveActionForNotificationsForiOS10AndAbove {
 
     UNNotificationAction *approveAction = [UNNotificationAction actionWithIdentifier:PUSH_NOTIFICATION_ONETOUCH_APPROVE_OPTION title:PUSH_NOTIFICATION_ONETOUCH_APPROVE_TEXT options:UNNotificationActionOptionAuthenticationRequired];
 
     return approveAction;
 }
 
-- (UNNotificationAction *)getDenyActionForNotificationsForiOS8AndAbove {
+- (UNNotificationAction *)getDenyActionForNotificationsForiOS10AndAbove {
 
     UNNotificationAction *denyAction = [UNNotificationAction actionWithIdentifier:PUSH_NOTIFICATION_ONETOUCH_DENY_OPTION title:PUSH_NOTIFICATION_ONETOUCH_DENY_TEXT options:UNNotificationActionOptionDestructive | UNNotificationActionOptionAuthenticationRequired];
 
@@ -234,19 +334,19 @@
 
 }
 
-- (UNNotificationCategory *)getOneTouchCategoryForiOS8AndAboveWithActions:(NSArray *)actions {
+- (UNNotificationCategory *)getOneTouchCategoryForiOS10AndAboveWithActions:(NSArray *)actions {
 
     UNNotificationCategory *actionCategory = [UNNotificationCategory categoryWithIdentifier:PUSH_NOTIFICATION_ONETOUCH_CATEGORY_IDENTIFIER actions:actions intentIdentifiers:@[] options:UNNotificationCategoryOptionCustomDismissAction];
     return actionCategory;
 }
 
-- (UNNotificationCategory *)getOneTouchCategoryForiOS8AndAbove {
+- (UNNotificationCategory *)getOneTouchCategoryForiOS10AndAbove {
 
-    UNNotificationAction *approveAction = [self getApproveActionForNotificationsForiOS8AndAbove];
+    UNNotificationAction *approveAction = [self getApproveActionForNotificationsForiOS10AndAbove];
 
-    UNNotificationAction *denyAction = [self getDenyActionForNotificationsForiOS8AndAbove];
+    UNNotificationAction *denyAction = [self getDenyActionForNotificationsForiOS10AndAbove];
 
-    UNNotificationCategory *actionCategory = [self getOneTouchCategoryForiOS8AndAboveWithActions:@[approveAction, denyAction]];
+    UNNotificationCategory *actionCategory = [self getOneTouchCategoryForiOS10AndAboveWithActions:@[approveAction, denyAction]];
 
     return actionCategory;
 }
@@ -269,7 +369,7 @@
      }
      */
 
-    UNNotificationCategory *actionCategory = [self getOneTouchCategoryForiOS8AndAbove];
+    UNNotificationCategory *actionCategory = [self getOneTouchCategoryForiOS10AndAbove];
     NSSet *categories = [NSSet setWithObject:actionCategory];
 
     UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
