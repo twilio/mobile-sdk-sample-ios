@@ -26,13 +26,17 @@
 @synthesize nav;
 @synthesize window;
 
+- (void)setupTwilioAuthConfiguration {
+    TwilioAuthConfiguration *config = [TwilioAuthConfiguration configurationWithUserDefaultsGroup:@"group.twilio.auth.sample.12345"];
+    [TwilioAuth setupWithConfiguration:config];
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
     // Register for push notifications
     [self registerForPushNotifications:application];
 
-    TwilioAuthConfiguration *config = [TwilioAuthConfiguration configurationWithUserDefaultsGroup:@"group.twilio.auth.sample.12345"];
-    [TwilioAuth setupWithConfiguration:config];
+    [self setupTwilioAuthConfiguration];
 
     // Configure Root View Controller
     TwilioAuth *sharedTwilioAuth = [TwilioAuth sharedInstance];
@@ -108,8 +112,7 @@
         return;
     }
 
-    TwilioAuthConfiguration *config = [TwilioAuthConfiguration configurationWithUserDefaultsGroup:@"group.twilio.auth.sample.12345"];
-    [TwilioAuth setupWithConfiguration:config];
+    [self setupTwilioAuthConfiguration];
     TwilioAuth *sharedAuth = [TwilioAuth sharedInstance];
     [sharedAuth getRequestWithUUID:approvalRequestUUID completion:^(AUTApprovalRequest *request, NSError *error) {
 
@@ -125,8 +128,7 @@
 
 - (void)approveRequest:(AUTApprovalRequest *)request completionHandler:(void (^)())completionHandler {
 
-    TwilioAuthConfiguration *config = [TwilioAuthConfiguration configurationWithUserDefaultsGroup:@"group.twilio.auth.sample.12345"];
-    [TwilioAuth setupWithConfiguration:config];
+    [self setupTwilioAuthConfiguration];
     TwilioAuth *sharedAuth = [TwilioAuth sharedInstance];
     [sharedAuth approveRequest:request completion:^(NSError *error) {
 
@@ -140,8 +142,7 @@
 
 - (void)denyRequest:(AUTApprovalRequest *)request completionHandler:(void (^)())completionHandler {
 
-    TwilioAuthConfiguration *config = [TwilioAuthConfiguration configurationWithUserDefaultsGroup:@"group.twilio.auth.sample.12345"];
-    [TwilioAuth setupWithConfiguration:config];
+    [self setupTwilioAuthConfiguration];
     TwilioAuth *sharedAuth = [TwilioAuth sharedInstance];
     [sharedAuth denyRequest:request completion:^(NSError *error) {
 
@@ -184,8 +185,7 @@
     }
 
     // Check if device has been registered
-    TwilioAuthConfiguration *config = [TwilioAuthConfiguration configurationWithUserDefaultsGroup:@"group.twilio.auth.sample.12345"];
-    [TwilioAuth setupWithConfiguration:config];
+    [self setupTwilioAuthConfiguration];
     TwilioAuth *sharedTwilioAuth = [TwilioAuth sharedInstance];
     if (![sharedTwilioAuth isDeviceRegistered]) {
         return;
@@ -434,8 +434,7 @@
     }
 
     NSString *approvalRequestUUID = [userInfo objectForKey:@"approval_request_uuid"];
-    TwilioAuthConfiguration *config = [TwilioAuthConfiguration configurationWithUserDefaultsGroup:@"group.twilio.auth.sample.12345"];
-    [TwilioAuth setupWithConfiguration:config];
+    [self setupTwilioAuthConfiguration];
     TwilioAuth *twilioAuth = [TwilioAuth sharedInstance];
     [twilioAuth getRequestWithUUID:approvalRequestUUID completion:^(AUTApprovalRequest *request, NSError *error) {
 
