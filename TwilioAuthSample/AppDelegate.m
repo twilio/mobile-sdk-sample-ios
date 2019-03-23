@@ -47,12 +47,6 @@
 
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
 
-    NSDictionary *notificationInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
-
-    if (notificationInfo) {
-        [self handlePushNotificationWithInfo:notificationInfo];
-    }
-
     return YES;
 }
 
@@ -429,6 +423,12 @@
 - (void)handlePushNotificationWithInfo:(NSDictionary*)userInfo {
 
     NSString *notificationType = [userInfo objectForKey:@"type"];
+
+    if ([notificationType isEqualToString:@"remove_push"]) {
+        [self removePushNotifications];
+        return;
+    }
+
     if (![notificationType isEqualToString:@"onetouch_approval_request"]) {
         return;
     }
@@ -450,34 +450,34 @@
 
 }
 
-- (void)application:(UIApplication*)application didReceiveRemoteNotification:(NSDictionary*)userInfo {
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
 
     [self handlePushNotificationWithInfo:userInfo];
+    completionHandler(UIBackgroundFetchResultNewData);
+
 }
 
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
+- (void)removePushNotifications {
 
     /**
      Sample payload of `remove_push` notification
      {"aps":{"content-available":1, "sound":""}, "type":"remove_push"}
      */
-    if ([[userInfo objectForKey:@"type"] isEqualToString:@"remove_push"]) {
-        UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
 
-        [center getDeliveredNotificationsWithCompletionHandler:^(NSArray<UNNotification *> *notifications) {
+    UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
 
-            NSMutableArray *identifiersToRemove = [[NSMutableArray alloc] init];
+    [center getDeliveredNotificationsWithCompletionHandler:^(NSArray<UNNotification *> *notifications) {
 
-            for (UNNotification *notification in notifications) {
-                if ([notification.request.content.categoryIdentifier isEqualToString:PUSH_NOTIFICATION_ONETOUCH_CATEGORY_IDENTIFIER]) {
-                    [identifiersToRemove addObject:notification.request.identifier];
-                }
+        NSMutableArray *identifiersToRemove = [[NSMutableArray alloc] init];
+
+        for (UNNotification *notification in notifications) {
+            if ([notification.request.content.categoryIdentifier isEqualToString:PUSH_NOTIFICATION_ONETOUCH_CATEGORY_IDENTIFIER]) {
+                [identifiersToRemove addObject:notification.request.identifier];
             }
+        }
 
-            [center removeDeliveredNotificationsWithIdentifiers:identifiersToRemove];
-        }];
-    }
-
-    completionHandler(UIBackgroundFetchResultNewData);
+        [center removeDeliveredNotificationsWithIdentifiers:identifiersToRemove];
+    }];
 }
+
 @end
