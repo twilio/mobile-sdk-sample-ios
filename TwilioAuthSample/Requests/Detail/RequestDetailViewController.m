@@ -227,7 +227,9 @@
         }
 
     }];
-    [action setValue:[UIColor colorWithHexString:defaultColor] forKey:@"titleTextColor"];
+    if (@available(iOS 10, *)) {
+        [action setValue:[UIColor colorWithHexString:defaultColor] forKey:@"titleTextColor"];
+    }
 
     [alertController addAction:action];
 
