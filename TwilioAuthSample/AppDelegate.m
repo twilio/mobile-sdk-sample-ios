@@ -81,16 +81,16 @@
 }
 
 - (void)application:(UIApplication *)application handleActionWithIdentifier:(NSString *)identifier forRemoteNotification:(nonnull NSDictionary *)userInfo completionHandler:(nonnull void (^)())completionHandler {
-    [self updateOneTouchRequestFromNotificationWithStatus:identifier userInfo:userInfo completionHandler:completionHandler];
-
-}
-
-
-- (void)updateOneTouchRequestFromNotificationWithStatus:(NSString *)statusOption userInfo:(NSDictionary *)userInfo completionHandler:(void (^)())completionHandler {
 
     if (![self isOneTouchPushNotificationRequest:userInfo]) {
         return;
     }
+
+    [self updateOneTouchRequestFromNotificationWithStatus:identifier userInfo:userInfo completionHandler:completionHandler];
+}
+
+
+- (void)updateOneTouchRequestFromNotificationWithStatus:(NSString *)statusOption userInfo:(NSDictionary *)userInfo completionHandler:(void (^)())completionHandler {
 
     AUTApprovalRequestStatus status;
     if ([statusOption isEqualToString:PUSH_NOTIFICATION_ONETOUCH_APPROVE_OPTION]) {
