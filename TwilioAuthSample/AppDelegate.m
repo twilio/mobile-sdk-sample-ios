@@ -458,6 +458,8 @@
 
 }
 
+// Example of how to remove push notifications
+// Push notification category "remove_push" is not being sent in production
 - (void)removePushNotifications {
 
     /**
