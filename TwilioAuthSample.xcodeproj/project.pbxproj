@@ -287,7 +287,7 @@
 				017E3CCF21F649BC00A04D37 /* Sources */,
 				017E3CD021F649BC00A04D37 /* Frameworks */,
 				017E3CD121F649BC00A04D37 /* Resources */,
-				9A6857079ECB86F264FC0F8A /* [CP] Copy Pods Resources */,
+				B7EE33065997B9FAA8D21F40 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -476,7 +476,7 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TwilioAuthSample/Pods-TwilioAuthSample-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		9A6857079ECB86F264FC0F8A /* [CP] Copy Pods Resources */ = {
+		B7EE33065997B9FAA8D21F40 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (

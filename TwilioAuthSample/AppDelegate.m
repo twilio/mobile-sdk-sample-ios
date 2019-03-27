@@ -122,7 +122,6 @@
 
 - (void)approveRequest:(AUTApprovalRequest *)request completionHandler:(void (^)())completionHandler {
 
-    [self setupTwilioAuthConfiguration];
     TwilioAuth *sharedAuth = [TwilioAuth sharedInstance];
     [sharedAuth approveRequest:request completion:^(NSError *error) {
 
@@ -136,7 +135,6 @@
 
 - (void)denyRequest:(AUTApprovalRequest *)request completionHandler:(void (^)())completionHandler {
 
-    [self setupTwilioAuthConfiguration];
     TwilioAuth *sharedAuth = [TwilioAuth sharedInstance];
     [sharedAuth denyRequest:request completion:^(NSError *error) {
 
@@ -179,7 +177,6 @@
     }
 
     // Check if device has been registered
-    [self setupTwilioAuthConfiguration];
     TwilioAuth *sharedTwilioAuth = [TwilioAuth sharedInstance];
     if (![sharedTwilioAuth isDeviceRegistered]) {
         return;
