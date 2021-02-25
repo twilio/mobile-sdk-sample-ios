@@ -80,7 +80,7 @@
     [self.window makeKeyAndVisible];
 }
 
-- (void)application:(UIApplication *)application handleActionWithIdentifier:(NSString *)identifier forRemoteNotification:(nonnull NSDictionary *)userInfo completionHandler:(nonnull void (^)())completionHandler {
+- (void)application:(UIApplication *)application handleActionWithIdentifier:(NSString *)identifier forRemoteNotification:(nonnull NSDictionary *)userInfo completionHandler:(nonnull void (^)(void))completionHandler {
 
     if (![self isOneTouchPushNotificationRequest:userInfo]) {
         return;
@@ -159,32 +159,25 @@
 #pragma mark - Register for Push Notifications
 -(void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
 
+    TwilioAuth *sharedTwilioAuth = [TwilioAuth sharedInstance];
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
 
-    NSString *deviceTokenAsString = [[[[deviceToken description]
-       stringByReplacingOccurrencesOfString: @"<" withString: @""]
-      stringByReplacingOccurrencesOfString: @">" withString: @""]
-     stringByReplacingOccurrencesOfString: @" " withString: @""];
+    NSString *deviceTokenAsString = [self stringWithDeviceToken:deviceToken];
 
     NSLog(@"Device token %@", deviceTokenAsString);
 
     NSString *currentPushToken = [userDefaults objectForKey:@"PUSH_TOKEN"];
 
-    // First time storing the push token
-    if (!currentPushToken || [currentPushToken isEqualToString:@""]) {
-        [userDefaults setObject:deviceTokenAsString forKey:@"PUSH_TOKEN"];
-        return;
-    }
-
-    // Check if device has been registered
-    TwilioAuth *sharedTwilioAuth = [TwilioAuth sharedInstance];
-    if (![sharedTwilioAuth isDeviceRegistered]) {
-        return;
-    }
-
     // Check if push token has changed
     BOOL hasPushTokenChanged = ![deviceTokenAsString isEqualToString:currentPushToken];
     if (!hasPushTokenChanged) {
+        return;
+    }
+    
+    [userDefaults setObject:deviceTokenAsString forKey:@"PUSH_TOKEN"];
+  
+    // Check if device has been registered
+    if (![sharedTwilioAuth isDeviceRegistered]) {
         return;
     }
 
@@ -370,6 +363,17 @@
 
     [application registerForRemoteNotifications];
 
+}
+
+- (NSString *)stringWithDeviceToken:(NSData *)deviceToken {
+    const char *data = [deviceToken bytes];
+    NSMutableString *token = [NSMutableString string];
+
+    for (NSUInteger i = 0; i < [deviceToken length]; i++) {
+        [token appendFormat:@"%02.2hhx", data[i]];
+    }
+
+    return [token copy];
 }
 
 #pragma mark - Handle Push Notification
