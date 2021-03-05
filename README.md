@@ -2,6 +2,9 @@
 
 Welcome to the Twilio Auth iOS SDK Sample application. This application demonstrates how to use the mobile SDK inside an iOS app.
 
+## Requirements
+Xcode 12.x
+
 ## How to Run
 
 * **Step 1:** Clone the repository to your local machine
