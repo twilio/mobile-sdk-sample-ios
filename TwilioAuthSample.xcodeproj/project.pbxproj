@@ -27,8 +27,8 @@
 		01D48C441DEA605200D675BB /* UIColor+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D48C431DEA605200D675BB /* UIColor+Extensions.m */; };
 		01EE5E1E1EBB84C900B2E333 /* TOTPViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01EE5E1D1EBB84C900B2E333 /* TOTPViewController.m */; };
 		01F318FB1C9C6CFF003BA657 /* RequestTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01F318F91C9C6CFF003BA657 /* RequestTableViewCell.xib */; };
-		2F617BB229B359CF0F6DA022 /* libPods-PushNotificationService.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F4EBD347EF510959A0CE46E /* libPods-PushNotificationService.a */; };
-		ADBA4402F7998640590AA74E /* libPods-TwilioAuthSample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 84D9EC7C85D3120C682FB1E6 /* libPods-TwilioAuthSample.a */; };
+		64D244669F6B6BBF4D136A1E /* libPods-PushNotificationService.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0320A4578BC52288BF0EE67E /* libPods-PushNotificationService.a */; };
+		AB12D50347AE1D42CA60B936 /* libPods-TwilioAuthSample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EB331F4FC0A32D083583BDC /* libPods-TwilioAuthSample.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -107,12 +107,12 @@
 		01EE5E1C1EBB84C900B2E333 /* TOTPViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TOTPViewController.h; sourceTree = "<group>"; };
 		01EE5E1D1EBB84C900B2E333 /* TOTPViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TOTPViewController.m; sourceTree = "<group>"; };
 		01F318F91C9C6CFF003BA657 /* RequestTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RequestTableViewCell.xib; sourceTree = "<group>"; };
-		3D8C713E66B073180F95FFAE /* Pods-PushNotificationService.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PushNotificationService.release.xcconfig"; path = "Pods/Target Support Files/Pods-PushNotificationService/Pods-PushNotificationService.release.xcconfig"; sourceTree = "<group>"; };
-		64BF7DD1AEA80FF85E636272 /* Pods-PushNotificationService.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PushNotificationService.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PushNotificationService/Pods-PushNotificationService.debug.xcconfig"; sourceTree = "<group>"; };
-		84D9EC7C85D3120C682FB1E6 /* libPods-TwilioAuthSample.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TwilioAuthSample.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8F4EBD347EF510959A0CE46E /* libPods-PushNotificationService.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PushNotificationService.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		BC897F464437DC9F721C280D /* Pods-TwilioAuthSample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TwilioAuthSample.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TwilioAuthSample/Pods-TwilioAuthSample.debug.xcconfig"; sourceTree = "<group>"; };
-		E65743246B5FC1F7F4953ECB /* Pods-TwilioAuthSample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TwilioAuthSample.release.xcconfig"; path = "Pods/Target Support Files/Pods-TwilioAuthSample/Pods-TwilioAuthSample.release.xcconfig"; sourceTree = "<group>"; };
+		0320A4578BC52288BF0EE67E /* libPods-PushNotificationService.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PushNotificationService.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F13B901D408A6A21BED01CF /* Pods-PushNotificationService.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PushNotificationService.debug.xcconfig"; path = "Target Support Files/Pods-PushNotificationService/Pods-PushNotificationService.debug.xcconfig"; sourceTree = "<group>"; };
+		3EB331F4FC0A32D083583BDC /* libPods-TwilioAuthSample.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TwilioAuthSample.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3F513F1DD0EBCDC6A63D4DD9 /* Pods-TwilioAuthSample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TwilioAuthSample.release.xcconfig"; path = "Target Support Files/Pods-TwilioAuthSample/Pods-TwilioAuthSample.release.xcconfig"; sourceTree = "<group>"; };
+		A36092559F789099A0E6DD0F /* Pods-PushNotificationService.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PushNotificationService.release.xcconfig"; path = "Target Support Files/Pods-PushNotificationService/Pods-PushNotificationService.release.xcconfig"; sourceTree = "<group>"; };
+		A3982171FD07E0B4DF4D376A /* Pods-TwilioAuthSample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TwilioAuthSample.debug.xcconfig"; path = "Target Support Files/Pods-TwilioAuthSample/Pods-TwilioAuthSample.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,7 +120,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2F617BB229B359CF0F6DA022 /* libPods-PushNotificationService.a in Frameworks */,
+				64D244669F6B6BBF4D136A1E /* libPods-PushNotificationService.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -128,7 +128,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ADBA4402F7998640590AA74E /* libPods-TwilioAuthSample.a in Frameworks */,
+				AB12D50347AE1D42CA60B936 /* libPods-TwilioAuthSample.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -184,8 +184,8 @@
 				01B99CA41C936A1600462FA3 /* TwilioAuthSample */,
 				017E3CD421F649BC00A04D37 /* PushNotificationService */,
 				01B99CA31C936A1600462FA3 /* Products */,
-				F91F30C837E207ED5307482F /* Pods */,
 				B07D3C2B584FF00D65D9DADF /* Frameworks */,
+				0B1F18CFD71B9CB8B2CA5B15 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -255,25 +255,26 @@
 			path = TOTP;
 			sourceTree = "<group>";
 		};
+		0B1F18CFD71B9CB8B2CA5B15 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				1F13B901D408A6A21BED01CF /* Pods-PushNotificationService.debug.xcconfig */,
+				A36092559F789099A0E6DD0F /* Pods-PushNotificationService.release.xcconfig */,
+				A3982171FD07E0B4DF4D376A /* Pods-TwilioAuthSample.debug.xcconfig */,
+				3F513F1DD0EBCDC6A63D4DD9 /* Pods-TwilioAuthSample.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		B07D3C2B584FF00D65D9DADF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				017E3CDF21F65B8E00A04D37 /* Security.framework */,
-				84D9EC7C85D3120C682FB1E6 /* libPods-TwilioAuthSample.a */,
-				8F4EBD347EF510959A0CE46E /* libPods-PushNotificationService.a */,
+				0320A4578BC52288BF0EE67E /* libPods-PushNotificationService.a */,
+				3EB331F4FC0A32D083583BDC /* libPods-TwilioAuthSample.a */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		F91F30C837E207ED5307482F /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				BC897F464437DC9F721C280D /* Pods-TwilioAuthSample.debug.xcconfig */,
-				E65743246B5FC1F7F4953ECB /* Pods-TwilioAuthSample.release.xcconfig */,
-				64BF7DD1AEA80FF85E636272 /* Pods-PushNotificationService.debug.xcconfig */,
-				3D8C713E66B073180F95FFAE /* Pods-PushNotificationService.release.xcconfig */,
-			);
-			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -283,11 +284,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 017E3CDC21F649BC00A04D37 /* Build configuration list for PBXNativeTarget "PushNotificationService" */;
 			buildPhases = (
-				43F4DC49A60091D0A2B52B18 /* [CP] Check Pods Manifest.lock */,
+				D9FC7C4CD339487751D4913E /* [CP] Check Pods Manifest.lock */,
 				017E3CCF21F649BC00A04D37 /* Sources */,
 				017E3CD021F649BC00A04D37 /* Frameworks */,
 				017E3CD121F649BC00A04D37 /* Resources */,
-				B7EE33065997B9FAA8D21F40 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -302,14 +302,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 01B99CB41C936A1600462FA3 /* Build configuration list for PBXNativeTarget "TwilioAuthSample" */;
 			buildPhases = (
-				1F156AD56DAD26420AF27CF3 /* [CP] Check Pods Manifest.lock */,
+				D77BB274A3D7BC5D7E468B7E /* [CP] Check Pods Manifest.lock */,
 				01B99C9E1C936A1600462FA3 /* Sources */,
 				01B99C9F1C936A1600462FA3 /* Frameworks */,
 				01B99CA01C936A1600462FA3 /* Resources */,
 				0130721E1C9703B60048383E /* Embed Frameworks */,
-				8027A9FBB4B636E0EAC0BA8D /* [CP] Embed Pods Frameworks */,
 				017E3CAE21F6457D00A04D37 /* Embed App Extensions */,
-				E69E3B5C17D0B6A2215F2338 /* [CP] Copy Pods Resources */,
+				C2872D96C4EBD0D6FDF7D8E5 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -328,7 +327,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1010;
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 1240;
 				ORGANIZATIONNAME = Authy;
 				TargetAttributes = {
 					017E3CD221F649BC00A04D37 = {
@@ -411,7 +410,25 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1F156AD56DAD26420AF27CF3 /* [CP] Check Pods Manifest.lock */ = {
+		C2872D96C4EBD0D6FDF7D8E5 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TwilioAuthSample/Pods-TwilioAuthSample-frameworks.sh",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/TwilioAuth/TwilioAuth.framework/TwilioAuth",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TwilioAuth.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TwilioAuthSample/Pods-TwilioAuthSample-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D77BB274A3D7BC5D7E468B7E /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -433,7 +450,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		43F4DC49A60091D0A2B52B18 /* [CP] Check Pods Manifest.lock */ = {
+		D9FC7C4CD339487751D4913E /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -453,66 +470,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		8027A9FBB4B636E0EAC0BA8D /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-TwilioAuthSample/Pods-TwilioAuthSample-frameworks.sh",
-				"${PODS_ROOT}/TwilioAuth/TwilioAuth.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TwilioAuth.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TwilioAuthSample/Pods-TwilioAuthSample-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		B7EE33065997B9FAA8D21F40 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PushNotificationService/Pods-PushNotificationService-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E69E3B5C17D0B6A2215F2338 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TwilioAuthSample/Pods-TwilioAuthSample-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -579,7 +536,7 @@
 /* Begin XCBuildConfiguration section */
 		017E3CDD21F649BC00A04D37 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 64BF7DD1AEA80FF85E636272 /* Pods-PushNotificationService.debug.xcconfig */;
+			baseConfigurationReference = 1F13B901D408A6A21BED01CF /* Pods-PushNotificationService.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -605,7 +562,11 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = PushNotificationService/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.twilio.auth.sample.PushNotificationService;
@@ -617,7 +578,7 @@
 		};
 		017E3CDE21F649BC00A04D37 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3D8C713E66B073180F95FFAE /* Pods-PushNotificationService.release.xcconfig */;
+			baseConfigurationReference = A36092559F789099A0E6DD0F /* Pods-PushNotificationService.release.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -643,7 +604,11 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = PushNotificationService/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.twilio.auth.sample.PushNotificationService;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -660,13 +625,24 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -695,6 +671,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_WORKSPACE = YES;
 			};
 			name = Debug;
 		};
@@ -706,13 +683,24 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
@@ -734,12 +722,13 @@
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
+				VALIDATE_WORKSPACE = YES;
 			};
 			name = Release;
 		};
 		01B99CB51C936A1600462FA3 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BC897F464437DC9F721C280D /* Pods-TwilioAuthSample.debug.xcconfig */;
+			baseConfigurationReference = A3982171FD07E0B4DF4D376A /* Pods-TwilioAuthSample.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -757,7 +746,10 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/TwilioAuthSample/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				MARKETING_VERSION = 1.2.6;
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.twilio.auth.sample;
@@ -772,7 +764,7 @@
 		};
 		01B99CB61C936A1600462FA3 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E65743246B5FC1F7F4953ECB /* Pods-TwilioAuthSample.release.xcconfig */;
+			baseConfigurationReference = 3F513F1DD0EBCDC6A63D4DD9 /* Pods-TwilioAuthSample.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -789,7 +781,10 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/TwilioAuthSample/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				MARKETING_VERSION = 1.2.6;
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.twilio.auth.sample;
